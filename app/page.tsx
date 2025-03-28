@@ -27,10 +27,22 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">Hello, I'm Adithyan Ilangovan</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          Welcome to my personal blog where I share things I wish I had known earlier. I'm the
-          founder of A.I. Podcasting, a bootstrap startup that uses AI to help podcasters tell their
-          stories without technical complications. I'm passionate about AI, entrepreneurship, and
-          making complex technical processes more accessible.
+          This is my personal blog where I document things I wish I had known earlier. I have
+          noticed my writing is usually crisper when I write with an audience in mind. And over the
+          years I have realized that the audience that I know best is myself. So I write for my
+          younger self.
+        </p>
+        <p>
+          Specifically I reflect on painful experiences and spend a lot of thinking tokens on them.
+          And finally while writing, I try to compress my thinking tokens into clear word tokens
+          which I like to call as "principles". These principles guide me in making better decisions
+          in the future. By publishing these ideas, I sharpen my own thinking. I also hope to help
+          others avoid similar struggles.
+        </p>
+        <p>
+          Right now, I'm deeply focused on AI, which I believe marks a fundamental inflection point
+          in history. I spend most of my time interactively coding with AI tools and documenting
+          what I learn along the way.
         </p>
         <p>
           <Link
@@ -44,6 +56,10 @@ export default function Page() {
         <div className="mt-8">
           <h2 className="text-xl font-medium mb-4">My GitHub Activity</h2>
           <GithubCalendar />
+          <p className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
+            Most of my time recently has been spent coding with AI. I'll be gradually open-sourcing
+            my projects here.
+          </p>
         </div>
       </div>
     </section>

@@ -3,21 +3,45 @@ title: 'Why You Need a Proxy Server for LLMs'
 publishedAt: '2024-05-15'
 summary: 'As LLMs evolve rapidly, a proxy server like LiteLLM becomes essential for production applications to manage model switching, fallbacks, and authentication.'
 tags: 'LLM, API, Proxy, LiteLLM, Production, ML Engineering'
+image: '/blog/why-you-need-proxy-server-llm/proxy-server.png'
 hidden: false
 ---
 
 In this post, I'll explain why you need a proxy server for LLMs. I'll focus primarily on the WHY rather than the HOW or WHAT, though I'll provide some guidance on implementation. Once you understand why this abstraction is valuable, you can determine the best approach for your specific needs.
 
-I generally hate abstractions. So much so that it's often to my own detriment. Our company website was hosted on my GF's old laptop for about a year and a half. The reason I say that is personally I don't like stacks, frameworks, or unnecessary layers. I prefer working with raw components.
+I generally hate abstractions. So much so that it's often to my own detriment. Our company website was hosted on my GF's old laptop for about a year and a half. The reason I share that anecdote is that I don't like stacks, frameworks, or unnecessary layers. I prefer working with raw components.
 
 That said, I only adopt abstractions when they prove _genuinely_ useful.
+
+Among all the possible abstractions in the LLM ecosystem, a proxy server is likely one of the first you should consider when building production applications.
 
 <Callout emoji="🎯">
   This post isn't for beginners or tinkerers. It becomes relevant once you start deploying LLMs in
   production environments. Think of this as an "LLM 201" post.
 </Callout>
 
-Among all the possible abstractions in the LLM ecosystem, a proxy server is likely one of the first you should consider when building production applications.
+<Image
+  src="/blog/why-you-need-proxy-server-llm/proxy-server.png"
+  alt="LLM Proxy Server Architecture"
+  width={800}
+  height={450}
+/>
+
+## What Exactly Is an LLM Proxy Server?
+
+Before diving into the reasons, let me clarify what I mean by a "proxy server" in the context of LLMs.
+
+If you've started developing LLM applications, you'll notice each provider has their own way of doing things. OpenAI has its SDK, Google has one for Gemini, Anthropic has their Claude SDK, and so on. Each comes with different authentication methods, request formats, and response structures.
+
+When you want to integrate these across your frontend and backend systems, you end up implementing the same logic multiple times. For each provider, for each part of your application. It quickly becomes unwieldy.
+
+This is where a proxy server comes in. It provides one unified interface that all your applications can use, typically mimicking the OpenAI chat completion endpoint since it's become something of a standard.
+
+Your applications connect to this single API with one consistent API key. All requests flow through the proxy, which then routes them to the appropriate LLM provider behind the scenes. The proxy handles all the provider-specific details: authentication, retries, formatting, and other logic.
+
+Think of it as a smart, centralized traffic controller for all your LLM requests. You get one consistent interface while maintaining the flexibility to use any provider.
+
+Now that we understand what a proxy server is, let's move on to why you might need one when you start working with LLMs in production environments. These reasons become increasingly important as your applications scale and serve real users.
 
 ## Four Reasons You Need an LLM Proxy Server in Production
 
@@ -88,29 +112,31 @@ This centralization makes security management, key rotation, and access control 
 
 In practical terms, you secure your proxy server with a single API key which you'll use across all your applications. All authentication-related logic for different providers like Google Gemini, Anthropic, or OpenAI stays within the proxy server. If you need to switch authentication for any provider, you won't need to update your frontend, backend, or other applications. You'll just change it once in the proxy server.
 
-## How It Works in Practice
+## How to Implement a Proxy Server
 
-In practice, you'll have one unified API secured with an authentication key. All your applications will consume this single API, which acts as the proxy server. The proxy server maintains connections to all your LLM providers and handles the complexity behind the scenes.
+Now that we've talked about why you need a proxy server, let's briefly look at how to implement one if you're convinced.
 
-## What Options Are Available
+Typically, you'll have one service which provides you an API URL and a key. All your applications will connect to this single endpoint. The proxy handles the complexity of routing requests to different LLM providers behind the scenes.
 
 You have two main options for implementation:
 
 1. **Self-host a solution**: Deploy your own proxy server on your infrastructure
 2. **Use a managed service**: Many providers offer managed LLM proxy services
 
-## Why I Use LiteLLM
+## What Works for Me
 
-I personally use LiteLLM's proxy server. I chose it not for any novel reason. It's open source, it just works, and I can host it myself without paying additional fees.
+I really don't have strong opinions on which specific solution you should use. If you're convinced about the why, you'll figure out the what that perfectly fits your use case.
 
-I've deployed it in a Docker container behind a web app, and it has been working flawlessly. It's probably the single best abstraction I've implemented in our LLM stack.
+That being said, just to complete this report, I'll share what I use. I chose LiteLLM's proxy server because it's open source and has been working flawlessly for me. I haven't tried many other solutions because this one just worked out of the box.
 
-While there are many solutions in this space, I've found LiteLLM particularly easy to work with. If you're not using a proxy server for your LLM applications yet, I highly recommend considering it, especially as you scale to production.
-
-It will save you substantial development time and headaches, particularly once you start handling real-world traffic and reliability requirements.
+I've just self-hosted it on my own infrastructure. It took me half a day to set everything up, and it worked out of the box. I've deployed it in a Docker container behind a web app. It's probably the single best abstraction I've implemented in our LLM stack.
 
 ## Conclusion
 
-In an ecosystem changing as rapidly as LLMs, the ability to adapt quickly to newer, better models is paramount. A proxy server provides the abstraction layer needed to swap models without application changes, handle failures gracefully, optimize costs through caching, and centralize authentication.
+This post stems from bitter lessons I learned the hard way.
 
-Sometimes abstractions are worth it. For production LLM applications, a proxy server is definitely one of them.
+I don't like abstractions - that's my style. But a proxy server is the one abstraction I wish I'd adopted sooner.
+
+In the fast-evolving LLM space (god know what's gonna come next in AI these days), you need to quickly adapt to better models or risk falling behind. A proxy server gives you that flexibility without rewriting your code.
+
+Sometimes abstractions are worth it. For LLMs in production, a proxy server definitely is.

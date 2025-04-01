@@ -40,88 +40,128 @@ export default function AboutPage() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">About Me</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          This is my personal blog where I share things I wish I had known earlier. I write
-          primarily for myself—to capture valuable lessons and transform my thinking into clear
-          principles. As Ray Dalio puts it, life is a lot of "another one of those," and principles
-          make navigating these patterns easier. By publishing these ideas, I sharpen my own
-          thinking, invite helpful feedback, and hopefully help others avoid similar struggles.
+          This is my personal blog where I document lessons I wish I'd known earlier. Writing helps
+          me clarify my thoughts, and I've found my writing becomes clearer when I imagine an
+          audience. The audience I know best is myself, so I write primarily for my younger self.
         </p>
+
         <p>
-          I'm the founder of A.I. Podcasting, a bootstrap startup where we enable podcasters to tell
-          their stories without getting bogged down by technical processes. We use AI-driven
-          solutions to handle the complexities that come after recording, letting creators focus on
-          what matters most—their content.
+          By writing for myself, I reflect deeply on challenging experiences, investing significant
+          "thinking tokens" into understanding them. This process allows me to compress my insights
+          into clear, actionable principles that guide my decisions.
+        </p>
+
+        <p>
+          As Ray Dalio wisely points out, life often presents us with "another one of those"
+          situations. Well-crafted principles make navigating these recurring patterns easier and
+          free us to focus on new challenges. Though I write for myself first, publishing these
+          ideas helps sharpen my thinking through feedback and hopefully helps others avoid similar
+          struggles.
         </p>
 
         <h2>My AI Journey</h2>
+
         <p>
-          In 2023, a friend who was expecting a baby introduced me to ChatGPT. He told me he was
-          using it to ask questions about parenting and found it remarkably helpful despite its
-          occasional inaccuracies. This caught my attention because he is not a hype-y guy.
+          Currently, I spend most of my time deeply immersed in AI, interactively coding and
+          exploring its capabilities. This focus stems from a journey that began in 2023 and has
+          transformed my career and outlook.
         </p>
+
         <p>
-          Though I had no formal AI training, when I started using GPT-3.5, something clicked. I
-          sensed in my gut that this was some sort of inflection point in history. After playing with it
-          every day after work for about 2 hours every evening, I became convinced. The
-          technology felt transformative in a way that's hard to put into words. A few months later,
-          despite having no background in the field, I took a leap of faith and quit my job to
-          figure out what this was all about. I like learning by doing.
+          It started when a friend who was expecting a baby introduced me to ChatGPT. He mentioned
+          using it to ask parenting questions and found it surprisingly helpful, despite its
+          occasional inaccuracies. This caught my attention because he rarely gets "hypey" about new
+          tools.
         </p>
+
         <p>
-          My first venture in AI was a startup called "Best in a Nutshell." I followed the classic
-          startup playbook—building a solution first and then looking for problems to solve. It
-          failed after 7-8 months, but the experience was invaluable. For A.I. Podcasting, I flipped
-          the approach. I started by talking directly with podcasters about their challenges,
-          understanding their workflows, and then building solutions based on real needs rather than
-          just what the technology could do.
+          Though I had no formal AI training, I got really curious and started experimenting with
+          GPT-3.5. After work every day, I would come back and spend evenings exploring this
+          technology. This happened for about 4 months. Althought I was not formally trained in AI,
+          I became convinced of its potential and knew this was a turning point. So I told myself
+          that I want to be part of this thought not yet quite sure how since I was not trained with
+          AI. Anyways, long story short... I quit my job and told myself I will figure it out on the
+          way.
         </p>
+
         <p>
-          I consider myself more of an AI thinker than a researcher. I enjoy experimenting with
-          these tools to find practical applications rather than developing the underlying
-          technology itself. What drives me is finding ways to blend technology with creativity,
-          making complex technical processes more accessible to everyone.
+          This leap led to my first AI venture, "Wisdom in a Nutshell." I did all the classic
+          startup mistakes, building a solution first and then looking for people having problems.
+          It failed after several months, but the experience taught me invaluable lessons.
         </p>
+
+        <p>
+          For my current startup, A.I. Podcasting, I reversed the approach. I began by talking
+          directly with podcasters, understanding their real challenges, and then building solutions
+          tailored to their needs. This problem-first mindset has made all the difference.
+        </p>
+
+        <p>
+          Today, I consider myself more of an AI tinkerer than a researcher. I enjoy experimenting
+          with AI tools to discover practical applications rather than developing the underlying
+          technology itself. My passion lies in blending technology with creativity, making complex
+          processes accessible to everyone.
+        </p>
+
         <h2>Professional Background</h2>
+
         <p>
-          I graduated from IIT Hyderabad with a degree in Electrical Engineering, then earned my
-          Masters in Telecommunication Engineering. During my masters program, I became fascinated
-          with video and multimedia technologies, sparked by an inspiring professor who opened my
-          eyes to the field's potential.
+          My educational journey began at IIT Hyderabad, where I earned a degree in Electrical
+          Engineering, graduating with Honours. I then pursued a Master's in Telecommunication
+          Engineering at TU Munich. I was fortunate to have an inspiring professor who ignited my
+          interest in video and multimedia technologies.
         </p>
+
         <p>
-          My career spans eight years in the tech industry, starting as a software engineer before
-          transitioning into product roles at various startups. Throughout this journey, colleagues
-          knew me for my ability to think from first principles and generate innovative ideas that
-          cut through complexity. Before diving into AI, my last position was as a Product Manager
-          at Paramount, where I further honed my skills in understanding user needs and translating
-          them into meaningful products.
+          Professionally, I've spent eight years in the multimedia tech industry, primarily working
+          on streaming and video encoding technologies. I started as a software engineer before
+          transitioning into product roles. If you ask my colleagues, they would likely say I wasn't
+          the best software engineer (which is true). However, they might say that I have the
+          ability to think from first principles and (occasionally) generate innovative,
+          needle-moving ideas. These ideas, in retrospect, often seem simple and obvious but are
+          overlooked in the moment. They were always there, waiting for someone to notice and give
+          them some love. I personally loved coming up with those ideas, then convincing people of
+          their value, and finally working as a team to drive them to production. In engineering,
+          success is only achieved if you complete this entire cycle (ideation -> validation ->
+          production).
         </p>
+
         <h2>Current Focus</h2>
+
         <p>
-          Now, I'm building A.I. Podcasting with a clear mission: to help podcasters focus on
-          storytelling while we handle the technical complexities. Our AI-driven solutions address
-          real problems faced by content creators by reducing friction in their workflow—from audio
-          enhancement and editing to distribution and audience engagement.
+          Currently, I'm building A.I. Podcasting with a clear mission: helping podcasters focus on
+          storytelling while we handle the technical complexities. Our AI-driven solutions
+          streamline workflows, from audio enhancement and editing to distribution and audience
+          engagement.
         </p>
+
         <p>
-          I strongly believe that AI should enhance human creativity rather than replace it. The
-          tools we build should reduce technical barriers while preserving creative control in human
-          hands. Technology works best when it amplifies our capabilities rather than substituting
-          for them.
+          I strongly believe AI should enhance human creativity rather than replace it. The tools we
+          build aim to reduce technical barriers while preserving creative control in human hands.
+          Technology works best when it amplifies our capabilities rather than substituting for
+          them.
         </p>
+
         <p>
-          I spend 70-80% of my time coding with AI tools, exploring their capabilities and
-          limitations through hands-on experimentation. This blog serves as my voice in this
-          journey—a place to document what I learn and hopefully influence how we approach this
-          technological revolution as it unfolds.
+          On this blog, I document my journey of learning how best to co-create with AI tools and
+          share what I discover along the way. I believe we've passed the inflection point;
+          participation in this technological shift is no longer optional.
         </p>
+
+        <p>
+          This blog is my voice in that ongoing conversation, exploring how we can thoughtfully
+          engage with AI as it transforms our world. Stay tuned.
+        </p>
+
         <h2>Connect With Me</h2>
+
         <p>
-          I write regularly about AI, entrepreneurship, technology, and personal growth. If you have
-          thoughts or want to connect, please reach out via <a href={socialLinks.email}>email</a> or
-          find me on <a href={socialLinks.twitter}>Twitter</a>,{' '}
-          <a href={socialLinks.linkedin}>LinkedIn</a>, or <a href={socialLinks.github}>GitHub</a>. I
-          welcome conversations that challenge and refine my thinking.
+          I regularly write about AI, entrepreneurship, technology, and personal growth. If you'd
+          like to connect or share your thoughts, please reach out via{' '}
+          <a href={socialLinks.email}>email</a> or find me on{' '}
+          <a href={socialLinks.twitter}>Twitter</a>, <a href={socialLinks.linkedin}>LinkedIn</a>, or{' '}
+          <a href={socialLinks.github}>GitHub</a>. I welcome conversations that challenge and refine
+          my thinking.
         </p>
       </div>
     </section>

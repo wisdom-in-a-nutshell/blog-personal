@@ -27,22 +27,22 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">Hello, I'm Adithyan Ilangovan</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          This is my personal blog where I document things I wish I had known earlier. I have
-          noticed my writing is usually crisper when I write with an audience in mind. And over the
-          years I have realized that the audience that I know best is myself. So I write for my
-          younger self.
+          This is my personal blog where I document lessons I wish I'd known earlier. I've found my
+          writing becomes clearer when I imagine an audience, and the audience I know best is
+          myself. So, I write primarily for my younger self.
         </p>
         <p>
-          Specifically I reflect on painful experiences and spend a lot of thinking tokens on them.
-          And finally while writing, I try to compress my thinking tokens into clear word tokens
-          which I like to call as "principles". These principles guide me in making better decisions
-          in the future. By publishing these ideas, I sharpen my own thinking. I also hope to help
-          others avoid similar struggles.
+          I reflect deeply on challenging experiences, investing significant "thinking tokens" into
+          understanding them. Writing helps me compress these insights into clear, actionable
+          principles. These principles guide my future decisions, sharpen my thinking, and hopefully
+          help others avoid similar struggles.
         </p>
         <p>
-          Right now, I'm deeply focused on AI, which I believe marks a fundamental inflection point
-          in history. I spend most of my time interactively coding with AI tools and documenting
-          what I learn along the way.
+          Apart from that, I spend most of my time deeply immersed in AI, which I believe marks a
+          fundamental turning point in history. Here, I document my journey of learning how best to
+          co-create with AI. I also explore how we can thoughtfully engage with this technology
+          because the inflection point has already passed, and we have no choice but to participate.
+          This blog is my voice in that ongoing conversation.
         </p>
         <p>
           <Link

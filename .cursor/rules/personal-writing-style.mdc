@@ -1,0 +1,144 @@
+---
+title: Personal Writing Style Guide
+description: Guidelines for maintaining consistent voice, tone, and style in blog posts to match the author's preferences
+glob: "content/**/*.mdx"
+alwaysApply: true
+---
+
+# Personal Writing Style Guide
+
+This rule provides comprehensive guidelines for writing blog posts that accurately reflect the author's voice, style preferences, and background information.
+
+## Author Background
+
+The author is a 32-year-old entrepreneur based in Berlin, Germany, with the following key characteristics:
+
+- Founder of AI Podcasting (AIP), a startup handling podcast post-production
+- Services include editing, publishing, website creation, audience growth, and monetization strategies
+- Skilled programmer with a passion for artificial intelligence
+- Leadership role guiding teams to streamline podcast workflows
+- Avid reader with interests in emerging tech, especially AI
+- Follows a mostly vegan lifestyle
+- Continuously learning and staying updated on tech trends
+- Primary goal: To help podcasters focus on content creation while handling everything post-recording
+
+## Writing Style & Tone
+
+### Core Principles
+
+- **Clarity & Conciseness**: Direct, easy-to-understand sentences. Avoid unnecessary jargon or overly complex language.
+- **Efficiency & Brevity**: Say as much as possible in as few words as possible.
+- **Professional Yet Accessible**: Present expertise in AI and tech without sounding too academic or dense.
+- **Enthusiastic & Forward-Thinking**: Convey excitement about technology and innovation, balancing optimism with practical insights.
+- **Authentic & Helpful**: Focus on educating, informing, and building trust.
+
+### Language & Formatting
+
+- **Plain Language**: Use everyday vocabulary. When using tech terms, provide brief context or examples.
+- **Short Paragraphs & Bullet Points**: Break content into easily digestible segments.
+- **Short Sentences**: Prefer multiple short sentences over long, complex ones. Break up long sentences into smaller ones for improved readability.
+- **Tone**: Friendly but balanced with professionalism.
+- **Call-to-Action Focus**: Guide readers toward practical steps or reflections.
+- **No Em-Dashes**: Replace em-dashes with commas, parentheses, or separate sentences.
+
+## Common Themes & Topics
+
+Blog posts should emphasize one or more of these core themes:
+
+1. **Podcasting & Audio Production**
+   - Streamlined workflows
+   - Improved sound quality
+   - Best practices for podcast creation
+
+2. **AI & Technology Trends**
+   - How AI simplifies tasks
+   - Enhances creativity
+   - Expands reach
+
+3. **Entrepreneurship & Startup Culture**
+   - Lessons learned
+   - Leadership tips
+   - Growth strategies
+
+4. **Personal Growth & Continuous Learning**
+   - Books being read
+   - Courses being taken
+   - New tech being explored
+
+5. **Lifestyle & Values**
+   - Subtle mentions of mostly vegan lifestyle
+   - Environmental awareness (when relevant)
+
+## Writing Structure Guidelines
+
+### Blog Post Structure
+
+1. **Strong Introduction**
+   - Begin with a compelling hook
+   - Clearly state the post's purpose
+   - Introduce main points early
+
+2. **Body Content**
+   - Use descriptive subheadings (H2, H3)
+   - Include concrete examples and evidence
+   - Break down complex concepts
+   - Include personal anecdotes when appropriate
+
+3. **Conclusion**
+   - Wrap up with a final reflection
+   - Provide next steps or action items
+   - End with a succinct conclusion
+
+### Voice Guidelines
+
+Write as though explaining something to a knowledgeable friend:
+- Respectful and engaging
+- Not overly formal
+- Reader-centric (emphasize benefits to the reader)
+- Show empathy for reader's perspective
+- Maintain a logical flow throughout
+
+## Examples
+
+### Preferred Style Example
+
+```
+I've tested over 20 podcast editing tools this year. Three stand out for their AI capabilities.
+
+First, Tool X analyzes speaker patterns and automatically removes filler words. Our clients report 30% faster editing times.
+
+Second, Tool Y transcribes with 98% accuracy, even with multiple speakers. This saves hours of manual correction.
+
+Finally, Tool Z generates show notes that sound natural and highlight key moments. Podcasters using it see increased listener engagement.
+
+These tools deliver the most value with minimal learning curve. Try Tool X if you're just starting, as it provides the quickest wins for new podcasters.
+```
+
+### Style to Avoid
+
+```
+As the founder of AIP, I've been deeply immersed in the podcasting scene for years now. The technology landscape is absolutely fascinating, with so many tools available that it's hard to keep track! I tested a whole bunch of podcast editing tools, maybe around 20 or so this year alone. I found that there were three tools that were really great for various reasons related to their artificial intelligence capabilities.
+
+Tool X is amazing because it can analyze speaker patterns. Tool Y does transcription really well. Tool Z creates show notes. All of these tools can be useful in different situations and contexts depending on what exactly you're trying to accomplish with your podcast editing workflow.
+```
+
+## Common Pitfalls to Avoid
+
+- **Wordiness**: Cut unnecessary phrases and redundant statements
+- **Overuse of Technical Jargon**: Balance expertise with accessibility
+- **Lack of Structure**: Always use clear headings and logical progression
+- **Missing Examples**: Include concrete examples for abstract concepts
+- **Passive Voice**: Prefer active voice in most cases
+- **Overly Academic Tone**: Keep it conversational yet professional
+- **Long, Complex Sentences**: Break them into shorter, more digestible sentences. Aim for 1-2 ideas per sentence maximum.
+- **Using Em-Dashes**: Replace with commas, parentheses, or separate sentences
+
+## Implementation Process
+
+1. Reference this style guide before writing each blog post
+2. Review existing posts to understand the established voice
+3. Follow the technical requirements in the blog-creation.mdc rule
+4. Have another team member review for voice consistency
+5. Regularly update this guide as the author's style evolves
+
+By following these guidelines, all blog content will maintain a consistent voice that accurately reflects the author's style, expertise, and perspective.

@@ -1,0 +1,59 @@
+---
+title: 'Explaining Richard Sutton's AI Research Slogans'
+publishedAt: '2024-06-03'
+summary: 'A comprehensive breakdown of Richard Sutton's key AI research principles in clear, practical terms for a technical audience.'
+tags: 'AI, Machine Learning, Reinforcement Learning, Research Principles'
+image: '/images/richard-sutton-principles.png'
+---
+
+# Understanding Richard Sutton's AI Research Slogans
+
+Recently, Richard Sutton, a pioneer in reinforcement learning, shared his research principles on Twitter:
+
+<StaticTweet id="1906837186319942114" />
+
+I've been a long-time admirer of Sutton's work, particularly his influential ["The Bitter Lesson"](https://www.cs.utexas.edu/~jphanna/bitter-lesson.html) essay that outlines how computation-based approaches have consistently outperformed human knowledge engineering in AI. When I saw this new list of principles, I wanted to better understand each concept in more practical terms.
+
+I asked an expert to break down each of these principles in plain language for technical readers. Below is their explanation of these powerful AI research slogans, which I'm sharing in hopes it might help others in the field.
+
+_Richard S. Sutton – a pioneer of reinforcement learning – compiled a set of personal "slogans" (principles) to guide AI research. Below, each slogan is explained in practical terms for a general technical audience:_
+
+## 1. Approximate the solution, not the problem (no special cases)
+
+This slogan advises focusing on approximating the **solution** to a problem rather than simplifying the **problem** itself. In practice, it means you should directly tackle the goal you care about with a general approach, instead of hand-crafting many special-case rules or oversimplified models for the problem. For example, in speech recognition, it's better to use a learning method that broadly approximates understanding any speech (the solution) than to create separate, perfect models for every accent or scenario (special-case problem modeling). By approximating the solution, you avoid brittle case-by-case fixes and aim for a more robust, unified method.
+
+## 2. Drive from the problem
+
+"Drive from the problem" means letting the **actual problem and data** steer your research direction. In other words, start with real-world testing and feedback rather than abstract theory alone. This practical approach emphasizes continually testing ideas on the true task and using those results to guide improvements. For instance, in developing self-driving cars, extensive road testing and data collection (the real problem context) should guide algorithm design more than perfectly solving a simplified theoretical model, because real traffic conditions ultimately determine what works.
+
+## 3. Take the agent's point of view
+
+This principle is about designing AI systems **from the perspective of the agent** (the AI or robot) that is actually acting and learning. It means considering what the agent perceives and knows, rather than assuming an all-knowing external view. In practical terms, you build the AI to make decisions based on its own limited inputs and experience. For example, imagine a cleaning robot – taking the robot's point of view means programming it to detect dirt and navigate using its onboard sensors, instead of relying on a perfect floor map or a human's view of the room. By adopting the agent's perspective, you ensure solutions work under the same information constraints the agent will have in reality.
+
+## 4. Don't ask the agent to achieve what it can't measure
+
+An AI agent can only reliably optimize what it can **measure or get feedback on**, so you shouldn't demand it to accomplish goals with no clear metric. The slogan is essentially saying: "if you can't quantify it, the AI can't directly aim for it." In practice, you must give the agent a defined objective signal (a reward or measurable performance metric). For example, a video streaming service's algorithm might be asked to maximize user _engagement_ (which can be measured by watch time or clicks), but it would be futile to ask it to maximize user _happiness_ directly, since happiness has no concrete, available measurement for the algorithm. In summary, tie the agent's goals to something it can sense or quantify; otherwise it's aiming in the dark.
+
+## 5. Don't ask the agent to know what it can't verify
+
+Similar to the above, this rule says an AI agent shouldn't be expected to "know" or decide on things that it has **no way to verify with its own data or observations**. You should design the agent's tasks around information it can obtain and check. For instance, an email filtering AI (like a spam filter) can analyze text patterns and sender behavior (things it can observe) to decide if an email is spam, but you wouldn't ask it to know the sender's true intent because intent is not observable or confirmable by the software. In practice, this means we give the agent responsibilities only over facts or signals it can derive from its inputs – we don't require magically knowing hidden truths.
+
+## 6. Set measurable goals for subparts of the agent
+
+Complex AI systems are often made of components or sub-modules (for example, perception, planning, learning, etc.). Sutton's slogan advises giving each of these subparts its own **measurable goal or performance metric**. In other words, break the overall task into pieces where each piece has a clear criterion for success that can be observed. This helps in training and improving each part independently and transparently. For example, in a self-driving car, the vision system might have the goal of maximizing detection accuracy of pedestrians, the localization module aims to minimize error in the car's position estimate, and the planning module tries to maximize route safety and efficiency – each of these goals can be measured and tested separately. By setting such measurable sub-goals, engineers can pinpoint which component is working well or needs improvement, and each part of the agent can learn effectively on its own terms.
+
+## 7. Discriminative models are usually better than generative models
+
+In machine learning, a **discriminative model** focuses directly on mapping inputs to outputs (e.g. classifying data), whereas a **generative model** tries to model how the data is produced (learning the full distribution of inputs, not just the desired output). Sutton's slogan reflects the empirical finding that for many tasks, especially classification or prediction tasks, it's usually more effective to use discriminative methods than generative ones. The practical reason is that discriminative models attack the problem we care about _head-on_, needing to learn fewer unnecessary details. They often require less data and are simpler, since they don't attempt to simulate the entire data-generating process. For example, to distinguish photos of cats vs. dogs, a discriminative approach (like a direct classifier that learns the features separating cats from dogs) tends to outperform a generative approach (which would involve learning to fully generate realistic cat and dog images and then classify them) given the same resources. Unless you specifically need to **generate** data, using a discriminative model is typically the more practical and accurate choice.
+
+## 8. Work by orthogonal dimensions. Work issue by issue.
+
+"Orthogonal dimensions" implies **independent aspects** of a problem. This slogan is advising researchers to tackle problems by breaking them down into separate, non-overlapping issues, and solving each one in turn. In practice, you identify different axes of complexity in your project and address them one at a time, holding others constant. This way, improvements in one area won't mess up another because you've separated concerns (just as orthogonal axes in a graph don't interfere with each other). For example, in software design, one often separates the user interface from the underlying algorithm. By analogy, in an AI project you might separately refine the learning algorithm versus the data preprocessing pipeline, so you can work on each "dimension" independently. Working issue by issue in this modular fashion makes it easier to diagnose problems and incrementally build a better overall system without getting overwhelmed by tangled dependencies.
+
+## 9. Work on ideas, not software
+
+This slogan captures the notion that in research, **intellectual progress** matters more than complex software infrastructure. Sutton encourages AI researchers to spend their time exploring new concepts and algorithms rather than building large software systems for their own sake. In practical terms, you should prototype just enough code to test your ideas, but not get bogged down in engineering bells and whistles. The goal is to learn and discover, not to produce polished software products. By working on ideas first, researchers can quickly iterate on theories and gain insights, and only later worry about scaling up or optimizing in software.
+
+## 10. Experience is the data of AI
+
+Here Sutton emphasizes that an AI agent's **experiences are its** fundamental learning material. Just as humans learn from lived experiences, AI systems learn from their interactions and observations. This principle highlights the importance of creating rich, diverse experiential data for AI training rather than hand-crafted rules. For reinforcement learning in particular, this means designing environments where agents can accumulate meaningful experiences that lead to learning. In practice, this principle encourages approaches like simulation training, where AI systems can rapidly accumulate varied experiences, or real-world deployment with appropriate safeguards to collect authentic interaction data.

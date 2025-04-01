@@ -122,7 +122,8 @@ export default function AboutPage() {
           overlooked in the moment. They were always there, waiting for someone to notice and give
           them some love. I personally loved coming up with those ideas, then convincing people of
           their value, and finally working as a team to drive them to production. In engineering,
-          success is only achieved if you complete this entire cycle (ideation -> validation ->
+          success is only achieved if you complete this entire cycle (ideation {'->'} validation{' '}
+          {'->'}
           production).
         </p>
 

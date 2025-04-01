@@ -28,21 +28,21 @@ export default function Page() {
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           This is my personal blog where I document lessons I wish I'd known earlier. I've found my
-          writing becomes clearer when I imagine an audience, and the audience I know best is
-          myself. So, I write primarily for my younger self.
+          writing becomes clearer when I imagine an audience. The audience I know best is myself. So
+          I write primarily for my younger self.
         </p>
         <p>
-          I reflect deeply on challenging experiences, investing significant "thinking tokens" into
-          understanding them. Writing helps me compress these insights into clear, actionable
-          principles. These principles guide my future decisions, sharpen my thinking, and hopefully
-          help others avoid similar struggles.
+          I reflect deeply on challenging experiences. This means investing significant "thinking
+          tokens" into understanding them. Writing helps me compress these insights into clear,
+          actionable principles. These principles guide my future decisions and sharpen my thinking.
+          Hopefully they help others avoid similar struggles too.
         </p>
         <p>
-          Apart from that, I spend most of my time deeply immersed in AI, which I believe marks a
-          fundamental turning point in history. Here, I document my journey of learning how best to
-          co-create with AI. I also explore how we can thoughtfully engage with this technology
-          because the inflection point has already passed, and we have no choice but to participate.
-          This blog is my voice in that ongoing conversation.
+          Right now, I spend most of my time immersed in AI. I believe it marks a fundamental
+          turning point in history. Here I document my journey of learning how to co-create with AI.
+          I explore how we can thoughtfully engage with this technology. The inflection point has
+          already passed. We have no choice but to participate. This blog is my voice in that
+          ongoing conversation.
         </p>
         <p>
           <Link

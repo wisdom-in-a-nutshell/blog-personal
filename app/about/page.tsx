@@ -122,8 +122,7 @@ export default function AboutPage() {
           there, waiting for someone to notice and give them some love. I personally loved coming up
           with those ideas, convincing people of their value, and working as a team to drive them to
           production. In engineering, success only happens when you complete this entire cycle
-          (ideation {'->'} validation {'->'}
-          production).
+          (ideation to validation to production).
         </p>
 
         <h2>Current Focus</h2>

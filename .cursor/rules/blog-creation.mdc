@@ -1,12 +1,79 @@
 ---
 description: Guidelines for creating and formatting blog posts using MDX in the personal blog
-globs: 'content/*.mdx'
+// ... existing code ...
+## Frontmatter Requirements
+
+Every blog post must include frontmatter at the beginning of the file. Frontmatter is metadata enclosed between triple dashes (`---`):
+
+```mdx
+---
+title: 'Your Post Title'
+publishedAt: 'CURRENT_DATE'
+summary: 'A brief description of your post (used for SEO and previews).'
+tags: 'Tag1, Tag2, Tag3'
+image: '/optional-image-path.png'
+hidden: false
+---
+
+Post content starts here...
+```
+
+### Required Fields
+
+- **title**: The title of your blog post
+- **publishedAt**: The publication date in `YYYY-MM-DD` format. Always use the current date when creating a new post.
+- **summary**: A brief description (under 160 characters for SEO)
+- **tags**: Comma-separated list of relevant tags
+// ... existing code ...
+## Content Formatting
+
+### Basic Markdown
+
+Standard Markdown syntax works as expected:
+
+```mdx
+## Heading 2
+### Heading 3
+
+**Bold text** and *italic text*
+
+- Bullet point
+- Another bullet point
+
+1. Numbered item
+2. Another numbered item
+
+[Link text](mdc:https:/example.com)
+
+![Alt text](mdc:path/to/image.jpg)
+```
+
+> **IMPORTANT**: Do not repeat the post title as an H1 heading in the content. The title from the frontmatter will be automatically displayed as the page title, making an H1 heading redundant. Start your content with an H2 heading.
+
+### Code Blocks
+// ... existing code ...
+## Common Pitfalls
+
+### Metadata Issues
+
+- **Missing Required Fields**: Ensure all required frontmatter fields are present
+- **Date Format**: The `publishedAt` field must use `YYYY-MM-DD` format (use current date for new posts)
+- **Quotes**: Wrap values containing special characters in quotes
+
+### Content Issues
+
+- **Title Redundancy**: Don't repeat the title from frontmatter as an H1 heading in the content
+- **Broken Images**: Ensure image paths are correct and images exist in the public directory
+- **Component Errors**: Check that all custom components are properly imported and used
+- **Syntax Errors**: Ensure all MDX syntax is valid and properly closed
+- **Large Media**: Compress images before adding them to keep page load times fast
+// ... existing code ...globs:
 alwaysApply: true
 ---
 
 # Blog Post Creation Guide
 
-This rule provides a comprehensive guide for creating, structuring, and formatting blog posts for the personal blog using MDX.
+This rule provides a comprehensive guide for creating, structuring, and formatting blog posts for the personal blog using MDX. Test.
 
 ## Overview
 
@@ -32,7 +99,7 @@ Every blog post must include frontmatter at the beginning of the file. Frontmatt
 ```mdx
 ---
 title: 'Your Post Title'
-publishedAt: 'CURRENT_DATE'
+publishedAt: '2024-05-01'
 summary: 'A brief description of your post (used for SEO and previews).'
 tags: 'Tag1, Tag2, Tag3'
 image: '/optional-image-path.png'
@@ -45,7 +112,7 @@ Post content starts here...
 ### Required Fields
 
 - **title**: The title of your blog post
-- **publishedAt**: The publication date in `YYYY-MM-DD` format. Always use the current date when creating a new post.
+- **publishedAt**: The publication date in `YYYY-MM-DD` format
 - **summary**: A brief description (under 160 characters for SEO)
 - **tags**: Comma-separated list of relevant tags
 
@@ -61,6 +128,7 @@ Post content starts here...
 Standard Markdown syntax works as expected:
 
 ```mdx
+# Heading 1
 ## Heading 2
 ### Heading 3
 
@@ -72,12 +140,10 @@ Standard Markdown syntax works as expected:
 1. Numbered item
 2. Another numbered item
 
-[Link text](mdc:https:/example.com)
+@Link text
 
-![Alt text](mdc:path/to/image.jpg)
+!@Alt text
 ```
-
-> **IMPORTANT**: Do not repeat the post title as an H1 heading in the content. The title from the frontmatter will be automatically displayed as the page title, making an H1 heading redundant. Start your content with an H2 heading.
 
 ### Code Blocks
 
@@ -111,9 +177,9 @@ The blog includes several custom components you can use in your MDX:
 
 ```mdx
 <ImageGrid>
-  ![Image 1](mdc:image1.jpg)
-  ![Image 2](mdc:image2.jpg)
-  ![Image 3](mdc:image3.jpg)
+  !@Image 1
+  !@Image 2
+  !@Image 3
 </ImageGrid>
 ```
 
@@ -150,27 +216,26 @@ Use the Callout component for highlighting important information:
 
 1. Create a new `.mdx` file in the `content/` directory with a descriptive filename (using kebab-case)
 2. Add the required frontmatter at the top of the file
-3. Write your content using Markdown and custom components (start with H2 headings, not H1)
+3. Write your content using Markdown and custom components
 4. Test the post by running the development server (`pnpm dev`) and navigating to `/blog/your-post-slug`
 
 ## Real-World Examples
 
 For reference, examine these existing blog posts:
 
-- [Getting Started Guide](mdc:../../content/getting-started.mdx) - Basic post structure and formatting
-- [MDX Examples](mdc:../../content/custom-mdx-examples.mdx) - Demonstrates custom components
+- @Getting Started Guide - Basic post structure and formatting
+- @MDX Examples - Demonstrates custom components
 
 ## Common Pitfalls
 
 ### Metadata Issues
 
 - **Missing Required Fields**: Ensure all required frontmatter fields are present
-- **Date Format**: The `publishedAt` field must use `YYYY-MM-DD` format (use current date for new posts)
+- **Date Format**: The `publishedAt` field must use `YYYY-MM-DD` format
 - **Quotes**: Wrap values containing special characters in quotes
 
 ### Content Issues
 
-- **Title Redundancy**: Don't repeat the title from frontmatter as an H1 heading in the content
 - **Broken Images**: Ensure image paths are correct and images exist in the public directory
 - **Component Errors**: Check that all custom components are properly imported and used
 - **Syntax Errors**: Ensure all MDX syntax is valid and properly closed
@@ -180,7 +245,7 @@ For reference, examine these existing blog posts:
 
 1. Write your post in the `content/` directory
 2. Set `hidden: true` during drafting and review
-3. When ready to publish, set `hidden: false` and ensure the `publishedAt` date is current
+3. When ready to publish, set `hidden: false` and ensure the `publishedAt` date is correct
 4. Commit and push your changes to deploy the new post
 
 By following these guidelines, you'll create consistent and well-formatted blog posts that take full advantage of the blog's capabilities.

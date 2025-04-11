@@ -9,6 +9,7 @@ import { highlight } from 'sugar-high'
 import { CaptionComponent } from './caption'
 import { ImageGrid } from './image-grid'
 import { TweetComponent } from './tweet'
+import { VerbatimCode } from './verbatim-code'
 import { YouTubeComponent } from './youtube'
 
 function CustomLink(props) {
@@ -115,6 +116,7 @@ let components = {
   Table,
   del: Strikethrough,
   Callout,
+  VerbatimCode,
 }
 
 export function CustomMDX(props) {

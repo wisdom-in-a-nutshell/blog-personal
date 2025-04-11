@@ -1,33 +1,31 @@
 ---
-title: 'Teaching AI Amnesia: Writing Cursor Rules with Rules'
+title: 'Writing Cursor Rules with a Meta Cursor Rule'
 publishedAt: '2025-04-10'
 summary: 'AI forgets things between chats. Cursor Rules fix this. Learn why you need them and a trick to make writing them easy.'
 tags: 'AI, Productivity, Cursor, Development, Systems'
 ---
 
-## The AI Has Amnesia Problem
+I spend most of my coding time in Cursor. It's a fantastic tool for LLM assisted coding.
 
-I spend most of my coding time in Cursor. It's a fantastic tool.
+But coding with LLMs has a specific quirk: they possess strong **contextual memory** but lack **episodic memory**.
 
-But LLMs have a specific quirk: they possess strong **contextual memory** but lack **episodic memory**.
+Or in simpler words, they recall and use information from within a single conversation (the context) but forget everything once a new chat session begins (no memory of past conversations).
 
-Or in simpler word, they remember (almost) within a single conversation (the context) but forget everything once a new chat session begins (no memory of past episodes).
-
-Think of it like working with a brilliant assistant who has amnesia. Every single day, you have to explain the basics again.
+Think of it like working with a brilliant assistant who has amnesia. Every single day, you have to explain the basics again:
 
 - "Remember, we use camelCase here."
-- "Our shared utilities go in the `lib` folder in specific folder structure."
+- "Our shared utilities go in the `lib` folder with this specific folder structure."
 - "This is how the backend API expects requests."
 
-If you use Cursor often, this should sound very familiar. And you've likely same variations fo the above yourself. You nudge the AI back towards your project's standards or your personal preferences again and again.
+If you use Cursor often, this should sound very familiar. You've likely said similar things yourself. You nudge the AI back towards your project's standards or your personal preferences again and again.
+
+If you already are nodding your head in agreement with what is being said here and the title of this blog post make sense to you and you are just here for the meta cursor rules that you want to use, feel free to jump straight to the section on [How to Create Rules Without the Friction](#how-to-create-rules-without-the-friction).
+
+For everyone else, let's first dive deeper into _why_ this is necessary.
 
 ## My Approach: Why, How, Then What
 
 My philosophy is simple: understand _why_ a problem exists and _how_ a solution works, and the _what_ (the specific implementation) becomes much clearer. You'll likely even devise better solutions than I could suggest.
-
-If you're already convinced you need a better way to manage AI consistency in Cursor and just want the practical trick, feel free to jump straight to the section on [How to Create Rules Without the Friction](#how-to-create-rules-without-the-friction).
-
-For everyone else, let's first dive deeper into _why_ this is necessary.
 
 ## Why You Need Systems for AI
 
@@ -69,73 +67,20 @@ This is just a fancy way of saying you create _one_ rule that acts as a template
 
 Once you have this meta-rule, the process becomes easy:
 
-1.  Notice a pattern you want to codify.
-2.  Open the Cursor chat.
-3.  Point the AI to your meta-rule (e.g., "Using the `cursor-rule-creation.mdc` guide...").
-4.  Ask it to write a new rule based on the pattern or even a recent chat conversation ("...write a rule for our component structure based on this chat.").
+1. Notice a pattern you want to codify.
+2. Open the Cursor chat.
+3. Point the AI to your meta-rule (e.g., "Using the `cursor-rule-creation.mdc` guide...").
+4. Ask it to write a new rule based on the pattern or even a recent chat conversation ("...write a rule for our component structure based on this chat.").
 
 The AI uses your meta-rule template to generate a well-structured draft. Save it, and you're done. This drastically lowers the effort needed to build your rule library.
 
-### My Meta-Rule Template Structure
+## Example Meta-Cursor Rule
 
-Creating your own meta-rule is straightforward.
+Here's an example of a meta-cursor rule that you can use to create new cursor rules.
 
-1.  Create a `.cursor/rules` directory in your project root (if it doesn't exist).
-2.  Create a file inside, perhaps named `cursor-rule-creation.mdc`.
-3.  Define the structure you want your rules to follow.
-
-Here's a simplified structure I use in my meta-rule:
-
-```mdc
----
-title: Brief Title of the Rule
-description: Guidelines for what this rule covers
-glob: 'pattern/to/match/relevant/files/**/*.{ext}'
-alwaysApply: false # Or true, depending on the rule
----
-
-# Rule Title
-
-## 1. Introduction / Problem
-
-- What problem does this rule solve?
-- Why is this pattern important?
-- When should this rule be applied?
-
-## 2. The Pattern / Solution
-
-- Clear explanations.
-- Code examples (`tsx`, `python`, etc.).
-- Key components involved.
-- Links to *real* example files in the codebase if possible.
-
-## 3. Implementation Steps (If Applicable)
-
-- Step-by-step guide.
-- Ordered list format.
-
-## 4. Common Pitfalls
-
-- What often goes wrong?
-- How to spot the issues?
-- How to fix or avoid them?
-```
-
-Customize this structure to fit your needs.
-
-## Building Systems Pays Off
-
-Meta-cursor rules are about building systems for your AI interactions. You teach the AI how to create its own documentation. This creates a self-improving cycle that boosts consistency and saves you time.
-
-The small upfront investment in creating _one_ meta-rule pays off significantly. You'll spend less time repeating instructions and more time building.
-
-Here's my full meta-rule file for reference:
-
-```mdc
-// TODO: Insert your full meta-rule content here
-```
-
-What systems are you building to work more effectively with AI? Let me know.
+<VerbatimCode
+  code={`\n---\ndescription: This rule provides guidance on how to create effective Cursor rules that help developers understand and follow codebase patterns.\nglobs:\nalwaysApply: false\n---\n\n\n## Rule Location and Organization\n\n### Directory Structure\nAll cursor rules MUST be stored in the \`.cursor/rules\` directory:\n\n\`\`\`\n\n.cursor/\n└── rules/\n    ├── api-implementation.mdc\n    ├── server-startup-monitoring.mdc\n    ├── frontend-implementation-guide.mdc\n    └── cursor-rule-creation.mdc\n\n### File Naming\n- Use kebab-case for file names\n- Always use the \`.mdc\` extension\n- Names should be descriptive and indicate the rule\'s purpose\n\n# Writing Effective Cursor Rules\n\nThis meta-rule provides guidance on creating cursor rules that help document code patterns, architecture decisions, and best practices for your codebase.\n\n## What is a Cursor Rule?\n\nCursor rules are documentation files that Cursor AI can access to understand your project\'s specific patterns and requirements. They serve as knowledge bases that help maintain consistency across your codebase.\n\n## Rule Structure\n\nA well-structured cursor rule should include the following elements:\n\n### 1. YAML Frontmatter\n\n\`\`\`yaml\n---\ntitle: Brief Title of the Rule\ndescription: Guidelines for what this rule covers and its purpose in a standardized format\nglob: \"pattern/to/match/relevant/files/**/*.{ext}\"\nalwaysApply: true\n---\n\`\`\`\n\n- **title**: A clear, descriptive title (5-7 words)\n- **description**: A concise description starting with \"Guidelines for...\" that explains the rule\'s purpose\n- **glob**: File pattern(s) that should trigger this rule\n- **alwaysApply**: Set to true to have this rule applied automatically when relevant files are opened\n\n### 2. Introduction Section\n\nStart with a brief overview that explains:\n- What problem this rule addresses\n- Why following this pattern is important\n- When developers should apply this pattern\n\n### 3. Pattern Description\n\nClearly document the recommended pattern(s):\n- Explain the structure using both text and code examples\n- Highlight key components and their relationships\n- Include real file references from your codebase when possible\n- Use diagrams or structured lists to illustrate complex relationships\n\n### 4. Implementation Steps\n\nProvide a step-by-step guide for implementing the pattern:\n- Ordered list of actions to take\n- Decision points clearly identified\n- Prerequisites or dependencies mentioned\n\n### 5. Real-World Examples\n\nInclude examples from your actual codebase:\n- Link to real files (using relative paths)\n- Highlight the most important parts of the examples\n- Explain why these examples demonstrate best practices\n- Consider \"before and after\" examples for clarity\n\n### 6. Common Pitfalls\n\nDocument known issues or anti-patterns:\n- Problems that commonly arise\n- How to recognize them\n- How to fix or avoid them\n\n## Best Practices for Writing Rules\n\n### Be Specific and Actionable\n\n✅ DO:\n- Provide concrete examples\n- Link to actual files in the codebase\n- Give specific step-by-step instructions\n\n❌ DON\'T:\n- Use vague language like \"appropriately\" or \"properly\"\n- Assume knowledge without providing references\n- Include personal opinions without justification\n\n### Focus on Patterns, Not Individual Issues\n\nRules should document patterns that apply across multiple files or components, not fix individual bugs or issues.\n\n### Keep Rules Updated\n\nAs your codebase evolves, keep your rules updated:\n- Review rules regularly when patterns change\n- Remove outdated rules\n- Update examples to reflect current code\n\n### Use Clear, Consistent Formatting\n\n- Use markdown headings consistently (H1 for title, H2 for major sections, H3 for subsections)\n- Format code blocks with appropriate language tags\n- Use bullet points and numbered lists for clarity\n- Bold or italicize important points for emphasis\n\n## Example Rule Structure\n\nBelow is a simplified template for a cursor rule:\n\n\`\`\`markdown\n---\ntitle: Component Styling Pattern\ndescription: Guidelines for styling React components using CSS Modules for consistent appearance\nglob: \"**/*.{tsx,jsx,css}\"\nalwaysApply: true\n---\n\n# Component Styling Pattern\n\nThis rule documents our approach to styling React components using CSS Modules.\n\n## Overview\n\nWe use CSS Modules to scope styles to specific components, preventing style leakage and naming conflicts.\n\n## Directory Structure\n\nComponents with styles should follow this structure:\n\n\`\`\`\ncomponents/\n└── Button/\n    ├── Button.tsx\n    ├── Button.module.css\n    └── index.ts\n\`\`\`\n\n## Implementation Steps\n\n1. Create a component directory with the component name\n2. Create the component file (ComponentName.tsx)\n3. Create a CSS module file with the same name (ComponentName.module.css)\n4. Create an index.ts file that exports the component\n\n## Real-World Examples\n\nSee our Button component implementation:\n- [components/Button/Button.tsx](mdc:../src/components/Button/Button.tsx)\n- [components/Button/Button.module.css](mdc:../src/components/Button/Button.module.css)\n\n## Common Pitfalls\n\n- Don\'t mix global styles with module styles\n- Avoid deeply nested selectors\n- Don\'t use !important in module styles\n\`\`\`\n\n## Real Example from Your Codebase\n\nThe API Implementation rule we created is a good example of a well-structured rule:\n\n- It has clear YAML frontmatter with title, description, and glob pattern\n- The overview explains the job-based architecture and its importance\n- It documents multiple patterns with clear explanations\n- It includes real-world examples from your codebase\n- It lists common pitfalls to avoid\n- It has a step-by-step implementation guide\n\nBy following these guidelines, you\'ll create cursor rules that effectively document your codebase patterns and help all developers maintain consistency.\n`}
+/>
 
 ```
 

@@ -1,6 +1,6 @@
 ---
-description: Guidelines for consistent coding style, file naming, and structure across the codebase
-globs:
+description: 
+globs: 
 alwaysApply: true
 ---
 

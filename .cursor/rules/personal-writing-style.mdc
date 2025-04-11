@@ -1,8 +1,7 @@
 ---
-title: Personal Writing Style Guide
 description: Guidelines for maintaining consistent voice, tone, and style in blog posts to match the author's preferences
-glob: "content/**/*.mdx"
-alwaysApply: true
+globs: 
+alwaysApply: false
 ---
 
 # Personal Writing Style Guide

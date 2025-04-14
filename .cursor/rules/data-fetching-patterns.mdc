@@ -1,7 +1,6 @@
 ---
-title: Data Fetching Patterns
-description: Guidelines for fetching and managing data in Next.js App Router projects with server and client components
-glob: "app/**/*.tsx"
+description:  This rule documents the standardized approaches for fetching, caching, and handling data in our Next.js blog application.
+globs: 
 alwaysApply: false
 ---
 

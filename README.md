@@ -19,6 +19,10 @@ For technical setup details, see [SETUP.md](./SETUP.md).
 .
 ├── app/                    # Next.js App Router structure
 │   ├── components/         # Reusable UI components
+│   │   ├── nav.tsx           # Main navigation component
+│   │   ├── footer.tsx        # Footer component with subscribe & social links
+│   │   ├── subscribe-modal.tsx # Modal for email subscription
+│   │   └── ...             # Other UI components
 │   ├── blog/               # Blog section and post rendering
 │   ├── projects/           # Projects showcase
 │   ├── photos/             # Photo gallery
@@ -35,17 +39,18 @@ For technical setup details, see [SETUP.md](./SETUP.md).
 
 The blog includes several reusable components that you can use in new pages or features:
 
-| Component          | Description                                             | File Location                        |
-| ------------------ | ------------------------------------------------------- | ------------------------------------ |
-| `Navbar`           | Main navigation bar with links to all sections          | `app/components/nav.tsx`             |
-| `ThemeSwitch`      | Dark/light mode toggle with system preference detection | `app/components/theme-switch.tsx`    |
-| `Footer`           | Site footer with social links                           | `app/components/footer.tsx`          |
-| `GithubCalendar`   | GitHub activity heatmap                                 | `app/components/github-calendar.tsx` |
-| `CustomMDX`        | MDX renderer with custom components                     | `app/components/mdx.tsx`             |
-| `ImageGrid`        | Grid layout for displaying multiple images              | `app/components/image-grid.tsx`      |
-| `TweetComponent`   | Embed and style tweets                                  | `app/components/tweet.tsx`           |
-| `YouTubeComponent` | Embed YouTube videos                                    | `app/components/youtube.tsx`         |
-| `CaptionComponent` | Add captions to media elements                          | `app/components/caption.tsx`         |
+| Component          | Description                                                                                  | File Location                        |
+| ------------------ | -------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `Navbar`           | Main navigation bar with About, Blog, Projects links, and a dropdown (icon) for Photos link. | `app/components/nav.tsx`             |
+| `ThemeSwitch`      | Dark/light mode toggle with system preference detection                                      | `app/components/theme-switch.tsx`    |
+| `Footer`           | Site footer with copyright, Subscribe link (triggers modal), and social links.               | `app/components/footer.tsx`          |
+| `SubscribeModal`   | Modal dialog for email subscription collection (uses Resend via `/api/subscribe`).           | `app/components/subscribe-modal.tsx` |
+| `GithubCalendar`   | GitHub activity heatmap                                                                      | `app/components/github-calendar.tsx` |
+| `CustomMDX`        | MDX renderer with custom components                                                          | `app/components/mdx.tsx`             |
+| `ImageGrid`        | Grid layout for displaying multiple images                                                   | `app/components/image-grid.tsx`      |
+| `TweetComponent`   | Embed and style tweets                                                                       | `app/components/tweet.tsx`           |
+| `YouTubeComponent` | Embed YouTube videos                                                                         | `app/components/youtube.tsx`         |
+| `CaptionComponent` | Add captions to media elements                                                               | `app/components/caption.tsx`         |
 
 ## Content Management
 
@@ -86,7 +91,7 @@ Here's how to perform common tasks on this project:
 
 1. Follow the structure in existing pages under the `app/` directory
 2. Create a new directory with a `page.tsx` file
-3. Update navigation in `app/components/nav.tsx` if needed
+3. Update navigation in `app/components/nav.tsx` if needed (check `primaryNavItems` and `secondaryNavItems`)
 4. Refer to the `page-creation-guide` Cursor rule for detailed instructions
 
 #### Adding a New Blog Post
@@ -118,15 +123,22 @@ Understanding how data flows through the application:
    - Rendered in `app/projects/page.tsx`
 
 3. **Site Configuration**:
+
    - Defined in `app/config.ts` →
    - Used throughout the application for SEO, metadata, and social links
+
+4. **Subscription Flow**:
+   - User clicks "Subscribe" in `Footer` →
+   - `SubscribeModal` opens →
+   - Form submits email to `/api/subscribe/route.ts` →
+   - API route adds contact to Resend audience using environment variables.
 
 ## Performance Considerations
 
 The site is optimized for performance:
 
 - Image optimization with Next.js Image component
-- Server components for reduced client-side JavaScript
+- Server components for reduced client-side JavaScript (Note: Navbar and Footer are Client Components due to hooks)
 - Dark mode without layout shifts
 - Tailwind for efficient CSS
 

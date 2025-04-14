@@ -17,7 +17,7 @@ const secondaryNavItems = {
   '/photos': { name: 'Photos' },
 }
 
-export function Navbar(): JSX.Element {
+export function Navbar(): React.ReactElement {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 

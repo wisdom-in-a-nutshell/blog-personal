@@ -44,7 +44,7 @@ The blog includes several reusable components that you can use in new pages or f
 | `Navbar`           | Main navigation bar with About, Blog, Projects links, and a dropdown (icon) for Photos link. | `app/components/nav.tsx`             |
 | `ThemeSwitch`      | Dark/light mode toggle with system preference detection                                      | `app/components/theme-switch.tsx`    |
 | `Footer`           | Site footer with copyright, Subscribe link (triggers modal), and social links.               | `app/components/footer.tsx`          |
-| `SubscribeModal`   | Modal dialog for email subscription collection.                                              | `app/components/subscribe-modal.tsx` |
+| `SubscribeModal`   | Modal dialog for email subscription collection (uses Resend via `/api/subscribe`).           | `app/components/subscribe-modal.tsx` |
 | `GithubCalendar`   | GitHub activity heatmap                                                                      | `app/components/github-calendar.tsx` |
 | `CustomMDX`        | MDX renderer with custom components                                                          | `app/components/mdx.tsx`             |
 | `ImageGrid`        | Grid layout for displaying multiple images                                                   | `app/components/image-grid.tsx`      |
@@ -123,8 +123,15 @@ Understanding how data flows through the application:
    - Rendered in `app/projects/page.tsx`
 
 3. **Site Configuration**:
+
    - Defined in `app/config.ts` →
    - Used throughout the application for SEO, metadata, and social links
+
+4. **Subscription Flow**:
+   - User clicks "Subscribe" in `Footer` →
+   - `SubscribeModal` opens →
+   - Form submits email to `/api/subscribe/route.ts` →
+   - API route adds contact to Resend audience using environment variables.
 
 ## Performance Considerations
 

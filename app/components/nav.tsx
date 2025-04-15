@@ -6,16 +6,16 @@ import { metaData } from '../config'
 import { SubscribeModal } from './subscribe-modal'
 import { ThemeSwitch } from './theme-switch'
 
-// Primary: About, Blog
+// Primary: Blog only
 const primaryNavItems = {
-  '/about': { name: 'About' },
   '/blog': { name: 'Blog' },
-  // Projects removed from primary
+  // About moved to secondary
 }
 
-// Secondary: Projects, Photos
+// Secondary: About, Projects, Photos
 const secondaryNavItems = {
-  '/projects': { name: 'Projects' }, // Projects added back to secondary
+  '/about': { name: 'About' }, // Added About to secondary
+  '/projects': { name: 'Projects' },
   '/photos': { name: 'Photos' },
 }
 

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { metaData } from '../config'
+import { SubscribeModal } from './subscribe-modal'
 import { ThemeSwitch } from './theme-switch'
 
 // Primary: About, Blog
@@ -20,6 +21,7 @@ const secondaryNavItems = {
 
 export function Navbar(): React.ReactElement {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -53,6 +55,15 @@ export function Navbar(): React.ReactElement {
               {name}
             </Link>
           ))}
+          {/* Subscribe Button */}
+          <button
+            type="button"
+            onClick={() => setIsSubscribeModalOpen(true)}
+            className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+            aria-label="Subscribe to newsletter"
+          >
+            Subscribe
+          </button>
           {/* Dropdown Trigger - Reverted to "More" text and arrow */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -107,6 +118,12 @@ export function Navbar(): React.ReactElement {
           <ThemeSwitch />
         </div>
       </div>
+
+      {/* Subscribe Modal */}
+      <SubscribeModal
+        isOpen={isSubscribeModalOpen}
+        onClose={() => setIsSubscribeModalOpen(false)}
+      />
     </nav>
   )
 }

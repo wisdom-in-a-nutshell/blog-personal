@@ -5,7 +5,13 @@ name: Auto PR on Branch Creation
 # The workflow is managed in the organization's .github repository for consistency
 
 on:
-  create:
+  push:
+    branches-ignore:
+      - main
+      - master
+      - develop
+      - staging
+      - production
 
 # Permissions required for the reusable workflow to create PRs and add labels
 permissions:
@@ -13,10 +19,8 @@ permissions:
   pull-requests: write
   issues: write
 
-# Only run on branch creation, not tag creation
 jobs:
   auto-pr:
-    if: github.event.ref_type == 'branch'
 
     # Uses a reusable workflow from the organization's .github repository
     # This centralizes the PR creation logic for consistency across repos

@@ -7,6 +7,12 @@ name: Auto PR on Branch Creation
 on:
   create:
 
+# Permissions required for the reusable workflow to create PRs and add labels
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 # Only run on branch creation, not tag creation
 jobs:
   auto-pr:
@@ -23,6 +29,4 @@ jobs:
       # Branches to skip (customize if needed)
       skip-branches: 'main,master,develop,staging,production'
 
-    secrets:
-      # GitHub token for creating pull requests
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit

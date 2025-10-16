@@ -56,6 +56,36 @@ Post content starts here...
 
 ## Content Formatting
 
+### Title Handling - CRITICAL
+
+**The blog automatically generates the H1 title from your frontmatter.** Never add the title as an H1 heading in your content.
+
+✅ **Correct approach:**
+
+```mdx
+---
+title: 'My Blog Post Title'
+---
+
+## First Section Heading
+Content starts here...
+```
+
+❌ **Incorrect approach:**
+
+```mdx
+---
+title: 'My Blog Post Title'
+---
+
+# My Blog Post Title
+
+## First Section Heading
+Content starts here...
+```
+
+**Always start your content with H2 headings (##), never H1 (#).**
+
 ### Basic Markdown
 
 Standard Markdown syntax works as expected:
@@ -76,8 +106,6 @@ Standard Markdown syntax works as expected:
 
 ![Alt text](mdc:path/to/image.jpg)
 ```
-
-> **IMPORTANT**: Do not repeat the post title as an H1 heading in the content. The title from the frontmatter will be automatically displayed as the page title, making an H1 heading redundant. Start your content with an H2 heading.
 
 ### Code Blocks
 
@@ -170,7 +198,8 @@ For reference, examine these existing blog posts:
 
 ### Content Issues
 
-- **Title Redundancy**: Don't repeat the title from frontmatter as an H1 heading in the content
+- **Title Redundancy**: NEVER add H1 headings - the title from frontmatter is automatically displayed
+- **Wrong Heading Levels**: Always start content with H2 (##), never H1 (#)
 - **Broken Images**: Ensure image paths are correct and images exist in the public directory
 - **Component Errors**: Check that all custom components are properly imported and used
 - **Syntax Errors**: Ensure all MDX syntax is valid and properly closed

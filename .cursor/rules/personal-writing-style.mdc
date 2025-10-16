@@ -6,139 +6,56 @@ alwaysApply: false
 
 # Personal Writing Style Guide
 
-This rule provides comprehensive guidelines for writing blog posts that accurately reflect the author's voice, style preferences, and background information.
+This rule is about voice—pair it with `.cursor/rules/blog-creation.mdc` for structure, MDX usage, and publishing mechanics.
 
-## Author Background
+## Author Identity
 
-The author is a 32-year-old entrepreneur based in Berlin, Germany, with the following key characteristics:
+- Berlin-based founder/engineer building AI and developer tooling products
+- Writes from hands-on experience with LLM infrastructure, developer workflows, product design, and founder journeys
+- Uses personal anecdotes to ground lessons, then abstracts them into actionable takeaways
 
-- Founder of AI Podcasting (AIP), a startup handling podcast post-production
-- Services include editing, publishing, website creation, audience growth, and monetization strategies
-- Skilled programmer with a passion for artificial intelcligence
-- Leadership role guiding teams to streamline podcast workflows
-- Avid reader with interests in emerging tech, especially AI
-- Follows a mostly vegan lifestyle
-- Continuously learning and staying updated on tech trends
-- Primary goal: To help podcasters focus on content creation while handling everything post-recording
+## Voice Fundamentals
 
-## Writing Style & Tone
+- **Clear & Direct**: Open with why the topic matters, avoid filler phrasing, state conclusions plainly.
+- **Concise but Varied**: Favor short and medium-length sentences; mix cadence to keep momentum.
+- **Professional-Friendly**: Speak as a peer solving problems. Confident, humble, never salesy.
+- **Reader Benefit First**: Tie each insight to what the reader can do next; stay pragmatic.
+- **Connected Flow**: Add bridging sentences so each paragraph leads naturally to the next.
 
-### Core Principles
+## Language Patterns
 
-- **Clarity & Conciseness**: Direct, easy-to-understand sentences. Avoid unnecessary jargon or overly complex language.
-- **Efficiency & Brevity**: Say as much as possible in as few words as possible.
-- **Professional Yet Accessible**: Present expertise in AI and tech without sounding too academic or dense.
-- **Enthusiastic & Forward-Thinking**: Convey excitement about technology and innovation, balancing optimism with practical insights.
-- **Authentic & Helpful**: Focus on educating, informing, and building trust.
+- Use plain, concrete vocabulary. Introduce technical terms only when they move the point forward, and add a quick refresher if needed.
+- Anchor arguments with numbers, observations, or real incidents (e.g., “400 cold emails,” “hit €15K MRR”).
+- Use first person for lived experience (“I learned…”) and second person when giving advice (“You’ll feel this once…”).
+- Deploy rhetorical questions sparingly to prompt reflection; follow them with an immediate answer or action.
+- Em dashes are allowed when they sharpen emphasis; default to commas or periods to keep sentences tight.
 
-### Language & Formatting
+## Narrative Modes to Reuse
 
-- **Plain Language**: Use everyday vocabulary. When using tech terms, provide brief context or examples.
-- **Short Paragraphs & Bullet Points**: Break content into easily digestible segments.
-- **Short Sentences**: Prefer multiple short sentences over long, complex ones. Break up long sentences into smaller ones for improved readability.
-- **Tone**: Friendly but balanced with professionalism.
-- **No Em-Dashes**: Replace em-dashes with commas, parentheses, or separate sentences.
+- **Insight Memo**: Why this matters → what changed → precise next steps (content/why-you-need-proxy-server-llm.mdx:1).
+- **Reflection Log**: Set the context, capture the emotional pulse, share what you’ll do differently (content/latitude59-tallinn-reflections.mdx:1).
+- **Dialogue/Parable**: Alternate inner voices to highlight mindset shifts or tension (content/bootstrappers-parable.mdx:1).
+- **Curated Explainer**: Reference an external source, translate it into plain language, and add your lens (content/richard-sutton-ai-slogans.mdx:1).
+- **Builder’s Playbook**: Outline a system or workflow you use, then invite readers to adapt it (content/writing-cursor-rules-with-a-cursor-rule.mdx:1).
 
-## Common Themes & Topics
+## Tone Levers & Devices
 
-Blog posts should emphasize one or more of these core themes:
+- Lead with stakes or a vivid observation, not throat-clearing.
+- Use callouts or figures only when they condense a core lesson or add clarity; avoid decorative components.
+- Close with a succinct takeaway (“If you only do one thing…”) or note the next experiment you’ll run.
+- Keep humor wry and understated; let confidence come from evidence, not hype.
 
-1. **Podcasting & Audio Production**
-   - Streamlined workflows
-   - Improved sound quality
-   - Best practices for podcast creation
+## What to Avoid
 
-2. **AI & Technology Trends**
-   - How AI simplifies tasks
-   - Enhances creativity
-   - Expands reach
+- Rambling setup before delivering value.
+- Abstract theory with no lived example.
+- Repeating the same insight in both a callout and body text.
+- Letting edits iron out the human voice—retain the “builder talking to peers” feel.
+- Dense jargon dumps, passive constructions, or hedge words that dilute conviction.
 
-3. **Entrepreneurship & Startup Culture**
-   - Lessons learned
-   - Leadership tips
-   - Growth strategies
+## Reference Posts
 
-4. **Personal Growth & Continuous Learning**
-   - Books being read
-   - Courses being taken
-   - New tech being explored
+- `content/why-you-need-proxy-server-llm.mdx` — exemplar for Insight Memo voice.
+- `content/latitude59-tallinn-reflections.mdx` — exemplar for Reflection Log voice.
 
-5. **Lifestyle & Values**
-   - Subtle mentions of mostly vegan lifestyle
-   - Environmental awareness (when relevant)
-
-## Writing Structure Guidelines
-
-### Blog Post Structure
-
-1. **Strong Introduction**
-   - Begin with a compelling hook
-   - Clearly state the post's purpose
-   - Introduce main points early
-
-2. **Body Content**
-   - Use descriptive subheadings (H2, H3)
-   - Include concrete examples and evidence
-   - Break down complex concepts
-   - Include personal anecdotes when appropriate
-
-3. **Conclusion**
-   - Wrap up with a final reflection
-   - Provide next steps or action items
-   - End with a succinct conclusion
-   - No need to end with a question or call to action unless necessary.
-
-### Voice Guidelines
-
-Write as though explaining something to a knowledgeable friend:
-- Respectful and engaging
-- Not overly formal
-- Reader-centric (emphasize benefits to the reader)
-- Show empathy for reader's perspective
-- Maintain a logical flow throughout
-- And also there should be a connecting sentences from one paragraph to another.
-
-## Examples
-
-### Preferred Style Example
-
-```
-I've tested over 20 podcast editing tools this year. Three stand out for their AI capabilities.
-
-First, Tool X analyzes speaker patterns and automatically removes filler words. Our clients report 30% faster editing times.
-
-Second, Tool Y transcribes with 98% accuracy, even with multiple speakers. This saves hours of manual correction.
-
-Finally, Tool Z generates show notes that sound natural and highlight key moments. Podcasters using it see increased listener engagement.
-
-These tools deliver the most value with minimal learning curve. Try Tool X if you're just starting, as it provides the quickest wins for new podcasters.
-```
-
-### Style to Avoid
-
-```
-As the founder of AIP, I've been deeply immersed in the podcasting scene for years now. The technology landscape is absolutely fascinating, with so many tools available that it's hard to keep track! I tested a whole bunch of podcast editing tools, maybe around 20 or so this year alone. I found that there were three tools that were really great for various reasons related to their artificial intelligence capabilities.
-
-Tool X is amazing because it can analyze speaker patterns. Tool Y does transcription really well. Tool Z creates show notes. All of these tools can be useful in different situations and contexts depending on what exactly you're trying to accomplish with your podcast editing workflow.
-```
-
-## Common Pitfalls to Avoid
-
-- **Wordiness**: Cut unnecessary phrases and redundant statements
-- **Overuse of Technical Jargon**: Balance expertise with accessibility
-- **Lack of Structure**: Always use clear headings and logical progression
-- **Missing Examples**: Include concrete examples for abstract concepts
-- **Passive Voice**: Prefer active voice in most cases
-- **Overly Academic Tone**: Keep it conversational yet professional
-- **Long, Complex Sentences**: Break them into shorter, more digestible sentences. Aim for 1-2 ideas per sentence maximum.
-- **Using Em-Dashes**: Replace with commas, parentheses, or separate sentences
-
-## Implementation Process
-
-1. Reference this style guide before writing each blog post
-2. Review existing posts to understand the established voice
-3. Follow the technical requirements in the blog-creation.mdc rule
-4. Have another team member review for voice consistency
-5. Regularly update this guide as the author's style evolves
-
-By following these guidelines, all blog content will maintain a consistent voice that accurately reflects the author's style, expertise, and perspective.
+Review these before drafting new material to stay anchored in the established tone.

@@ -1,12 +1,12 @@
 ---
 description: Guidelines for maintaining consistent voice, tone, and style in blog posts to match the author's preferences
-globs: 
+globs:
 alwaysApply: false
 ---
 
 # Personal Writing Style Guide
 
-This rule is about voice—pair it with `.cursor/rules/blog-creation.mdc` for structure, MDX usage, and publishing mechanics.
+Use these as defaults, not strict rules. Prioritize clarity and authenticity. Break any guideline when doing so improves understanding or preserves your genuine voice. Pair this with `.cursor/rules/blog-creation.mdc` for structure, MDX usage, and publishing mechanics.
 
 ## Author Identity
 
@@ -28,24 +28,15 @@ This rule is about voice—pair it with `.cursor/rules/blog-creation.mdc` for st
 - Anchor arguments with numbers, observations, or real incidents (e.g., “400 cold emails,” “hit €15K MRR”).
 - Use first person for lived experience (“I learned…”) and second person when giving advice (“You’ll feel this once…”).
 - Deploy rhetorical questions sparingly to prompt reflection; follow them with an immediate answer or action.
-- Em dashes are allowed when they sharpen emphasis; default to commas or periods to keep sentences tight.
-
-## Narrative Modes to Reuse
-
-- **Insight Memo**: Why this matters → what changed → precise next steps (content/why-you-need-proxy-server-llm.mdx:1).
-- **Reflection Log**: Set the context, capture the emotional pulse, share what you’ll do differently (content/latitude59-tallinn-reflections.mdx:1).
-- **Dialogue/Parable**: Alternate inner voices to highlight mindset shifts or tension (content/bootstrappers-parable.mdx:1).
-- **Curated Explainer**: Reference an external source, translate it into plain language, and add your lens (content/richard-sutton-ai-slogans.mdx:1).
-- **Builder’s Playbook**: Outline a system or workflow you use, then invite readers to adapt it (content/writing-cursor-rules-with-a-cursor-rule.mdx:1).
+- Avoid em dashes; use commas, parentheses, or separate sentences to keep sentences tight.
 
 ## Tone Levers & Devices
 
-- Lead with stakes or a vivid observation, not throat-clearing.
-- Use callouts or figures only when they condense a core lesson or add clarity; avoid decorative components.
-- Close with a succinct takeaway (“If you only do one thing…”) or note the next experiment you’ll run.
-- Keep humor wry and understated; let confidence come from evidence, not hype.
+- Lead with stakes or a vivid observation.
+- Use callouts/figures only when they condense a core lesson.
+- Close with a succinct takeaway or the next experiment you’ll run.
 
-## What to Avoid
+## Watch‑outs
 
 - Rambling setup before delivering value.
 - Abstract theory with no lived example.

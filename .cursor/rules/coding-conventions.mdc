@@ -1,9 +1,7 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: This rule documents the coding standards, naming conventions, and file structure patterns used in this Next.js blog project.
+alwaysApply: false
 ---
-
 # Coding Conventions
 
 This rule documents the coding standards, naming conventions, and file structure patterns used in this Next.js blog project.
@@ -118,6 +116,7 @@ export function Button({ variant, size = 'medium', onClick, children }: ButtonPr
   - Effects & states
 
 Example:
+
 ```tsx
 <div className="flex flex-col md:flex-row gap-4 p-3 text-base font-medium text-neutral-800 dark:text-neutral-200 hover:underline">
   {/* Content */}

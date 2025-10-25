@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
+import { TableOfContents } from "app/components/table-of-contents";
 import { formatDate, getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/config";
 
@@ -95,6 +96,7 @@ export default async function Blog({ params }) {
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
+      <TableOfContents headings={post.headings} />
       <article className="prose prose-quoteless prose-neutral dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>

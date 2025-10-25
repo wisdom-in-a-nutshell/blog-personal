@@ -6,6 +6,7 @@ import React from 'react'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import { highlight } from 'sugar-high'
+import { slugify } from 'app/lib/slugify'
 import { CaptionComponent } from './caption'
 import { ImageGrid } from './image-grid'
 import { TweetComponent } from './tweet'
@@ -68,20 +69,26 @@ function Callout(props) {
   )
 }
 
-function slugify(str) {
-  return str
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/&/g, '-and-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
+function getNodeText(node) {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node)
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(getNodeText).join('')
+  }
+
+  if (React.isValidElement(node)) {
+    return getNodeText(node.props.children)
+  }
+
+  return ''
 }
 
 function createHeading(level) {
   const Heading = ({ children }) => {
-    let slug = slugify(children)
+    const text = getNodeText(children)
+    const slug = slugify(text)
     return React.createElement(
       `h${level}`,
       { id: slug },

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { extractHeadings, type Heading } from './headings'
 
 type Metadata = {
   title: string
@@ -8,6 +9,13 @@ type Metadata = {
   tags: string
   image?: string
   hidden?: boolean
+}
+
+export type BlogPost = {
+  metadata: Metadata
+  slug: string
+  content: string
+  headings: Heading[]
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -43,16 +51,18 @@ function readMDXFile(filePath: string) {
   return parseFrontmatter(rawContent)
 }
 
-function getMDXData(dir: string) {
+function getMDXData(dir: string): BlogPost[] {
   let mdxFiles = getMDXFiles(dir)
   return mdxFiles.map(file => {
     let { metadata, content } = readMDXFile(path.join(dir, file))
     let slug = path.basename(file, path.extname(file))
+    let headings = extractHeadings(content)
 
     return {
       metadata,
       slug,
       content,
+      headings,
     }
   })
 }

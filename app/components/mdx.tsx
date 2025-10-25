@@ -2,7 +2,7 @@ import 'katex/dist/katex.min.css'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { type ReactElement, type ReactNode } from 'react'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import { highlight } from 'sugar-high'
@@ -69,7 +69,7 @@ function Callout(props) {
   )
 }
 
-function getNodeText(node) {
+function getNodeText(node: ReactNode): string {
   if (typeof node === 'string' || typeof node === 'number') {
     return String(node)
   }
@@ -79,7 +79,8 @@ function getNodeText(node) {
   }
 
   if (React.isValidElement(node)) {
-    return getNodeText(node.props.children)
+    const element = node as ReactElement<{ children?: ReactNode }>
+    return getNodeText(element.props.children ?? '')
   }
 
   return ''

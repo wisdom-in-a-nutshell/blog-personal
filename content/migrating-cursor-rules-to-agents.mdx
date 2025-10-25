@@ -9,7 +9,7 @@ hidden: false
 
 Recently, I [said goodbye to Cursor](/blog/goodbye-cursor) after two years of heavy usage, and I'm now migrating all my coding workflows to the [Codex CLI](https://github.com/openai/codex).
 
-One of the biggest challenges in this transition was migrating all my carefully crafted [Cursor Rules](https://cursor.com/docs/context/rules) to work with [Codex CLI](https://github.com/openai/codex) (basically converting them into nested markdown files called [AGENTS.md](https://agents.md)).
+One of the biggest challenges in this transition was migrating all my [Cursor Rules](https://cursor.com/docs/context/rules) to work with [Codex CLI](https://github.com/openai/codex) (basically converting them into nested markdown files called [AGENTS.md](https://agents.md)).
 
 If you already get the "why" and just want the "how," [jump straight to the solution](#the-solution-agentsmd-migration).
 
@@ -46,7 +46,7 @@ Much of my coding over the last two years has been done through Cursor, so I've 
 
 I'd classify myself as a bad to average programmer on my own. But with this approach, I become something like a very good programming manager for AI agents. It's been working so well that I have confidence to ship code to clients and I've been able to build a [company](https://aipodcast.ing).
 
-When I started migrating away from Cursor to Codex CLI ([here's why](/blog/goodbye-cursor), but in short, cost), my Cursor Rules investment was one of the main sticky factors keeping me there. Every repository I work with has at least six to ten deeply handcrafted rules that define exactly how my agents should behave.
+When I started migrating away from Cursor to Codex CLI ([here's why](/blog/goodbye-cursor), but in short, cost), my Cursor Rules investment was one of the main sticky factors keeping me there. Every repository I work with has at least six to ten custom rules that define exactly how my agents should behave.
 
 The challenge was keeping all my Cursor rules when switching to [Codex CLI](https://github.com/openai/codex). Obviously I automated it. Let me walk you through how that works.
 
@@ -130,9 +130,9 @@ Here's an example of that scenario:
 The new root `AGENTS.md` would look something like this, acting as a set of pointers:
 
 ```markdown
-# Global Agent Guidance
+# Agent Rules
 
-This project has several global guidelines for AI collaboration. Please refer to them as needed:
+Here are the main guidelines for working on this project:
 
 - [Contributing Guidelines](./docs/rules/contributing.md)
 - [Pull Request Reviews](./docs/rules/pr-reviews.md)

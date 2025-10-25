@@ -1,0 +1,87 @@
+---
+title: 'From Cursor to Codex CLI: How I Migrated My Rules to AGENTS.md'
+publishedAt: '2025-10-24'
+summary: 'After migrating from Cursor to Codex CLI, I converted all my .cursor/rules to the new AGENTS.md format. Here is the complete migration process and why it matters.'
+tags: 'AI, Development, Cursor, Codex, Migration, Productivity, AGENTS'
+hidden: false
+---
+
+Recently, I [said goodbye to Cursor](/blog/goodbye-cursor) after two years of heavy usage. I am getting [Codex](https://github.com/openai/codex)-pilled.
+
+One of the biggest challenges in this transition was migrating all my carefully crafted [Cursor Rules](https://cursor.com/docs/context/rules) to work with [Codex CLI](https://github.com/openai/codex) (basically converting them into nested markdown files called [AGENTS.md](https://agents.md)).
+
+If you're already nodding and thinking "Yes, I know what you mean!" and just need the migration, jump straight to [The Migration Process](#the-migration-process).
+
+If you're still wondering what the fuss is all about, what AGENTS.md and its equivalents are, or why you need them in the first place, keep reading.
+
+## Why AI Agent Documentation Matters
+
+Whenever I talk about writing helpful docs for AI agents, the most common reactions I get are somewhere along the lines of:
+
+- "Why do we even need to do all of this?"
+- "Let's just YOLO it."
+- "I tried it and didn't find any benefit."
+- "When is it actually worth all this effort?"
+
+I wrote a [detailed blog post](/blog/writing-cursor-rules-with-a-cursor-rule) (that went mildly viral on Hacker News) sketching out my reasoning on this.
+
+Here I'll just summarize that with a newer (maybe better?) analogy.
+
+Imagine you're exploring gnarly unexplored terrain. If you're just doing short walks, quick iterations, exploring, mapping something out once and then forgetting about it, it doesn't make sense to clear out the terrain and lay down railway tracks for your little expedition. You'll just grab your bag and go.
+
+But the moment you know you want to move across this terrain repeatedly and efficiently, it starts making sense to clear the terrain and lay down railway tracks. Yes, there's upfront work, but once you do it, you'll eventually see the payoff. You'll be able to move much more cargo at much higher velocity and throughput on things you do frequently.
+
+In the AI coding world: if you're just writing short scripts and throwing them away or writing a proof of concept, setting up elaborate documentation for AI agents doesn't make much sense.
+
+But once you start building something serious, a codebase you'll work on for weeks and months, maybe you're past the MVP stage and building a company (like me), it will start making sense. You will very likely be building multiple features using the same API patterns, the same ways of exposing backends and frontends, the same interface approaches, that's when laying down these "railway tracks" becomes incredibly valuable.
+
+These railway tracks take different forms for AI agents:
+
+- Structured codebase with consistent patterns
+- Automated tooling (linters, type checkers, tests)
+- Documentation that teaches agents how your project works
+
+For today's post, we're focusing on number three. This is basically documenting the knowledge you'd give a new developer so they can effectively work on your project. Different coding tools call this differently: Claude has `claude.md`, Cursor has Cursor Rules, and now we're broadly converging on something called [AGENTS.md](https://agents.md), which is an open standard.
+
+Much of my coding over the last two years has been done through Cursor, so I've invested heavily in number three with Cursor Rules. Looking back, I can retrospectively say that this has been the single greatest investment I've made while coding.
+
+I'd classify myself as a bad to average programmer on my own. But with this approach, I become something like a very good programming manager for AI agents. It's been working so well that I have confidence to ship code to clients and I've been able to build a [company](https://aipodcast.ing).
+
+When I started migrating away from Cursor to Codex CLI ([here's why](/blog/goodbye-cursor), but in short, cost), my Cursor Rules investment was one of the main sticky factors keeping me there. Every repository I work with has at least six to ten deeply handcrafted rules that define exactly how my agents should behave.
+
+The real challenge wasn't just switching tools, it was preserving all this carefully crafted knowledge in a format that works with [Codex CLI](https://github.com/openai/codex). And what better way to do it than in an automated fashion?
+
+## The Solution: AGENTS.md Migration
+
+In case you don't know the context, [Cursor Rules](https://cursor.com/docs/context/rules) are markdown files with YAML frontmatter. The YAML frontmatter does a bunch of stuff—you can give instructions to auto-attach using descriptions, or you can give glob patterns (like `src/components/**/*.tsx`) and it'll automatically attach when working with those files. They can be nested in folders and automatically attach when relevant files are referenced.
+
+[AGENTS.md](https://cursor.com/docs/context/rules#agentsmd) is similar, but you don't get all the fancy auto-attachment features. It's a very simple markdown file that can also be nested in folders, and agents automatically look into the folder when they're working on files in that directory.
+
+Our goal is to convert from Cursor Rules to AGENTS.md. If you have only one rule per folder, you can simply convert it to `AGENTS.md` in that folder. But often you have multiple Cursor Rules targeting the same folder through different glob patterns—these need to be consolidated into one `AGENTS.md` file.
+
+Here's what the folder structure conversion looks like:
+
+```
+# Before (Cursor Rules)
+project/
+├── .cursor/rules/
+│   └── global.mdc          # Root-level rule
+├── src/
+│   ├── components/
+│   │   └── .cursor/rules/
+│   │       └── react.mdc   # Component-specific rule
+│   └── api/
+│       └── .cursor/rules/
+│           └── routes.mdc  # API-specific rule
+
+# After (AGENTS.md)
+project/
+├── AGENTS.md               # From global.mdc
+├── src/
+│   ├── components/
+│   │   └── AGENTS.md       # From react.mdc
+│   └── api/
+│       └── AGENTS.md       # From routes.mdc
+```
+
+One of the nice things is that AGENTS.md can be nested within folders. So instead of complex glob patterns, there's a simple one-to-one mapping. The script handles stripping away all the YAML frontmatter and puts the markdown content into the right folders. If you already understand the concept, [here's the script](https://github.com/wisdom-in-a-nutshell/blog/blob/main/scripts/migration/generate_agents_from_cursor.py) that handles the conversion.

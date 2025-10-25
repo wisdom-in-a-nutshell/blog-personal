@@ -27,22 +27,10 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">Hello, I'm Adithyan Ilangovan</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          This is my personal blog where I document lessons I wish I'd known earlier. I've found my
-          writing becomes clearer when I imagine an audience. The audience I know best is myself. So
-          I write primarily for my younger self.
+          I write lessons I wish I'd known earlier. Writing for my younger self helps me compress hard experiences into principles I can actually use.
         </p>
         <p>
-          I reflect deeply on challenging experiences. This means investing significant "thinking
-          tokens" into understanding them. Writing helps me compress these insights into clear,
-          actionable principles. These principles guide my future decisions and sharpen my thinking.
-          Hopefully they help others avoid similar struggles too.
-        </p>
-        <p>
-          Right now, I spend most of my time immersed in AI. I believe it marks a fundamental
-          turning point in history. Here I document my journey of learning how to co-create with AI.
-          I explore how we can thoughtfully engage with this technology. The inflection point has
-          already passed. We have no choice but to participate. This blog is my voice in that
-          ongoing conversation.
+          I'm building <a href="https://aipodcast.ing" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">AI Podcasting</a> and spending most of my time learning how to co-create with AI tools. We've passed the inflection point—participation isn't optional anymore.
         </p>
         <p>
           <Link
@@ -57,8 +45,7 @@ export default function Page() {
           <h2 className="text-xl font-medium mb-4">My GitHub Activity</h2>
           <GithubCalendar />
           <p className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
-            Most of my time recently has been spent coding with AI. I'll be gradually open-sourcing
-            my projects here.
+            Most of my time recently has been spent building AI Podcasting and experimenting with AI tools. I'll be gradually open-sourcing my projects here.
           </p>
         </div>
       </div>

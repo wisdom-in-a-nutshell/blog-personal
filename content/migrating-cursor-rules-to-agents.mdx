@@ -1,5 +1,5 @@
 ---
-title: 'From Cursor to Codex CLI: How I Migrated My Rules to AGENTS.md'
+title: 'From Cursor to Codex CLI: How I Migrated My Cursor `.mdc` Rules to AGENTS.md'
 publishedAt: '2025-10-24'
 summary: 'After migrating from Cursor to Codex CLI, I converted all my .cursor/rules to the new AGENTS.md format. Here is the complete migration process and why it matters.'
 tags: 'AI, Development, Cursor, Codex, Migration, Productivity, AGENTS'
@@ -57,31 +57,71 @@ In case you don't know the context, [Cursor Rules](https://cursor.com/docs/conte
 
 [AGENTS.md](https://cursor.com/docs/context/rules#agentsmd) is similar, but you don't get all the fancy auto-attachment features. It's a very simple markdown file that can also be nested in folders, and agents automatically look into the folder when they're working on files in that directory.
 
-Our goal is to convert from Cursor Rules to AGENTS.md. If you have only one rule per folder, you can simply convert it to `AGENTS.md` in that folder. But often you have multiple Cursor Rules targeting the same folder through different glob patterns—these need to be consolidated into one `AGENTS.md` file.
+Our goal is to convert from Cursor Rules to AGENTS.md. My migration script handles this in two main scenarios:
 
-Here's what the folder structure conversion looks like:
+**1. Simple Case: Subdirectory Rules**
+This is the most common situation. For `.cursor/rules` folders inside specific subdirectories, the script merges all rules into a single `AGENTS.md` file in that same directory. It’s a straightforward, one-to-one mapping that provides focused context.
+
+Here's an example showing multiple subdirectories:
 
 ```
-# Before (Cursor Rules)
+# Before
 project/
-├── .cursor/rules/
-│   └── global.mdc          # Root-level rule
-├── src/
-│   ├── components/
-│   │   └── .cursor/rules/
-│   │       └── react.mdc   # Component-specific rule
-│   └── api/
-│       └── .cursor/rules/
-│           └── routes.mdc  # API-specific rule
+└── src/
+    ├── components/
+    │   └── .cursor/rules/
+    │       └── react-patterns.mdc
+    └── api/
+        └── .cursor/rules/
+            ├── auth.mdc
+            └── validation.mdc
 
-# After (AGENTS.md)
+# After
 project/
-├── AGENTS.md               # From global.mdc
-├── src/
-│   ├── components/
-│   │   └── AGENTS.md       # From react.mdc
-│   └── api/
-│       └── AGENTS.md       # From routes.mdc
+└── src/
+    ├── components/
+    │   └── AGENTS.md  # Content from react-patterns.mdc
+    └── api/
+        └── AGENTS.md  # Merged content from auth.mdc + validation.mdc
 ```
 
-One of the nice things is that AGENTS.md can be nested within folders. So instead of complex glob patterns, there's a simple one-to-one mapping. The script handles stripping away all the YAML frontmatter and puts the markdown content into the right folders. If you already understand the concept, [here's the script](https://github.com/wisdom-in-a-nutshell/blog/blob/main/scripts/migration/generate_agents_from_cursor.py) that handles the conversion.
+**2. Complex Case: Multiple Global Rules at the Root**
+But what if you have multiple general-purpose rules in the root `.cursor/rules` folder?
+
+One way could be to consolidate them all into one massive root `AGENTS.md`. I don't recommend this for two reasons:
+1.  It bloats the context provided to the AI in every interaction.
+2.  It encourages stuffing unrelated rules into one file, making it hard to maintain.
+
+Instead, the script treats each root-level rule as a separate piece of documentation. It converts each one into its own markdown file under `docs/rules/` and creates a clean, simple root `AGENTS.md` that acts as a hyperlinked index.
+
+Here's an example of that scenario:
+
+```
+# Before
+.cursor/rules/
+├── contributing.mdc
+├── pr-reviews.mdc
+└── style-guide.mdc
+
+# After
+├── AGENTS.md
+└── docs/
+    └── rules/
+        ├── contributing.md
+        ├── pr-reviews.md
+        └── style-guide.md
+```
+
+The new root `AGENTS.md` would look something like this, acting as a set of pointers:
+
+```markdown
+# Global Agent Guidance
+
+This project has several global guidelines for AI collaboration. Please refer to them as needed:
+
+- [Contributing Guidelines](./docs/rules/contributing.md)
+- [Pull Request Reviews](./docs/rules/pr-reviews.md)
+- [Project Style Guide](./docs/rules/style-guide.md)
+```
+
+The migration script handles both of these cases automatically, stripping YAML frontmatter and putting the content in the right place. If you want to see how it's done, you can check out the [migration script](https://github.com/wisdom-in-a-nutshell/blog/blob/main/scripts/migration/generate_agents_from_cursor.py).

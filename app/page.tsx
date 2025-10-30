@@ -30,7 +30,7 @@ export default function Page() {
           I write lessons I wish I'd known earlier. Writing for my younger self helps me compress hard experiences into principles I can actually use.
         </p>
         <p>
-          I'm building <a href="https://aipodcast.ing" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">AI Podcasting</a> and spending most of my time learning how to co-create with AI tools. We've passed the inflection point—participation isn't optional anymore.
+          I'm building <a href="https://aipodcast.ing" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">AI Podcasting</a> and spending most of my time learning how to co-create with AI tools.
         </p>
         <p>
           <Link

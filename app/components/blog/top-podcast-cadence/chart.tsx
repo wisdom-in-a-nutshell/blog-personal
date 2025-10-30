@@ -339,7 +339,7 @@ export function PublishCadenceChart() {
             </PieChart>
           </ChartContainer>
           <span className="pointer-events-none absolute bottom-3 right-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
-            Analyzed by A.I. Podcasting
+            Adithyan Ilangovan | adithyan.io
           </span>
         </div>
         {/* Horizontal legend */}

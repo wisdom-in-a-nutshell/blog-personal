@@ -7,6 +7,7 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import { highlight } from 'sugar-high'
 import { slugify } from 'app/lib/slugify'
+import { PublishCadenceChart } from './charts/publish-cadence-chart'
 import { CaptionComponent } from './caption'
 import { ImageGrid } from './image-grid'
 import { TweetComponent } from './tweet'
@@ -125,6 +126,7 @@ let components = {
   del: Strikethrough,
   Callout,
   VerbatimCode,
+  PublishCadenceChart,
 }
 
 export function CustomMDX(props) {

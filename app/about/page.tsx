@@ -78,7 +78,7 @@ export default function AboutPage() {
         </p>
 
         <p>
-          This blog documents my journey learning to co-create with AI tools. We've passed the inflection point—participation isn't optional anymore.
+          This blog documents my journey learning to co-create with AI tools.
         </p>
 
         <h2>Connect With Me</h2>

@@ -314,7 +314,7 @@ export function PublishCadenceChart() {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col items-center px-4 pb-6">
-        <div ref={chartRef}>
+        <div ref={chartRef} className="relative w-full">
           <ChartContainer
             config={cadenceChartTheme}
             className="mx-auto aspect-square h-[360px] w-full max-w-[420px]"
@@ -338,6 +338,9 @@ export function PublishCadenceChart() {
               </Pie>
             </PieChart>
           </ChartContainer>
+          <span className="pointer-events-none absolute bottom-3 right-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
+            Analyzed by A.I. Podcasting
+          </span>
         </div>
         {/* Horizontal legend */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs">

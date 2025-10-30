@@ -172,6 +172,45 @@ Use the Callout component for highlighting important information:
 </Callout>
 ```
 
+### Charts and Data Visualizations
+
+Use the shared shadcn/Recharts wrappers for any chart embeds so styling, accessibility, and client-side code stay consistent.
+
+#### When to Use shadcn Chart Components
+
+**Use shadcn chart primitives when you need:**
+
+- Standard chart types (bar, line, area) with built-in styling
+- Consistent theming (light/dark mode support via `--chart-*` CSS variables)
+- Tooltips with automatic color indicators
+- Legends with consistent styling
+- Quick implementations that don't require custom positioning or advanced features
+
+**shadcn provides:**
+
+- `ChartContainer` - theming and CSS variable management
+- `ChartTooltip` / `ChartTooltipContent` - styled tooltips with color indicators
+- `ChartLegend` / `ChartLegendContent` - styled legends
+- Theme configuration via `ChartConfig` type
+
+#### When to Use Custom Recharts Implementation
+
+**Use custom Recharts code when you need:**
+
+- Advanced label positioning or custom rendering
+- Special interactions or animations not covered by shadcn
+- Complex data transformations or custom visualizations
+- Features that require trigonometry calculations or custom SVG rendering
+
+**Best Practice:** Start with shadcn primitives for the container, tooltips, and theming, then add custom Recharts code for specific advanced features. The custom code works seamlessly with shadcn's `ChartContainer` and theme system.
+
+#### Implementation Pattern
+
+- Prefer server-rendered posts with a single client component for the chart. Export your visualization as a reusable component under `app/components/blog/` or `app/components/charts/` (e.g., `top-podcast-cadence/chart.tsx`) and register it inside `app/components/mdx.tsx`.
+- Keep datasets deterministic by precomputing JSON in your CLI or script and importing it into the chart component. Do **not** fetch data inside MDX.
+- Embed charts with the registered tag, e.g. `<PublishCadenceChart />`. Avoid inline chart definitions inside the MDX file.
+- Base charts on shadcn `ChartContainer` for theming, even when using custom Recharts code for specific features.
+
 ## Implementation Steps
 
 1. Create a new `.mdx` file in the `content/` directory with a descriptive filename (using kebab-case)

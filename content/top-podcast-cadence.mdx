@@ -1,0 +1,109 @@
+---
+title: "How Often the Top 1% of Podcasts Publish"
+publishedAt: "2025-10-30"
+summary: "A side quest from a client project: cadence stats for the 1,000 highest-audience podcasts."
+tags: "podcasting, data, cadence"
+hidden: false
+---
+
+I work with podcasters. Recently got access to a rich podcasting dataset (around 170k shows) for an unrelated client project.
+
+So I thought why not do some side quests out of curiosity? The first thing I wanted to look at: **how often do the biggest podcasters publish?**
+
+I pulled the top 1,000 shows (by audience) from that dataset.
+
+Here's what I found:
+
+Weekly shows dominate, as expected. But nearly 1 in 5 publish daily (way more than I thought). In this post I break down what I found.
+
+Here's how this post is structured:
+
+- **Results**: visual charts, tables, and my summarized thoughts on what stood out
+- **Methodology**: how I crunched the numbers if you want to reproduce this
+- **Appendix**: links to the shows with different cadences so you can check them out
+
+
+## Results
+### Visual
+
+<PublishCadenceChart />
+
+
+### Table
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Frequency bucket*</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Weekly (3–9 days)</td>
+      <td className="text-right">582</td>
+      <td className="text-right">58.2%</td>
+    </tr>
+    <tr>
+      <td>Daily (~1 day)</td>
+      <td className="text-right">185</td>
+      <td className="text-right">18.5%</td>
+    </tr>
+    <tr>
+      <td>Near Daily (≤3 days)</td>
+      <td className="text-right">135</td>
+      <td className="text-right">13.5%</td>
+    </tr>
+    <tr>
+      <td>Monthly (10–29 days)</td>
+      <td className="text-right">83</td>
+      <td className="text-right">8.3%</td>
+    </tr>
+    <tr>
+      <td>Other (&gt;30 days)</td>
+      <td className="text-right">15</td>
+      <td className="text-right">1.5%</td>
+    </tr>
+    <tr>
+      <td><em>Total</em></td>
+      <td className="text-right"><em>1,000</em></td>
+      <td className="text-right"><em>100%</em></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+*Frequency buckets explained in the methodology section below.
+
+
+## What Stood Out
+
+**Daily isn't rare.** 185 shows (18.5%) publish every day. That's way more than I expected. Most are newsroom-style shows that act like broadcast desks—NPR's *Up First*, *The Megyn Kelly Show*, *The Glenn Beck Program*. You also get daily scripture feeds like *The Bible in a Year* and sports shows that follow game cycles. Some shows post multiple times per day or break long episodes into clips.
+
+**Weekly is still king.** 582 shows (58.2%) stick to the 3-9 day rhythm. These are your appointment listens that drop the same day each week—*This American Life*, *The Pat McAfee Show*, comedy chat shows. People know when to expect them and show up.
+
+**Near-daily surprised me.** 135 shows publish every 2-3 days. These are personality-driven shows that don't need full newsroom overhead but move fast enough to stay current. Think *My Favorite Murder*, *Office Ladies*, *Pod Save America*, *Conan O'Brien Needs A Friend*. They're evergreen-ish but reactive.
+
+**Slow can still work, but I'm not sure why.** 98 shows publish monthly or slower and still hit the top 1%. Some look like high-production investigative series (*Dr. Death*) or prestige history shows (*Hardcore History*). But I haven't dug deep enough to know if they're intentionally slow for quality reasons or just have inconsistent schedules. The monthly ones cluster around 14-21 days, the really slow ones can go 36-120 days between episodes.
+
+
+## Methodology
+
+
+## What I Looked At
+
+- Universe: 167,516 shows in our catalogue.
+- Cohort: the top 1,000 by audience (≈99th percentile, ≥73K estimated listeners per episode).
+- Snapshot date: 30 October 2025 (UTC).
+- Episodes considered: up to the 40 most recent per show (or whatever existed). I measured cadence from the day gaps between consecutive episodes and mapped each feed into a publishing bucket.
+
+Three shows didn’t have enough history to classify cleanly, so I rolled them into the nearest bucket before plotting. That keeps the chart and table aligned at 1,000 shows.
+
+
+
+## Where I’m Using This
+
+I’m wiring the cadence calculation into the enrichment jobs so these buckets refresh alongside audience estimates. That way, when I spot a dormant feed or a machine-like daily engine, it’s grounded in numbers—not hunches.
+
+If you want the raw roster, the working files include episode links, medians, Apple IDs, and the progress logs from the crawler. I’ll keep evolving the analysis as we add growth deltas and trend lines.

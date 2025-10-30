@@ -360,4 +360,14 @@ export default function BlogPosts() {
 - **Large Component Files**: Keep components focused on a single responsibility
 - **Prop Drilling**: Consider Context API for deeply nested prop passing
 
+## Chart Components
+
+When creating chart components, follow the decision framework:
+
+- **Use shadcn chart primitives** (`ChartContainer`, `ChartTooltip`, `ChartLegend`) for standard charts that don't require custom positioning
+- **Use custom Recharts code** when you need advanced features like custom label positioning, leader lines, or complex interactions
+- **Always use `ChartContainer`** for theming and CSS variable management, even when writing custom Recharts code
+
+For detailed chart implementation guidelines, see the [Blog Creation Guide](../rules/blog-creation.md#charts-and-data-visualizations).
+
 By following these guidelines, you'll create consistent, well-typed, and maintainable components for the blog application.

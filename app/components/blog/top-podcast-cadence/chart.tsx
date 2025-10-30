@@ -1,8 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
 import { Cell, Pie, PieChart, type TooltipProps } from "recharts"
-import { Download } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
@@ -202,119 +200,18 @@ function CadenceTooltip({
 }
 
 export function PublishCadenceChart() {
-  const chartRef = useRef<HTMLDivElement>(null)
-  const [isDownloading, setIsDownloading] = useState(false)
-
-  const handleDownload = async () => {
-    if (!chartRef.current) return
-
-    setIsDownloading(true)
-    try {
-      // Find the SVG element inside the chart container
-      const svgElement = chartRef.current.querySelector("svg")
-      if (!svgElement) {
-        console.error("SVG element not found")
-        setIsDownloading(false)
-        return
-      }
-
-      // Clone the SVG to avoid modifying the original
-      const clonedSvg = svgElement.cloneNode(true) as SVGElement
-
-      // Get computed styles for the SVG
-      const svgStyles = window.getComputedStyle(svgElement)
-      const bgColor = svgStyles.backgroundColor || "white"
-
-      // Set SVG properties
-      clonedSvg.setAttribute("width", svgElement.getAttribute("width") || "420")
-      clonedSvg.setAttribute("height", svgElement.getAttribute("height") || "420")
-      clonedSvg.setAttribute("style", `background-color: ${bgColor};`)
-
-      // Serialize SVG to string
-      const svgData = new XMLSerializer().serializeToString(clonedSvg)
-      const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" })
-      const svgUrl = URL.createObjectURL(svgBlob)
-
-      // Convert SVG to PNG using canvas
-      const img = new Image()
-      img.onload = () => {
-        const canvas = document.createElement("canvas")
-        canvas.width = img.width || 420
-        canvas.height = img.height || 420
-        const ctx = canvas.getContext("2d")
-
-        if (!ctx) {
-          console.error("Could not get canvas context")
-          setIsDownloading(false)
-          return
-        }
-
-        // Fill background
-        ctx.fillStyle = bgColor
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-        // Draw the SVG image
-        ctx.drawImage(img, 0, 0)
-
-        // Convert to blob and download
-        canvas.toBlob((blob) => {
-          if (!blob) {
-            console.error("Could not create blob")
-            setIsDownloading(false)
-            return
-          }
-
-          const url = URL.createObjectURL(blob)
-          const link = document.createElement("a")
-          link.href = url
-          link.download = "podcast-cadence-chart.png"
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-          URL.revokeObjectURL(url)
-          URL.revokeObjectURL(svgUrl)
-          setIsDownloading(false)
-        }, "image/png")
-      }
-
-      img.onerror = () => {
-        console.error("Failed to load SVG image")
-        setIsDownloading(false)
-        URL.revokeObjectURL(svgUrl)
-      }
-
-      img.src = svgUrl
-    } catch (error) {
-      console.error("Error downloading chart:", error)
-      setIsDownloading(false)
-    }
-  }
-
   return (
     <Card className="border-border/70 bg-background">
       <CardHeader className="flex flex-col gap-2">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <CardTitle className="text-base font-semibold">
-              Top 1% Podcast Cadence
-            </CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              Distribution of 1,000 highest-audience shows by publishing frequency.
-            </p>
-          </div>
-          <button
-            onClick={handleDownload}
-            disabled={isDownloading}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground border border-border rounded-md hover:bg-muted/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Download chart as PNG"
-          >
-            <Download className="h-3.5 w-3.5" />
-            {isDownloading ? "Downloading..." : "Download"}
-          </button>
-        </div>
+        <CardTitle className="text-base font-semibold">
+          Top 1% Podcast Cadence
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Distribution of 1,000 highest-audience shows by publishing frequency.
+        </p>
       </CardHeader>
       <CardContent className="flex flex-col items-center px-4 pb-6">
-        <div ref={chartRef} className="relative w-full">
+        <div className="relative w-full">
           <ChartContainer
             config={cadenceChartTheme}
             className="mx-auto aspect-square h-[360px] w-full max-w-[420px]"

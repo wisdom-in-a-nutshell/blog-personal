@@ -78,7 +78,7 @@ The overall distribution shows most podcasts run 40-90 minutes. But does publish
 - **Range (p10-p90)**: Typical low and high values after removing the 10% shortest and 10% longest episodes (cuts out extreme outliers)
 - **Sample size**: Up to 40 recent episodes per show
 
-*Publishing cadence definitions (from my [previous analysis](/top-podcast-cadence)):*
+*Publishing cadence definitions (from my [previous analysis](/blog/top-podcast-cadence)):*
 
 <div className="flex justify-center">
 <table>
@@ -119,7 +119,7 @@ The overall distribution shows most podcasts run 40-90 minutes. But does publish
 </table>
 </div>
 
-### Key Observations
+**Key observations:**
 
 Publishing frequency clearly affects episode length, with some surprising patterns:
 
@@ -133,7 +133,7 @@ Publishing frequency clearly affects episode length, with some surprising patter
 
 Now let me show you the detailed breakdown. I'll start with the overall distribution histogram, then break it down by each cadence with their own charts and tables. This will give you the full picture of how episode lengths vary across different publishing frequencies.
 
-### Overall Duration Patterns
+## Overall Duration Patterns
 
 <EpisodeLengthHistogram />
 
@@ -183,11 +183,11 @@ Now let me show you the detailed breakdown. I'll start with the overall distribu
 
 To be honest, this data is pretty noisy at the aggregate level. The real patterns emerge when you look at how episode length varies by publishing cadence.
 
-### Episode Length by Publishing Cadence
 
 <hr className="mt-12 border-t border-border/60" />
+## Cadence Breakdowns
 
-#### Daily Shows (180 shows)
+### Daily Shows (180 shows)
 Average: 47.4 minutes | Median: 42.0 minutes
 
 <DailyEpisodeLengthChart />
@@ -238,7 +238,7 @@ Average: 47.4 minutes | Median: 42.0 minutes
 
 <hr className="mt-12 border-t border-border/60" />
 
-#### Near-Daily Shows (132 shows)
+### Near-Daily Shows (132 shows)
 Average: 62.1 minutes | Median: 59.5 minutes
 
 <NearDailyEpisodeLengthChart />
@@ -289,7 +289,7 @@ Average: 62.1 minutes | Median: 59.5 minutes
 
 <hr className="mt-12 border-t border-border/60" />
 
-#### Weekly Shows (588 shows)
+### Weekly Shows (588 shows)
 Average: 61.0 minutes | Median: 55.9 minutes
 
 <WeeklyEpisodeLengthChart />
@@ -340,7 +340,7 @@ Average: 61.0 minutes | Median: 55.9 minutes
 
 <hr className="mt-12 border-t border-border/60" />
 
-#### Monthly Shows (80 shows)
+### Monthly Shows (80 shows)
 Average: 58.7 minutes | Median: 49.6 minutes
 
 <MonthlyEpisodeLengthChart />
@@ -391,7 +391,7 @@ Average: 58.7 minutes | Median: 49.6 minutes
 
 <hr className="mt-12 border-t border-border/60" />
 
-#### Other Shows (20 shows)
+### Other Shows (20 shows)
 Average: 43.5 minutes | Median: 38.9 minutes
 
 <OtherEpisodeLengthChart />
@@ -444,7 +444,7 @@ Average: 43.5 minutes | Median: 38.9 minutes
 
 ## Methodology
 
-The methodology was very similar to my [last analysis](/top-podcast-cadence):
+The methodology was very similar to my [last analysis](/blog/top-podcast-cadence):
 
 - Started with the same top 1,000 podcasts by audience
 - From their RSS feeds, pulled the most recent episodes per show (up to 40)
@@ -457,10 +457,8 @@ That's it. Simple enough that anyone can reproduce this.
 
 ## What's Next
 
-This episode length data opened up more questions than it answered:
+Again, surprising findings that opened up more questions than they answered. The data keeps getting more interesting the deeper I dig.
 
-Do longer episodes get better engagement? Do daily short episodes build habit better than weekly long ones? And what about the relationship between length, topic, and audience retention?
+I'm planning to link up the individual shows and their data when I find time to clean everything up - so if anyone else wants to do their own analysis, you'll have access to the raw numbers.
 
-I'm planning to dig into engagement patterns next - looking at how episode length correlates with audience growth and retention across these top shows.
-
-If you have other angles you'd want me to explore with this podcast data, hit me up. Always curious what patterns might emerge.
+Thanks again to the reader who suggested this analysis. Got more ideas for podcast data deep dives? Drop them in the comments or hit me up.

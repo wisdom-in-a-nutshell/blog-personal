@@ -1,7 +1,9 @@
 "use client"
 
+import * as React from "react"
 import { Cell, Pie, PieChart, type TooltipProps } from "recharts"
 
+import { DownloadChartButton } from "@/components/charts/download-chart-button"
 import { ChartWatermark } from "@/components/charts/watermark"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
@@ -201,15 +203,30 @@ function CadenceTooltip({
 }
 
 export function PublishCadenceChart() {
+  const cardRef = React.useRef<HTMLDivElement | null>(null)
+
   return (
-    <Card className="border-border/70 bg-background">
-      <CardHeader className="flex flex-col gap-2">
-        <CardTitle className="text-base font-semibold">
-          Top 1% Podcast Cadence
-        </CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Distribution of 1,000 highest-audience shows by publishing frequency.
-        </p>
+    <Card ref={cardRef} className="border-border/70 bg-background">
+      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-2">
+          <CardTitle className="text-base font-semibold">
+            Top 1% Podcast Cadence
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Distribution of 1,000 highest-audience shows by publishing frequency.
+          </p>
+        </div>
+        <DownloadChartButton
+          getNode={() => cardRef.current}
+          fileName="top-podcast-cadence"
+          pixelRatio={3}
+          filter={(element) =>
+            element instanceof Element
+              ? !element.hasAttribute("data-chart-download-control")
+              : true
+          }
+          className="sm:mt-0"
+        />
       </CardHeader>
       <CardContent className="flex flex-col items-center px-4 pb-6">
         <div className="relative w-full">

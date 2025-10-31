@@ -12,6 +12,7 @@ import {
   YAxis,
 } from "recharts"
 
+import { DownloadChartButton } from "@/components/charts/download-chart-button"
 import { ChartWatermark } from "@/components/charts/watermark"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -194,6 +195,7 @@ type EpisodeLengthBarChartProps = {
   buckets: EpisodeLengthBucketInput[]
   footerSignature?: string
   watermarkVariant?: "overlay" | "inline"
+  downloadName?: string
 }
 
 function EpisodeLengthBarChart({
@@ -202,7 +204,9 @@ function EpisodeLengthBarChart({
   buckets,
   footerSignature = CHART_SIGNATURE,
   watermarkVariant = "overlay",
+  downloadName,
 }: EpisodeLengthBarChartProps) {
+  const cardRef = React.useRef<HTMLDivElement | null>(null)
   const { segments } = React.useMemo(() => buildSegments(buckets), [buckets])
   const chartConfig = React.useMemo(
     () => createChartConfig(segments),
@@ -210,11 +214,26 @@ function EpisodeLengthBarChart({
   )
 
   return (
-    <Card className="border-border/70 bg-background">
-      <CardHeader className="flex flex-col gap-2">
-        <CardTitle className="text-base font-semibold">{title}</CardTitle>
-        {description ? (
-          <p className="text-sm text-muted-foreground">{description}</p>
+    <Card ref={cardRef} className="border-border/70 bg-background">
+      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-2">
+          <CardTitle className="text-base font-semibold">{title}</CardTitle>
+          {description ? (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          ) : null}
+        </div>
+        {downloadName ? (
+          <DownloadChartButton
+            getNode={() => cardRef.current}
+            fileName={downloadName}
+            pixelRatio={3}
+            filter={(element) =>
+              element instanceof Element
+                ? !element.hasAttribute("data-chart-download-control")
+                : true
+            }
+            className="sm:mt-0"
+          />
         ) : null}
       </CardHeader>
       <CardContent className="px-4 pb-6">
@@ -228,7 +247,11 @@ function EpisodeLengthBarChart({
               layout="vertical"
               margin={{ top: 8, right: 32, bottom: 8, left: 120 }}
             >
-              <CartesianGrid horizontal={false} strokeDasharray="4 6" />
+              <CartesianGrid
+                horizontal={false}
+                strokeDasharray="2 8"
+                strokeOpacity={0.2}
+              />
               <XAxis
                 type="number"
                 axisLine={false}
@@ -278,6 +301,7 @@ export function EpisodeLengthHistogram() {
       description="Length buckets for 1,000 highest-audience podcasts."
       buckets={OVERALL_BUCKETS}
       watermarkVariant="inline"
+      downloadName="episode-length-distribution"
     />
   )
 }
@@ -289,6 +313,7 @@ export function DailyEpisodeLengthChart() {
       description="Distribution for 180 daily-publishing shows."
       buckets={DAILY_BUCKETS}
       watermarkVariant="inline"
+      downloadName="daily-episode-length"
     />
   )
 }
@@ -300,6 +325,7 @@ export function NearDailyEpisodeLengthChart() {
       description="Distribution for 132 shows publishing every 2–3 days."
       buckets={NEAR_DAILY_BUCKETS}
       watermarkVariant="inline"
+      downloadName="near-daily-episode-length"
     />
   )
 }
@@ -311,6 +337,7 @@ export function WeeklyEpisodeLengthChart() {
       description="Distribution for 583 weekly shows."
       buckets={WEEKLY_BUCKETS}
       watermarkVariant="inline"
+      downloadName="weekly-episode-length"
     />
   )
 }
@@ -322,6 +349,7 @@ export function MonthlyEpisodeLengthChart() {
       description="Distribution for 80 shows publishing every 10–29 days."
       buckets={MONTHLY_BUCKETS}
       watermarkVariant="inline"
+      downloadName="monthly-episode-length"
     />
   )
 }
@@ -333,6 +361,7 @@ export function OtherEpisodeLengthChart() {
       description="Distribution for 20 shows publishing slower than monthly."
       buckets={OTHER_BUCKETS}
       watermarkVariant="inline"
+      downloadName="other-episode-length"
     />
   )
 }

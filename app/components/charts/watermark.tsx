@@ -31,14 +31,12 @@ export function ChartWatermark({
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none mt-3 flex justify-end text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/45",
-          "max-sm:justify-center max-sm:text-[9px] max-sm:tracking-[0.1em]",
+          "pointer-events-none mt-3 flex justify-end text-[10px] font-medium tracking-[0.08em] text-muted-foreground/65",
+          "max-sm:justify-center max-sm:text-[9px] max-sm:tracking-[0.06em]",
           className
         )}
       >
-        <span className="rounded-full bg-background/75 px-3 py-1 shadow-sm backdrop-blur">
-          {text}
-        </span>
+        <span>{text}</span>
       </div>
     )
   }
@@ -47,9 +45,9 @@ export function ChartWatermark({
     <span
       aria-hidden="true"
       className={cn(
-        "pointer-events-none select-none text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/45",
-        "absolute bottom-3 right-4 rounded-full bg-background/75 px-3 py-1 shadow-sm backdrop-blur",
-        "max-sm:bottom-2 max-sm:right-3 max-sm:text-[9px] max-sm:tracking-[0.1em]",
+        "pointer-events-none select-none text-[10px] font-medium tracking-[0.08em] text-muted-foreground/55",
+        "absolute bottom-3 right-4",
+        "max-sm:bottom-2 max-sm:right-3 max-sm:text-[9px] max-sm:tracking-[0.06em]",
         className
       )}
     >

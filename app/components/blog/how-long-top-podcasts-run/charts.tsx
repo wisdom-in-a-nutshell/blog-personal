@@ -79,7 +79,7 @@ const WEEKLY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 2 },
   { id: "tenToTwenty", shows: 10 },
   { id: "twentyToForty", shows: 119 },
-  { id: "fortyToSixty", shows: 202 },
+  { id: "fortyToSixty", shows: 207 },
   { id: "sixtyToNinety", shows: 183 },
   { id: "ninetyPlus", shows: 67 },
 ]
@@ -334,7 +334,7 @@ export function WeeklyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
       title="Weekly Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 583 weekly-publishing shows."
+      description="Episode length distribution for the top 588 weekly-publishing shows."
       buckets={WEEKLY_BUCKETS}
       watermarkVariant="inline"
       downloadName="weekly-episode-length"

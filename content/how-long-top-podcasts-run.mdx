@@ -1,0 +1,404 @@
+---
+title: "I Analyzed 1,000 Top Podcasts: Here's How Long Their Episodes Actually Are"
+publishedAt: "2025-10-31"
+summary: "Episode length analysis of the top 1,000 podcasts reveals surprising patterns across different publishing frequencies."
+tags: "podcasting, data, episode length"
+image: '/blog/how-long-top-podcasts-run/header.png'
+hidden: false
+---
+
+Part two of my podcast data deep dive. After analyzing [how often top podcasts publish](/top-podcast-cadence), I got curious about episode lengths.
+
+So I pulled duration data for the same 1,000 shows and crunched the numbers.
+
+I found everything from 6-minute daily snippets to 4+ hour conversations.
+
+First I show the results, then methodology, then some thoughts on what this means.
+
+## Results
+
+### Overall Duration Patterns
+
+The median episode length across all top podcasts is **53.5 minutes**. But that doesn't tell the whole story.
+
+<EpisodeLengthHistogram />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">5</td>
+      <td className="text-right">0.5%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">38</td>
+      <td className="text-right">3.8%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">232</td>
+      <td className="text-right">23.2%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">330</td>
+      <td className="text-right">33.0%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">287</td>
+      <td className="text-right">28.7%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">108</td>
+      <td className="text-right">10.8%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+To be honest, this data is pretty noisy at the aggregate level. The real patterns emerge when you look at how episode length varies by publishing cadence.
+
+### Episode Length by Publishing Cadence
+
+Publishing cadence buckets (from my [previous analysis](/top-podcast-cadence)):
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Cadence</th>
+      <th>Definition</th>
+      <th className="text-right">Shows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Daily</td>
+      <td>~1 day between episodes</td>
+      <td className="text-right">180</td>
+    </tr>
+    <tr>
+      <td>Near-daily</td>
+      <td>≤3 days between episodes</td>
+      <td className="text-right">132</td>
+    </tr>
+    <tr>
+      <td>Weekly</td>
+      <td>3-9 days between episodes</td>
+      <td className="text-right">583</td>
+    </tr>
+    <tr>
+      <td>Monthly</td>
+      <td>10-29 days between episodes</td>
+      <td className="text-right">80</td>
+    </tr>
+    <tr>
+      <td>Other</td>
+      <td>>30 days between episodes</td>
+      <td className="text-right">20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Daily Shows (180 shows)
+Average: 47.4 minutes | Median: 42.0 minutes
+
+<DailyEpisodeLengthChart />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">3</td>
+      <td className="text-right">1.7%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">20</td>
+      <td className="text-right">11.1%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">57</td>
+      <td className="text-right">31.7%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">57</td>
+      <td className="text-right">31.7%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">28</td>
+      <td className="text-right">15.5%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">15</td>
+      <td className="text-right">8.3%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Near-Daily Shows (132 shows)
+Average: 62.1 minutes | Median: 59.5 minutes
+
+<NearDailyEpisodeLengthChart />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">0</td>
+      <td className="text-right">0.0%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">2</td>
+      <td className="text-right">1.5%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">21</td>
+      <td className="text-right">15.9%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">44</td>
+      <td className="text-right">33.3%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">50</td>
+      <td className="text-right">37.9%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">15</td>
+      <td className="text-right">11.4%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Weekly Shows (583 shows)
+Average: 61.0 minutes | Median: 55.9 minutes
+
+<WeeklyEpisodeLengthChart />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">2</td>
+      <td className="text-right">0.3%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">10</td>
+      <td className="text-right">1.7%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">119</td>
+      <td className="text-right">20.4%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">202</td>
+      <td className="text-right">34.7%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">183</td>
+      <td className="text-right">31.4%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">67</td>
+      <td className="text-right">11.5%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Monthly Shows (80 shows)
+Average: 58.7 minutes | Median: 49.6 minutes
+
+<MonthlyEpisodeLengthChart />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">0</td>
+      <td className="text-right">0.0%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">1</td>
+      <td className="text-right">1.2%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">29</td>
+      <td className="text-right">36.2%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">21</td>
+      <td className="text-right">26.3%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">20</td>
+      <td className="text-right">25.0%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">9</td>
+      <td className="text-right">11.3%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Other Shows (20 shows)
+Average: 43.5 minutes | Median: 38.9 minutes
+
+<OtherEpisodeLengthChart />
+
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Episode Length</th>
+      <th className="text-right">Shows</th>
+      <th className="text-right">Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;10 minutes</td>
+      <td className="text-right">0</td>
+      <td className="text-right">0.0%</td>
+    </tr>
+    <tr>
+      <td>10-20 minutes</td>
+      <td className="text-right">5</td>
+      <td className="text-right">25.0%</td>
+    </tr>
+    <tr>
+      <td>20-40 minutes</td>
+      <td className="text-right">5</td>
+      <td className="text-right">25.0%</td>
+    </tr>
+    <tr>
+      <td>40-60 minutes</td>
+      <td className="text-right">4</td>
+      <td className="text-right">20.0%</td>
+    </tr>
+    <tr>
+      <td>60-90 minutes</td>
+      <td className="text-right">5</td>
+      <td className="text-right">25.0%</td>
+    </tr>
+    <tr>
+      <td>90+ minutes</td>
+      <td className="text-right">1</td>
+      <td className="text-right">5.0%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### What Stood Out
+
+- **Daily shows run shorter.** Average 47 minutes vs 61 minutes for weekly shows. Makes sense—easier to fill an hour once a week than every day.
+
+- **The extremes are extreme.** PragerU averages 6.4 minutes. Sacred Symbols averages 261 minutes (4+ hours). Both in the top 1%.
+
+- **Weekly shows have the biggest range.** From 6-minute snippets to 4-hour deep dives. Weekly gives creators more flexibility to match content to length.
+
+- **Monthly shows cluster around the middle.** Average 59 minutes. Seems like when you publish less frequently, you aim for that "substantial but not overwhelming" length.
+
+### The Outliers
+
+**Shortest averages (with enough episodes to be reliable):**
+- PragerU 5-Minute Videos: 6.4 min
+- Fr. Mike Schmitz Catholic Podcast: 6.9 min
+- The Indicator from Planet Money: 8.9 min
+
+**Longest averages:**
+- Sacred Symbols PlayStation Podcast: 261 min (4.4 hours!)
+- Lex Fridman Podcast: 218 min (3.6 hours)
+- H3 Podcast: 209 min (3.5 hours)
+
+## Methodology
+
+Here's how I measured episode lengths:
+
+- Started with the same top 1,000 podcasts by audience from my [cadence analysis](/top-podcast-cadence)
+- All 1,000 shows had enough recent episodes with duration data
+- Looked at up to 40 recent episodes per show
+- Used mean duration per show (not median) since I wanted to capture their typical episode length
+- Grouped by the same publishing frequency buckets: Daily, Near-daily, Weekly, Monthly, Other
+
+*Publishing frequency buckets: Same as my previous analysis - Daily (~1 day), Near-daily (≤3 days), Weekly (3-9 days), Monthly (10-29 days), Other (>30 days)*
+
+That's it. Simple enough that anyone can reproduce this.
+
+## What's Next
+
+This episode length data opened up more questions than it answered:
+
+Do longer episodes get better engagement? Do daily short episodes build habit better than weekly long ones? And what about the relationship between length, topic, and audience retention?
+
+I'm planning to dig into engagement patterns next - looking at how episode length correlates with audience growth and retention across these top shows.
+
+If you have other angles you'd want me to explore with this podcast data, hit me up. Always curious what patterns might emerge.

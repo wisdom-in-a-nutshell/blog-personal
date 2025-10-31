@@ -105,6 +105,43 @@ Standard Markdown syntax works as expected:
 ![Alt text](../../../../path/to/image.jpg)
 ```
 
+### Tables
+
+For proper table formatting that works consistently across the blog, use HTML table syntax with the centered wrapper:
+
+```mdx
+<div className="flex justify-center">
+<table>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th className="text-right">Column 2</th>
+      <th className="text-right">Column 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Row 1 Data</td>
+      <td className="text-right">100</td>
+      <td className="text-right">50%</td>
+    </tr>
+    <tr>
+      <td>Row 2 Data</td>
+      <td className="text-right">200</td>
+      <td className="text-right">50%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
+
+**Key points:**
+
+- Use `<div className="flex justify-center">` to center the table
+- Use `className="text-right"` for right-aligned numerical columns
+- Escape HTML characters like `<` as `&lt;` when needed
+- Standard Markdown table syntax may not render consistently, so prefer HTML tables
+
 ### Code Blocks
 
 Use triple backticks with language specifier for syntax highlighting:

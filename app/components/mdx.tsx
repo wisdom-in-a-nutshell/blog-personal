@@ -8,6 +8,14 @@ import remarkMath from 'remark-math'
 import { highlight } from 'sugar-high'
 import { slugify } from 'app/lib/slugify'
 import { PublishCadenceChart } from './blog/top-podcast-cadence/chart'
+import {
+  DailyEpisodeLengthChart,
+  EpisodeLengthHistogram,
+  MonthlyEpisodeLengthChart,
+  NearDailyEpisodeLengthChart,
+  OtherEpisodeLengthChart,
+  WeeklyEpisodeLengthChart,
+} from './blog/how-long-top-podcasts-run/charts'
 import { CaptionComponent } from './caption'
 import { ImageGrid } from './image-grid'
 import { TweetComponent } from './tweet'
@@ -127,6 +135,12 @@ let components = {
   Callout,
   VerbatimCode,
   PublishCadenceChart,
+  EpisodeLengthHistogram,
+  DailyEpisodeLengthChart,
+  NearDailyEpisodeLengthChart,
+  WeeklyEpisodeLengthChart,
+  MonthlyEpisodeLengthChart,
+  OtherEpisodeLengthChart,
 }
 
 export function CustomMDX(props) {

@@ -2,6 +2,7 @@
 
 import { Cell, Pie, PieChart, type TooltipProps } from "recharts"
 
+import { ChartWatermark } from "@/components/charts/watermark"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
 
@@ -235,9 +236,11 @@ export function PublishCadenceChart() {
               </Pie>
             </PieChart>
           </ChartContainer>
-          <span className="pointer-events-none absolute bottom-3 right-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
-            Adithyan Ilangovan | adithyan.io
-          </span>
+          <ChartWatermark
+            text="Adithyan Ilangovan | adithyan.io"
+            variant="inline"
+            className="w-full max-w-[420px]"
+          />
         </div>
         {/* Horizontal legend */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs">

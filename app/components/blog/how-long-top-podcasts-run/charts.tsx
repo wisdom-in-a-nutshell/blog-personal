@@ -297,8 +297,8 @@ function EpisodeLengthBarChart({
 export function EpisodeLengthHistogram() {
   return (
     <EpisodeLengthBarChart
-      title="Episode Length Distribution"
-      description="Length buckets for 1,000 highest-audience podcasts."
+      title="How Long Are Top Podcast Episodes?"
+      description="Episode length distribution for the top 1,000 highest-audience shows."
       buckets={OVERALL_BUCKETS}
       watermarkVariant="inline"
       downloadName="episode-length-distribution"
@@ -309,8 +309,8 @@ export function EpisodeLengthHistogram() {
 export function DailyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Daily Shows · Episode Length"
-      description="Distribution for 180 daily-publishing shows."
+      title="Daily Shows: How Long Do Episodes Run?"
+      description="Episode length distribution for the top 180 daily-publishing shows."
       buckets={DAILY_BUCKETS}
       watermarkVariant="inline"
       downloadName="daily-episode-length"
@@ -321,8 +321,8 @@ export function DailyEpisodeLengthChart() {
 export function NearDailyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Near-Daily Shows · Episode Length"
-      description="Distribution for 132 shows publishing every 2–3 days."
+      title="Near-Daily Shows: How Long Do Episodes Run?"
+      description="Episode length distribution for the top 132 near-daily shows."
       buckets={NEAR_DAILY_BUCKETS}
       watermarkVariant="inline"
       downloadName="near-daily-episode-length"
@@ -333,8 +333,8 @@ export function NearDailyEpisodeLengthChart() {
 export function WeeklyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Weekly Shows · Episode Length"
-      description="Distribution for 583 weekly shows."
+      title="Weekly Shows: How Long Do Episodes Run?"
+      description="Episode length distribution for the top 583 weekly-publishing shows."
       buckets={WEEKLY_BUCKETS}
       watermarkVariant="inline"
       downloadName="weekly-episode-length"
@@ -345,8 +345,8 @@ export function WeeklyEpisodeLengthChart() {
 export function MonthlyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Monthly Shows · Episode Length"
-      description="Distribution for 80 shows publishing every 10–29 days."
+      title="Monthly Shows: How Long Do Episodes Run?"
+      description="Episode length distribution for the top 80 monthly-publishing shows."
       buckets={MONTHLY_BUCKETS}
       watermarkVariant="inline"
       downloadName="monthly-episode-length"
@@ -357,8 +357,8 @@ export function MonthlyEpisodeLengthChart() {
 export function OtherEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Other Cadence Shows · Episode Length"
-      description="Distribution for 20 shows publishing slower than monthly."
+      title="Other Cadence Shows: How Long Do Episodes Run?"
+      description="Episode length distribution for the top 20 shows publishing slower than monthly."
       buckets={OTHER_BUCKETS}
       watermarkVariant="inline"
       downloadName="other-episode-length"

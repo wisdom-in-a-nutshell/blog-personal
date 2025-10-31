@@ -13,11 +13,13 @@ So I decided to tackle that next.
 
 I pulled duration data for the same 1,000 shows, and found everything from 6-minute daily snippets to 4+ hour marathon conversations.
 
-First I'll show the results, then the methodology, and finally some thoughts on what this all means.
+My usual style is to show the raw results first, then dive into analysis. But this dataset is pretty overwhelming with all the charts and tables, so I'm switching it up: I'll start with the key observations and summary, then give you the detailed breakdown of the raw data if you want to dig deeper into the numbers.
 
 ## Results
 
-The overall distribution shows most podcasts run 40-90 minutes. But does publishing frequency actually affect episode length?
+### Key Findings
+
+The overall distribution shows most podcasts run 40-90 minutes. But does publishing frequency actually affect episode length? Seems yes. First the numbers, and the more about that below.
 
 <div className="flex justify-center">
 <table>
@@ -183,6 +185,8 @@ To be honest, this data is pretty noisy at the aggregate level. The real pattern
 
 ### Episode Length by Publishing Cadence
 
+<hr className="mt-12 border-t border-border/60" />
+
 #### Daily Shows (180 shows)
 Average: 47.4 minutes | Median: 42.0 minutes
 
@@ -232,7 +236,7 @@ Average: 47.4 minutes | Median: 42.0 minutes
 </table>
 </div>
 
----
+<hr className="mt-12 border-t border-border/60" />
 
 #### Near-Daily Shows (132 shows)
 Average: 62.1 minutes | Median: 59.5 minutes
@@ -283,7 +287,7 @@ Average: 62.1 minutes | Median: 59.5 minutes
   </table>
 </div>
 
----
+<hr className="mt-12 border-t border-border/60" />
 
 #### Weekly Shows (588 shows)
 Average: 61.0 minutes | Median: 55.9 minutes
@@ -334,7 +338,7 @@ Average: 61.0 minutes | Median: 55.9 minutes
   </table>
 </div>
 
----
+<hr className="mt-12 border-t border-border/60" />
 
 #### Monthly Shows (80 shows)
 Average: 58.7 minutes | Median: 49.6 minutes
@@ -385,7 +389,7 @@ Average: 58.7 minutes | Median: 49.6 minutes
   </table>
 </div>
 
----
+<hr className="mt-12 border-t border-border/60" />
 
 #### Other Shows (20 shows)
 Average: 43.5 minutes | Median: 38.9 minutes
@@ -436,29 +440,20 @@ Average: 43.5 minutes | Median: 38.9 minutes
   </table>
 </div>
 
-### What Stood Out
-
-- **Daily shows run shorter.** Average 47 minutes vs 61 minutes for weekly shows. Makes sense—easier to fill an hour once a week than every day.
-
-- **The extremes are extreme.** PragerU averages 6.4 minutes. Sacred Symbols averages 261 minutes (4+ hours). Both in the top 1%.
-
-- **Weekly shows have the biggest range.** From 6-minute snippets to 4-hour deep dives. Weekly gives creators more flexibility to match content to length.
-
-- **Monthly shows cluster around the middle.** Average 59 minutes. Seems like when you publish less frequently, you aim for that "substantial but not overwhelming" length.
+<hr className="mt-16 border-t border-border/60" />
 
 ## Methodology
 
-Here's how I measured episode lengths:
+The methodology was very similar to my [last analysis](/top-podcast-cadence):
 
-- Started with the same top 1,000 podcasts by audience from my [cadence analysis](/top-podcast-cadence)
-- All 1,000 shows had enough recent episodes with duration data
-- Looked at up to 40 recent episodes per show
-- Used mean duration per show (not median) since I wanted to capture their typical episode length
-- Grouped by the same publishing frequency buckets: Daily, Near-daily, Weekly, Monthly, Other
-
-*Publishing frequency buckets: Same as my previous analysis - Daily (~1 day), Near-daily (≤3 days), Weekly (3-9 days), Monthly (10-29 days), Other (>30 days)*
+- Started with the same top 1,000 podcasts by audience
+- From their RSS feeds, pulled the most recent episodes per show (up to 40)
+- Found the duration for each episode and calculated all the different metrics I've already explained above (median, average, p10-p90 ranges)
+- Did this analysis once for all 1,000 shows, then broke them down by cadences and repeated the analysis for each group
 
 That's it. Simple enough that anyone can reproduce this.
+
+<hr className="mt-16 border-t border-border/60" />
 
 ## What's Next
 

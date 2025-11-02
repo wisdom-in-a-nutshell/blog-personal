@@ -1,0 +1,36 @@
+name: Auto PR on Branch Creation
+
+# This workflow automatically creates pull requests when new branches are pushed
+# It runs when branches are created and uses the organization's centralized logic
+# The workflow is managed in the organization's .github repository for consistency
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+      - develop
+      - staging
+      - production
+
+# Permissions required for the reusable workflow to create PRs and add labels
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-pr:
+
+    # Uses a reusable workflow from the organization's .github repository
+    # This centralizes the PR creation logic for consistency across repos
+    uses: wisdom-in-a-nutshell/.github/.github/workflows/auto-pr-on-branch-create.yml@main
+
+    with:
+      # Target branch for pull requests (customize if needed)
+      target-branch: main
+
+      # Branches to skip (customize if needed)
+      skip-branches: 'main,master,develop,staging,production'
+
+    secrets: inherit

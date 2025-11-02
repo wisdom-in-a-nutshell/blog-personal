@@ -11,9 +11,11 @@ on:
     paths-ignore:
       - 'docs/**'
 
-# Add permissions to allow pushing documentation changes
+# Updated permissions to match what the reusable workflow requires
 permissions:
-  contents: write
+  contents: read
+  issues: write
+  pull-requests: read
 
 jobs:
   docs:

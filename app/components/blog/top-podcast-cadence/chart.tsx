@@ -13,27 +13,27 @@ const cadenceData = [
   {
     id: "daily",
     bucket: "Daily",
-    shows: 185,
+    shows: 180,
   },
   {
     id: "nearDaily",
     bucket: "≤3 days",
-    shows: 135,
+    shows: 132,
   },
   {
     id: "weekly",
     bucket: "Weekly (3–9 days)",
-    shows: 582,
+    shows: 588,
   },
   {
     id: "monthly",
     bucket: "Monthly (10–29 days)",
-    shows: 83,
+    shows: 80,
   },
   {
     id: "slow",
     bucket: ">30 days",
-    shows: 15,
+    shows: 20,
   },
 ] as const
 
@@ -45,35 +45,35 @@ const chartSegments = cadenceData.map((segment, index) => ({
 
 const cadenceChartTheme: ChartConfig = {
   daily: {
-    label: "Daily · 18.5%",
+    label: "Daily · 18.0%",
     theme: {
       light: "hsl(var(--chart-1))",
       dark: "hsl(var(--chart-1))",
     },
   },
   nearDaily: {
-    label: "≤3 days · 13.5%",
+    label: "≤3 days · 13.2%",
     theme: {
       light: "hsl(var(--chart-2))",
       dark: "hsl(var(--chart-2))",
     },
   },
   weekly: {
-    label: "Weekly (3–9 days) · 58.2%",
+    label: "Weekly (3–9 days) · 58.8%",
     theme: {
       light: "hsl(var(--chart-3))",
       dark: "hsl(var(--chart-3))",
     },
   },
   monthly: {
-    label: "Monthly (10–29 days) · 8.3%",
+    label: "Monthly (10–29 days) · 8.0%",
     theme: {
       light: "hsl(var(--chart-4))",
       dark: "hsl(var(--chart-4))",
     },
   },
   slow: {
-    label: ">30 days · 1.5%",
+    label: ">30 days · 2.0%",
     theme: {
       light: "hsl(var(--chart-5))",
       dark: "hsl(var(--chart-5))",

@@ -12,6 +12,7 @@ This repo powers the personal blog built with Next.js App Router, TypeScript, Ta
 - Drafting long-form content? Re-read `docs/rules/personal-writing-style.md` so tone, pacing, and anecdotes stay on brand.
 - Covering AIPodcasting or other company work? Skim the background brief in `docs/company/aipodcasting-positioning.md`, then apply your personal style per `.cursor/rules/personal-writing-style.md`.
 - Building or updating charts? Follow `docs/rules/data-visualization.md` for the `ChartCard` pattern, download controls, and data sync checklist.
+- Writing company-specific data posts? Use the agent playbook `docs/reference/agents-company-posts.md`. Data lives in `data/<topic>/`, and both charts and MDX tables must import from those typed modules.
 - Creating a new page or route under `app/`? Mirror the structure in `docs/rules/page-creation-guide.md`.
 - Building components or deciding between server/client variants? Check `docs/rules/component-creation.md`.
 - Choosing a data-loading strategy? Review `docs/rules/data-fetching-patterns.md` for App Router best practices.

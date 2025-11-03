@@ -30,9 +30,10 @@ function createEmptyMetadata(): Metadata {
   };
 }
 
-function parseFrontmatter(
-  fileContent: string
-): { metadata: Metadata; content: string } {
+function parseFrontmatter(fileContent: string): {
+  metadata: Metadata;
+  content: string;
+} {
   const match = FRONTMATTER_REGEX.exec(fileContent);
   if (!match) {
     return {
@@ -40,6 +41,7 @@ function parseFrontmatter(
       content: fileContent.trim(),
     };
   }
+
   const frontMatterBlock = match[1];
   const content = fileContent.replace(FRONTMATTER_REGEX, "").trim();
   const frontMatterLines = frontMatterBlock.trim().split("\n");

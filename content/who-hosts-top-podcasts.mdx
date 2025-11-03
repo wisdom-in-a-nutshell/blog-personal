@@ -6,12 +6,13 @@ tags: "podcasting, data, infrastructure"
 hidden: false
 ---
 
-After mapping [how often big shows publish](/blog/top-podcast-cadence) and [how long their episodes run](/blog/how-long-top-podcasts-run), the next obvious question was: **who actually hosts their RSS feeds?** We ran that probe across the same dataset.
+After my last two posts on [how often big shows publish](/blog/top-podcast-cadence) and [how long their episodes run](/blog/how-long-top-podcasts-run), I couldn't stop wondering: who's actually running the infrastructure for these top shows?
 
-Two quick takeaways before the charts:
+But it's not just about who hosts the RSS feed (that's just the storefront). I also wanted to know who's *really* delivering the audio files, because that's where the real power and ad tech is. So I decided to look at both.
 
-- Megaphone’s lead grows the closer you zoom into the very top shows, while Libsyn still owns a big chunk of the broader top 10k.
-- First-party RSS hasn’t disappeared. Roughly 1 in 10 of the very top shows still serves feeds from their own domains.
+Right off the bat, two things jumped out at me:
+- Megaphone's lead gets bigger the closer you get to the very top, while Libsyn still owns a huge chunk of the broader top 10k.
+- About 1 in 10 of the top shows still use their own domains for their RSS feeds, but there's a clever strategy at play there.
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -27,32 +28,31 @@ Two quick takeaways before the charts:
 
 Each donut keeps the largest platforms separate and bundles the rest so you can see the split at a glance.
 
-**What stood out to me:**
+<hr className="mt-12 border-t border-border/60" />
 
-- Megaphone is the gravity well at the top (28.9% of the 1k cohort) and it still shows up even when publishers run their own feeds—22 of the self-hosted feeds deliver audio from Megaphone behind the scenes.
-- Libsyn and Buzzsprout fade quickly once you look at the highest-audience shows. They’re still crucial for the long tail, but the big commercial pods migrate to the enterprise stack.
-- Spotify/Anchor’s footprint collapses at the top 1k. The shows that do break through seem to move to other hosts once the audience ramps.
+## My Key Takeaways
+
+- **Megaphone's "Invisible" Dominance.** I was surprised by Megaphone's dominance at the top (28.9% of the 1k cohort), especially since Libsyn and Buzzsprout are bigger names in the indie space. But the real story is in the audio delivery. When I did what I call an "enclosure sniff" on shows that look self-hosted (like NPR's), I found that Megaphone was still the one serving the actual mp3s. They're the invisible engine for a huge chunk of the top tier. My best guess is this all comes down to dynamic ad insertion, which is table stakes for enterprise publishers.
+
+- **The "Graduation" Story.** Looking at the top 10k, Libsyn is a giant (14.5%), but its share is cut in half in the top 1k (7.7%). Meanwhile, enterprise players like Omny and ART19 see their shares double. This looks like a classic graduation story. Shows start on the fantastic, indie-friendly hosts, but once they become commercial powerhouses, they seem to 'graduate' to the enterprise stack to get more advanced ad tech.
+
+- **The Clever Strategy of Self-Hosting.** I was surprised to see that about 1 in 10 of the biggest shows still host their own RSS feeds. At first, it felt like a throwback. But when I dug in, I realized it's actually a super smart strategy. Many of these 'self-hosted' feeds are just a branded URL (like `feeds.npr.org`). The *real* work (delivering the audio and inserting ads) is still handled by Megaphone on the backend. It's the best of both worlds: you get full control over your brand, but you still get to use enterprise-grade ad tech.
+
+- **Spotify/Anchor's Disappearing Act.** Given how many new shows start on Anchor, I expected to see more of them in the top 1k. But their share just craters at the very top. My theory? Anchor is an amazing, frictionless launchpad. It’s probably the best place to start. But once a show gets serious traction and wants to tap into the broader ad market beyond Spotify's walls, it seems they often pack their bags for a host with more flexible monetization.
 
 <hr className="mt-12 border-t border-border/60" />
 
-## Why it matters for us
+## Methodology (My Detective Work)
 
-This is the plumbing we have to navigate for the “record & relax” promise. Knowing which host (and which CDN) sits behind a feed lets us script handoffs, drop in the right intake links, and skip a bunch of back-and-forth when a creator is migrating. It also means the automations we’re shipping stay aware of which analytics proxies or delivery networks might rewrite URLs on their way out.
+My methodology had a few layers to get the real story.
 
-<hr className="mt-12 border-t border-border/60" />
-
-## Methodology
-
-Same cohort as the last two posts: top shows by audience from the PodSeeker dataset. For each feed we:
-
-1. Classified the hosting platform from the RSS URL (host and path rules).
-2. When the URL looked first-party or wrapped in a proxy, we fetched up to 200 KB, grabbed the first `<enclosure>` URL, and mapped the audio delivery host separately.
-
-We ignored anything slower than monthly cadence for this pass because the sample is tiny and the feed counts don’t move much there.
+1.  First, I did the easy part: classifying feeds from obvious URLs like `feeds.simplecast.com`.
+2.  But for the tricky ones (custom domains or weird URLs), I did what I call an "enclosure sniff." I peeked inside the RSS file to find the URL for the actual audio file. This let me separate the **brand** (the RSS feed) from the **engine** (the audio delivery platform).
+3.  For the charts you see, I also intentionally "clubbed" some categories like self-hosted sites and old feed managers into 'Other' so you can see the market share of the major commercial platforms more clearly.
 
 <hr className="mt-12 border-t border-border/60" />
 
-## Examples (so you can double-check us)
+## Examples (So You Can Double-Check Me)
 
 ### Straight-shot mappings
 
@@ -84,4 +84,6 @@ We ignored anything slower than monthly cadence for this pass because the sample
 
 ## What's next
 
-Next up, I want to cross-tab this with cadence and episode length. If you’re curious about a specific show or platform, hit me up—I’m planning to publish the full show-level explorer once I finish cleaning the proxy labels.
+This data opened up a lot of new questions for me. I'm not sure what I'll dig into next—maybe cross-referencing hosting with episode length, or maybe something else entirely. The deeper I go, the more interesting the patterns get.
+
+If you have any interesting ideas or see something I missed, hit me up.

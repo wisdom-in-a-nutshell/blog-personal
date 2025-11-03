@@ -55,7 +55,7 @@ type HostingProviderAggregateChartProps = {
   topCount?: number;
 };
 
-function buildAggregateSegments(
+export function buildAggregateSegments(
   cohort: HostingProviderCohort,
   topCount: number = AGGREGATE_TOP_COUNT
 ): AggregateSegment[] {

@@ -1,7 +1,7 @@
 ---
-title: "I Tracked 10,000 Top Podcasts: Here's Who Hosts Their Feeds"
+title: "Podcast Hosting Market Share: An Analysis of the Top 10,000 Shows"
 publishedAt: "2025-11-03"
-summary: "Feed hosting share for the top 1k and 10k podcasts, plus the exact rules we used so you can reproduce the results."
+summary: "Analysis of 10,000 top podcasts reveals a clear 'graduation' pattern: shows often start on indie hosts but migrate to enterprise platforms like Megaphone as they grow."
 tags: "podcasting, data, infrastructure"
 hidden: false
 ---
@@ -23,112 +23,13 @@ The results were pretty surprising. In this post, I'll show you:
 
 <HostingProviderTop1KAggregateChart />
 
-<div className="my-6 overflow-x-auto">
-  <table className="mx-auto w-full max-w-3xl min-w-[26rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Host</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Market Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3 font-semibold text-foreground">Megaphone</td>
-        <td className="px-6 py-3 text-right font-semibold text-foreground">289</td>
-        <td className="px-6 py-3 text-right font-semibold text-foreground">28.9%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Omny</td>
-        <td className="px-6 py-3 text-right">127</td>
-        <td className="px-6 py-3 text-right">12.7%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">ART19</td>
-        <td className="px-6 py-3 text-right">109</td>
-        <td className="px-6 py-3 text-right">10.9%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">First-Party RSS</td>
-        <td className="px-6 py-3 text-right">95</td>
-        <td className="px-6 py-3 text-right">9.5%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Simplecast</td>
-        <td className="px-6 py-3 text-right">92</td>
-        <td className="px-6 py-3 text-right">9.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Libsyn</td>
-        <td className="px-6 py-3 text-right">77</td>
-        <td className="px-6 py-3 text-right">7.7%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3 text-foreground">Everything else</td>
-        <td className="px-6 py-3 text-right">211</td>
-        <td className="px-6 py-3 text-right">21.1%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<HostingProviderTop1KAggregateTable />
 
 ### Feed hosts — Top 10,000 shows
 
 <HostingProviderTop10KAggregateChart />
 
-<div className="my-6 overflow-x-auto">
-  <table className="mx-auto w-full max-w-3xl min-w-[26rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Host</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Market Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3 font-semibold text-foreground">Megaphone</td>
-        <td className="px-6 py-3 text-right font-semibold text-foreground">2,027</td>
-        <td className="px-6 py-3 text-right font-semibold text-foreground">20.3%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Libsyn</td>
-        <td className="px-6 py-3 text-right">1,454</td>
-        <td className="px-6 py-3 text-right">14.5%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Simplecast</td>
-        <td className="px-6 py-3 text-right">720</td>
-        <td className="px-6 py-3 text-right">7.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Omny</td>
-        <td className="px-6 py-3 text-right">702</td>
-        <td className="px-6 py-3 text-right">7.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Acast</td>
-        <td className="px-6 py-3 text-right">695</td>
-        <td className="px-6 py-3 text-right">7.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">Spotify / Anchor</td>
-        <td className="px-6 py-3 text-right">585</td>
-        <td className="px-6 py-3 text-right">5.9%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">First-Party RSS</td>
-        <td className="px-6 py-3 text-right">544</td>
-        <td className="px-6 py-3 text-right">5.4%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3 text-foreground">Everything else</td>
-        <td className="px-6 py-3 text-right">3,273</td>
-        <td className="px-6 py-3 text-right">32.7%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<HostingProviderTop10KAggregateTable />
 
 
 <hr className="mt-12 border-t border-border/60" />
@@ -139,7 +40,7 @@ The results were pretty surprising. In this post, I'll show you:
 
 - **The Rise of the Enterprise Hosts.** So, where do all those graduating shows go? To be honest, before I did this analysis, I wasn't even aware of names like Omny Studio and ART19. I was expecting to see the names we all hear about—Libsyn, Buzzsprout, Transistor. But the data shows that as podcasts scale, they move to this entirely different class of enterprise host. The fact that platforms like Omny and ART19 *double* their market share in the top 1k was a huge surprise to me, and it really shows how different the needs of top-tier podcasts are.
 
-- **Megaphone: The Undisputed Top Player.** I was aware of Megaphone, but I was still shocked by its dominance (28.9% of the top 1k). The real story is even bigger. Many shows that *look* self-hosted (with a branded URL like `feeds.npr.org`) are actually using Megaphone on the backend to deliver the audio. This is the ultimate clever strategy: brand control combined with powerful ad tech. It's clear they are the dominant player for top-tier monetization.
+- **Megaphone: The Undisputed Top Player.** I was aware of Megaphone, but I was still shocked by its dominance (28.9% of the top 1k). What makes this even more impressive is that many shows with first-party RSS feeds (like `feeds.npr.org`) are actually using Megaphone behind the scenes to deliver their audio files. This white-label approach lets publishers maintain brand control while leveraging Megaphone's powerful ad tech—clearly the winning strategy for top-tier monetization.
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -149,7 +50,7 @@ My methodology had a few layers to get the real story.
 
 1.  First, I did the easy part: classifying feeds from obvious URLs like `feeds.simplecast.com`.
 2.  But for the tricky ones (custom domains or weird URLs), I did what I call an "enclosure sniff." I peeked inside the RSS file to find the URL for the actual audio file. This let me separate the **brand** (the RSS feed) from the **engine** (the audio delivery platform).
-3.  For the charts you see, I also intentionally "clubbed" some categories like self-hosted sites and old feed managers into 'Other' so you can see the market share of the major commercial platforms more clearly.
+
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -184,6 +85,6 @@ My methodology had a few layers to get the real story.
 <hr className="mt-16 border-t border-border/60" />
 
 ## What's next
-This data opened up many new questions. I'm not sure what I'll investigate next. I might cross-reference hosting with episode length, or I might explore something else. The deeper I go, the more interesting the patterns become.
+I'm not sure what I'll investigate next. I might cross-reference hosting with episode length, or I might explore something else. The deeper I go, the more interesting the patterns become.
 
 If you have any interesting ideas or see something I missed, let me know.

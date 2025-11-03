@@ -13,6 +13,10 @@ import {
   HostingProviderTop10KAggregateChart,
 } from "./blog/hosting-provider/charts";
 import {
+  HostingProviderTop1KAggregateTable,
+  HostingProviderTop10KAggregateTable,
+} from "./blog/hosting-provider/tables";
+import {
   DailyEpisodeLengthChart,
   EpisodeLengthHistogram,
   MonthlyEpisodeLengthChart,
@@ -169,6 +173,8 @@ const components = {
   OtherEpisodeLengthChart,
   HostingProviderTop1KAggregateChart,
   HostingProviderTop10KAggregateChart,
+  HostingProviderTop1KAggregateTable,
+  HostingProviderTop10KAggregateTable,
   CadenceSummaryTable,
   EpisodeLengthTable,
 };

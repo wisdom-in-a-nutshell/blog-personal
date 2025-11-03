@@ -12,11 +12,9 @@ const primaryNavItems = {
   // About moved to secondary
 };
 
-// Secondary: About, Projects, Photos
+// Secondary: About only (Projects/Photos hidden for now)
 const secondaryNavItems = {
-  "/about": { name: "About" }, // Added About to secondary
-  "/projects": { name: "Projects" },
-  "/photos": { name: "Photos" },
+  "/about": { name: "About" },
 };
 
 export function Navbar(): React.ReactElement {
@@ -106,7 +104,7 @@ export function Navbar(): React.ReactElement {
                 role="menu"
               >
                 <div className="py-1">
-                  {/* Render Projects and Photos links */}
+                  {/* Render secondary links */}
                   {Object.entries(secondaryNavItems).map(([path, { name }]) => (
                     <Link
                       className="block px-4 py-2 text-neutral-700 text-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"

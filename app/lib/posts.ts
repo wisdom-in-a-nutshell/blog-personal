@@ -21,15 +21,29 @@ export type BlogPost = {
 const FRONTMATTER_REGEX = /---\s*([\s\S]*?)\s*---/;
 const QUOTE_WRAP = /^['"](.*)['"]$/;
 
-function parseFrontmatter(fileContent: string) {
+function createEmptyMetadata(): Metadata {
+  return {
+    title: "",
+    publishedAt: "",
+    summary: "",
+    tags: "",
+  };
+}
+
+function parseFrontmatter(
+  fileContent: string
+): { metadata: Metadata; content: string } {
   const match = FRONTMATTER_REGEX.exec(fileContent);
   if (!match) {
-    return {} as Record<string, string>;
+    return {
+      metadata: createEmptyMetadata(),
+      content: fileContent.trim(),
+    };
   }
   const frontMatterBlock = match[1];
   const content = fileContent.replace(FRONTMATTER_REGEX, "").trim();
   const frontMatterLines = frontMatterBlock.trim().split("\n");
-  const metadata: Partial<Metadata> = {};
+  const metadata = createEmptyMetadata();
 
   const QUOTE_WRAP_REGEX = QUOTE_WRAP;
   for (const line of frontMatterLines) {
@@ -37,15 +51,27 @@ function parseFrontmatter(fileContent: string) {
     let value = valueArr.join(": ").trim();
     value = value.replace(QUOTE_WRAP_REGEX, "$1");
 
-    const k = key.trim() as keyof Metadata;
-    if (k === "hidden") {
-      metadata[k] = (value === "true") as unknown as Metadata[keyof Metadata];
-    } else {
-      metadata[k] = value as unknown as Metadata[keyof Metadata];
+    const trimmedKey = key.trim();
+
+    switch (trimmedKey) {
+      case "hidden":
+        metadata.hidden = value === "true";
+        break;
+      case "image":
+        metadata.image = value;
+        break;
+      case "title":
+      case "publishedAt":
+      case "summary":
+      case "tags":
+        metadata[trimmedKey] = value;
+        break;
+      default:
+        break;
     }
   }
 
-  return { metadata: metadata as Metadata, content };
+  return { metadata, content };
 }
 
 function getMDXFiles(dir: string) {

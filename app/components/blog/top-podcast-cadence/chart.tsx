@@ -38,11 +38,15 @@ const cadenceBucketLabels: Record<CadenceId, string> = {
   slow: ">30 days",
 };
 
-const cadenceData = CADENCE_COUNTS.map((c, _index) => ({
+const cadenceData = CADENCE_COUNTS.map((c) => ({
   id: c.id,
   bucket: cadenceBucketLabels[c.id],
   shows: c.shows,
-})) as const;
+})) satisfies ReadonlyArray<{
+  id: CadenceId;
+  bucket: string;
+  shows: number;
+}>;
 
 const chartSegments = cadenceData.map((segment, index) => ({
   ...segment,

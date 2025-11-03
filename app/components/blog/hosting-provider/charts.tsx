@@ -254,15 +254,15 @@ function HostingProviderAggregateDonut({
   );
 
   const defaultTitles: Record<HostingProviderCohort, string> = {
-    top1k: "Top Hosts vs Everyone Else — Top 1,000",
-    top10k: "Top Hosts vs Everyone Else — Top 10,000",
+    top1k: "Who Hosts the Top 1,000 Podcasts?",
+    top10k: "Who Hosts the Top 10,000 Podcasts?",
   };
 
   const defaultDescriptions: Record<HostingProviderCohort, string> = {
     top1k:
-      "Largest feed hosts in the top 1,000 shows. Everyone else combined into a single slice.",
+      "Market share of feed hosting providers for the 1,000 highest-audience shows.",
     top10k:
-      "Largest feed hosts in the top 10,000 shows. Everyone else combined into a single slice.",
+      "Market share of feed hosting providers for the 10,000 highest-audience shows.",
   };
 
   const defaultDownloads: Record<HostingProviderCohort, string> = {

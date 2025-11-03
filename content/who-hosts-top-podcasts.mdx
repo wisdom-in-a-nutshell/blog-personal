@@ -6,7 +6,7 @@ tags: "podcasting, data, infrastructure"
 hidden: false
 ---
 
-While working on my last two posts on [how often big shows publish](/blog/top-podcast-cadence) and [how long their episodes run](/blog/how-long-top-podcasts-run), I had to look at thousands of RSS feeds. I started noticing some patterns in the URLs and got curious: who actually hosts the top podcasts?
+While working on my last two posts on [how often big shows publish](/blog/top-podcast-cadence) and [how long their episodes run](/blog/how-long-top-podcasts-run), I had to look at thousands of RSS feeds. I started noticing some patterns in the URLs and got curious.
 
 So, I decided to do a much more formal analysis to figure out this question: who are the hosting providers for all these top shows?
 
@@ -27,17 +27,16 @@ The results were pretty surprising. In this post, I'll show you:
 
 <HostingProviderTop10KAggregateChart />
 
-Each donut keeps the largest platforms separate and bundles the rest so you can see the split at a glance.
 
 <hr className="mt-12 border-t border-border/60" />
 
 ## My Key Takeaways
 
-- **Megaphone's "Invisible" Dominance.** I was surprised by Megaphone's dominance at the top (28.9% of the 1k cohort), especially since Libsyn and Buzzsprout are bigger names in the indie space. But the real story is in the audio delivery. When I did what I call an "enclosure sniff" on shows that look self-hosted (like NPR's), I found that Megaphone was still the one serving the actual mp3s. They're the invisible engine for a huge chunk of the top tier. My best guess is this all comes down to dynamic ad insertion, which is table stakes for enterprise publishers.
+- **The "Graduation" Story.** Looking at the top 10,000 shows, the indie platforms are giants. Libsyn is huge (14.5%!). But when you zoom into just the top 1,000, its share is cut in half (7.7%). It looks like shows start on these fantastic, indie-friendly platforms, but once they become commercial powerhouses, they seem to 'graduate' to an enterprise stack. My guess is they start needing more advanced features like team management and dynamic ad insertion.
 
-- **The "Graduation" Story.** Looking at the top 10k, Libsyn is a giant (14.5%), but its share is cut in half in the top 1k (7.7%). Meanwhile, enterprise players like Omny and ART19 see their shares double. This looks like a classic graduation story. Shows start on the fantastic, indie-friendly hosts, but once they become commercial powerhouses, they seem to 'graduate' to the enterprise stack to get more advanced ad tech.
+- **The Rise of the Enterprise Hosts.** Before doing this analysis, I wasn't even that familiar with Omny Studio and ART19. But it turns out their share *doubles* when you go from the top 10k to the top 1k. It was a surprise to see them so strong at the very top, which points to how important that enterprise feature set becomes.
 
-- **The Clever Strategy of Self-Hosting.** I was surprised to see that about 1 in 10 of the biggest shows still host their own RSS feeds. At first, it felt like a throwback. But when I dug in, I realized it's actually a super smart strategy. Many of these 'self-hosted' feeds are just a branded URL (like `feeds.npr.org`). The *real* work (delivering the audio and inserting ads) is still handled by Megaphone on the backend. It's the best of both worlds: you get full control over your brand, but you still get to use enterprise-grade ad tech.
+- **Megaphone's "Invisible" Dominance.** I was aware of Megaphone, but I was shocked by its dominance (28.9% of the top 1k). The real story is even bigger. Many shows that *look* self-hosted (with a branded URL like `feeds.npr.org`) are actually using Megaphone on the backend to deliver the audio. They get the brand control of a custom URL, but still use Megaphone's powerful ad tech. It's a really clever strategy.
 
 - **Spotify/Anchor's Disappearing Act.** Given how many new shows start on Anchor, I expected to see more of them in the top 1k. But their share just craters at the very top. My theory? Anchor is an amazing, frictionless launchpad. It’s probably the best place to start. But once a show gets serious traction and wants to tap into the broader ad market beyond Spotify's walls, it seems they often pack their bags for a host with more flexible monetization.
 

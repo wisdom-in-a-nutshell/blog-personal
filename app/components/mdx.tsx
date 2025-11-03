@@ -7,6 +7,7 @@ import React, { type ReactElement, type ReactNode } from "react";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import { highlight } from "sugar-high";
+import { CadenceSummaryTable, EpisodeLengthTable } from "./blog/data-tables";
 import {
   DailyEpisodeLengthChart,
   EpisodeLengthHistogram,
@@ -160,6 +161,8 @@ const components = {
   WeeklyEpisodeLengthChart,
   MonthlyEpisodeLengthChart,
   OtherEpisodeLengthChart,
+  CadenceSummaryTable,
+  EpisodeLengthTable,
 };
 
 export function CustomMDX(props) {

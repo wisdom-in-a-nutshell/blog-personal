@@ -162,49 +162,7 @@ Here's the detailed breakdown by cadence:
 
 <EpisodeLengthHistogram />
 
-<div className="my-6 flex justify-center">
-  <table className="w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Episode Length</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3">&lt;10 minutes</td>
-        <td className="px-6 py-3 text-right">5</td>
-        <td className="px-6 py-3 text-right">0.5%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">10-20 minutes</td>
-        <td className="px-6 py-3 text-right">38</td>
-        <td className="px-6 py-3 text-right">3.8%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">20-40 minutes</td>
-        <td className="px-6 py-3 text-right">232</td>
-        <td className="px-6 py-3 text-right">23.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">40-60 minutes</td>
-        <td className="px-6 py-3 text-right">330</td>
-        <td className="px-6 py-3 text-right">33.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">60-90 minutes</td>
-        <td className="px-6 py-3 text-right">287</td>
-        <td className="px-6 py-3 text-right">28.7%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">90+ minutes</td>
-        <td className="px-6 py-3 text-right">108</td>
-        <td className="px-6 py-3 text-right">10.8%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<EpisodeLengthTable group="overall" />
 
 To be honest, this data is pretty noisy at the aggregate level. The real patterns emerge when you look at how episode length varies by publishing cadence.
 I focus the deeper charts on cadences with meaningful sample sizes (daily through monthly).
@@ -219,49 +177,7 @@ Average: 47.4 minutes | Median: 42.0 minutes
 
 <DailyEpisodeLengthChart />
 
-<div className="my-6 flex justify-center">
-  <table className="w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Episode Length</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3">&lt;10 minutes</td>
-        <td className="px-6 py-3 text-right">3</td>
-        <td className="px-6 py-3 text-right">1.7%</td>
-    </tr>
-    <tr>
-        <td className="px-6 py-3">10-20 minutes</td>
-        <td className="px-6 py-3 text-right">20</td>
-        <td className="px-6 py-3 text-right">11.1%</td>
-    </tr>
-    <tr>
-        <td className="px-6 py-3">20-40 minutes</td>
-        <td className="px-6 py-3 text-right">57</td>
-        <td className="px-6 py-3 text-right">31.7%</td>
-    </tr>
-    <tr>
-        <td className="px-6 py-3">40-60 minutes</td>
-        <td className="px-6 py-3 text-right">57</td>
-        <td className="px-6 py-3 text-right">31.7%</td>
-    </tr>
-    <tr>
-        <td className="px-6 py-3">60-90 minutes</td>
-        <td className="px-6 py-3 text-right">28</td>
-        <td className="px-6 py-3 text-right">15.5%</td>
-    </tr>
-    <tr>
-        <td className="px-6 py-3">90+ minutes</td>
-        <td className="px-6 py-3 text-right">15</td>
-        <td className="px-6 py-3 text-right">8.3%</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<EpisodeLengthTable group="daily" />
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -270,49 +186,7 @@ Average: 62.1 minutes | Median: 59.5 minutes
 
 <NearDailyEpisodeLengthChart />
 
-<div className="my-6 flex justify-center">
-  <table className="w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Episode Length</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3">&lt;10 minutes</td>
-        <td className="px-6 py-3 text-right">0</td>
-        <td className="px-6 py-3 text-right">0.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">10-20 minutes</td>
-        <td className="px-6 py-3 text-right">2</td>
-        <td className="px-6 py-3 text-right">1.5%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">20-40 minutes</td>
-        <td className="px-6 py-3 text-right">21</td>
-        <td className="px-6 py-3 text-right">15.9%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">40-60 minutes</td>
-        <td className="px-6 py-3 text-right">44</td>
-        <td className="px-6 py-3 text-right">33.3%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">60-90 minutes</td>
-        <td className="px-6 py-3 text-right">50</td>
-        <td className="px-6 py-3 text-right">37.9%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">90+ minutes</td>
-        <td className="px-6 py-3 text-right">15</td>
-        <td className="px-6 py-3 text-right">11.4%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<EpisodeLengthTable group="nearDaily" />
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -321,49 +195,7 @@ Average: 61.0 minutes | Median: 55.9 minutes
 
 <WeeklyEpisodeLengthChart />
 
-<div className="my-6 flex justify-center">
-  <table className="w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Episode Length</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3">&lt;10 minutes</td>
-        <td className="px-6 py-3 text-right">2</td>
-        <td className="px-6 py-3 text-right">0.3%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">10-20 minutes</td>
-        <td className="px-6 py-3 text-right">10</td>
-        <td className="px-6 py-3 text-right">1.7%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">20-40 minutes</td>
-        <td className="px-6 py-3 text-right">119</td>
-        <td className="px-6 py-3 text-right">20.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">40-60 minutes</td>
-        <td className="px-6 py-3 text-right">207</td>
-        <td className="px-6 py-3 text-right">35.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">60-90 minutes</td>
-        <td className="px-6 py-3 text-right">183</td>
-        <td className="px-6 py-3 text-right">31.1%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">90+ minutes</td>
-        <td className="px-6 py-3 text-right">67</td>
-        <td className="px-6 py-3 text-right">11.4%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<EpisodeLengthTable group="weekly" />
 
 <hr className="mt-12 border-t border-border/60" />
 
@@ -372,49 +204,7 @@ Average: 58.7 minutes | Median: 49.6 minutes
 
 <MonthlyEpisodeLengthChart />
 
-<div className="my-6 flex justify-center">
-  <table className="w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm">
-    <thead className="bg-muted/20">
-      <tr className="text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80">
-        <th className="px-6 py-3 font-medium">Episode Length</th>
-        <th className="px-6 py-3 text-right font-medium">Shows</th>
-        <th className="px-6 py-3 text-right font-medium">Share</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-border/35">
-      <tr>
-        <td className="px-6 py-3">&lt;10 minutes</td>
-        <td className="px-6 py-3 text-right">0</td>
-        <td className="px-6 py-3 text-right">0.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">10-20 minutes</td>
-        <td className="px-6 py-3 text-right">1</td>
-        <td className="px-6 py-3 text-right">1.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">20-40 minutes</td>
-        <td className="px-6 py-3 text-right">29</td>
-        <td className="px-6 py-3 text-right">36.2%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">40-60 minutes</td>
-        <td className="px-6 py-3 text-right">21</td>
-        <td className="px-6 py-3 text-right">26.3%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">60-90 minutes</td>
-        <td className="px-6 py-3 text-right">20</td>
-        <td className="px-6 py-3 text-right">25.0%</td>
-      </tr>
-      <tr>
-        <td className="px-6 py-3">90+ minutes</td>
-        <td className="px-6 py-3 text-right">9</td>
-        <td className="px-6 py-3 text-right">11.3%</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<EpisodeLengthTable group="monthly" />
 
 <hr className="mt-16 border-t border-border/60" />
 

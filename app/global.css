@@ -140,12 +140,13 @@ input[type="email"] {
 }
 
 table {
-  display: block;
-  max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  overflow-x: auto;
-  white-space: nowrap;
+}
+
+.prose table {
+  width: max-content;
+  max-width: 100%;
 }
 
 .prose .callout > p {

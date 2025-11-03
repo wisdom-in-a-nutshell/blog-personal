@@ -10,6 +10,8 @@ const TRIM_PATTERN = /[*_`~]/g;
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 const IMAGE_PATTERN = /!\[([^\]]*)\]\(([^)]+)\)/g;
 const HTML_TAG_PATTERN = /<[^>]+>/g;
+const HEADING_REGEX = /^(#{2,6})\s+(.*)$/;
+const ID_SUFFIX_REGEX = /\s*{#.*}$/;
 
 export function extractHeadings(content: string): Heading[] {
   const headings: Heading[] = [];
@@ -28,15 +30,15 @@ export function extractHeadings(content: string): Heading[] {
       continue;
     }
 
-    const match = line.match(/^(#{2,6})\s+(.*)$/);
+    const match = line.match(HEADING_REGEX);
     if (!match) {
       continue;
     }
 
     const [, hashes, headingBody] = match;
     const depth = hashes.length;
-    let text = headingBody
-      .replace(/\s*{#.*}$/, "")
+    const text = headingBody
+      .replace(ID_SUFFIX_REGEX, "")
       .replace(IMAGE_PATTERN, "$1")
       .replace(LINK_PATTERN, "$1")
       .replace(HTML_TAG_PATTERN, "")

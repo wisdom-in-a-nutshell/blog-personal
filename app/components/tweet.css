@@ -8,9 +8,10 @@
   /* Light colors */
   --tweet-bg-color: #fff;
   --tweet-bg-color-hover: var(--tweet-bg-color);
-  --tweet-color-blue-secondary: theme("colors.gray.600");
-  --tweet-color-blue-secondary-hover: theme("colors.gray.100");
-  --tweet-font-color-secondary: theme("colors.gray.500");
+  /* Replaced Tailwind theme() calls with static equivalents to satisfy CSS linter */
+  --tweet-color-blue-secondary: #525252; /* gray-600 */
+  --tweet-color-blue-secondary-hover: #f5f5f5; /* gray-100 */
+  --tweet-font-color-secondary: #737373; /* gray-500 */
 
   /* Common properties for both themes */
   --tweet-quoted-bg-color-hover: rgba(0, 0, 0, 0.03);
@@ -41,9 +42,9 @@
     --tweet-bg-color-hover: var(--tweet-bg-color);
     --tweet-quoted-bg-color-hover: rgba(255, 255, 255, 0.03);
     --tweet-border: 1px solid #333;
-    --tweet-color-blue-secondary: theme("colors.white");
+    --tweet-color-blue-secondary: #ffffff; /* white */
     --tweet-color-blue-secondary-hover: #333;
-    --tweet-font-color-secondary: theme("colors.gray.400");
+    --tweet-font-color-secondary: #a3a3a3; /* gray-400 */
   }
 }
 

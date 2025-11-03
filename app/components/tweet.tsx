@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Tweet } from 'react-tweet';
-import './tweet.css';
+import { Tweet } from "react-tweet";
+import "./tweet.css";
 
 export function TweetComponent({ id }: { id: string }) {
   return (

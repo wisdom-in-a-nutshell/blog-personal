@@ -1,4 +1,4 @@
-import { Heading } from "app/lib/headings";
+import type { Heading } from "app/lib/headings";
 
 type TableOfContentsProps = {
   headings: Heading[];
@@ -13,7 +13,10 @@ const INDENT_CLASS: Record<number, string> = {
 };
 
 export function TableOfContents({ headings }: TableOfContentsProps) {
-  const items = headings.filter((heading) => heading.depth <= 6);
+  const MAX_HEADING_DEPTH = 6;
+  const items = headings.filter(
+    (heading) => heading.depth <= MAX_HEADING_DEPTH
+  );
 
   if (!items.length) {
     return null;
@@ -29,10 +32,10 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
       </p>
       <ul className="space-y-2">
         {items.map(({ slug, text, depth }) => (
-          <li key={slug} className={INDENT_CLASS[depth] ?? "pl-0"}>
+          <li className={INDENT_CLASS[depth] ?? "pl-0"} key={slug}>
             <a
-              href={`#${slug}`}
               className="text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+              href={`#${slug}`}
             >
               {text}
             </a>

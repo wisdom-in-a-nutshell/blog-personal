@@ -1,14 +1,14 @@
-import React from "react";
 import Image from "next/image";
+import type React from "react";
 
-interface ImageGridProps {
+type ImageGridProps = {
   images: {
     src: string;
     alt: string;
     href?: string;
   }[];
   columns?: 2 | 3 | 4; // Accepts 2, 3, or 4 columns
-}
+};
 
 export const ImageGrid: React.FC<ImageGridProps> = ({
   images,
@@ -22,33 +22,33 @@ export const ImageGrid: React.FC<ImageGridProps> = ({
 
   return (
     <section>
-      <div className={`grid ${gridClass} gap-4 my-8`}>
-        {images.map((image, index) => (
-          <div key={index} className="relative aspect-square">
+      <div className={`grid ${gridClass} my-8 gap-4`}>
+        {images.map((image) => (
+          <div className="relative aspect-square" key={image.href ?? image.src}>
             {image.href ? (
               <a
-                target="_blank"
-                rel="noopener noreferrer"
+                className="block h-full w-full"
                 href={image.href}
-                className="block w-full h-full"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 <Image
                   alt={image.alt}
-                  src={image.src}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  priority
                   className="rounded-lg object-cover"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  src={image.src}
                 />
               </a>
             ) : (
               <Image
                 alt={image.alt}
-                src={image.src}
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                priority
                 className="rounded-lg object-cover"
+                fill
+                priority
+                sizes="(max-width: 768px) 50vw, 33vw"
+                src={image.src}
               />
             )}
           </div>

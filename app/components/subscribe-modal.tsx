@@ -1,18 +1,17 @@
-'use client'
+"use client";
 
-import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Props for the SubscribeModal component.
- * @interface SubscribeModalProps
  * @property {boolean} isOpen - Whether the modal is currently open.
  * @property {() => void} onClose - Function to call when the modal should be closed.
  */
-interface SubscribeModalProps {
-  isOpen: boolean
-  onClose: () => void
-}
+type SubscribeModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
 /**
  * A modal dialog component for users to subscribe via email.
@@ -27,175 +26,180 @@ export function SubscribeModal({
   isOpen,
   onClose,
 }: SubscribeModalProps): React.ReactElement | null {
-  const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{
-    type: 'success' | 'error'
-    text: string
-  } | null>(null)
-  const dialogRef = useRef<HTMLDialogElement>(null)
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   // Effect to control the modal's open/close state via the <dialog> element's API
   useEffect(() => {
-    const dialogNode = dialogRef.current
+    const dialogNode = dialogRef.current;
     if (dialogNode) {
       if (isOpen) {
-        document.body.style.overflow = 'hidden'
-        dialogNode.showModal()
+        document.body.style.overflow = "hidden";
+        dialogNode.showModal();
         // Reset state when modal opens
-        setEmail('')
-        setIsLoading(false)
-        setMessage(null)
+        setEmail("");
+        setIsLoading(false);
+        setMessage(null);
       } else {
-        document.body.style.overflow = ''
+        document.body.style.overflow = "";
         // Delay closing slightly to allow animation if needed
-        setTimeout(() => dialogNode.close(), 100) // Adjust timing if you add transitions
+        const CLOSE_DELAY_MS = 100;
+        setTimeout(() => dialogNode.close(), CLOSE_DELAY_MS);
       }
     }
     return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   // Effect to handle closing the dialog via the Escape key or clicking the backdrop
   useEffect(() => {
-    const dialogNode = dialogRef.current
+    const dialogNode = dialogRef.current;
     const handleCancel = (event: Event) => {
-      event.preventDefault()
-      onClose()
-    }
+      event.preventDefault();
+      onClose();
+    };
     const handleClick = (event: MouseEvent) => {
       if (dialogNode && event.target === dialogNode) {
-        onClose()
+        onClose();
       }
-    }
+    };
     if (dialogNode) {
-      dialogNode.addEventListener('cancel', handleCancel)
-      dialogNode.addEventListener('click', handleClick)
+      dialogNode.addEventListener("cancel", handleCancel);
+      dialogNode.addEventListener("click", handleClick);
     }
     return () => {
       if (dialogNode) {
-        dialogNode.removeEventListener('cancel', handleCancel)
-        dialogNode.removeEventListener('click', handleClick)
+        dialogNode.removeEventListener("cancel", handleCancel);
+        dialogNode.removeEventListener("click", handleClick);
       }
-    }
-  }, [onClose])
+    };
+  }, [onClose]);
 
   /**
    * Handles the form submission by sending the email to the API endpoint.
    * @param {React.FormEvent<HTMLFormElement>} e - The form event.
    */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setMessage(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage(null);
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (!response.ok) {
         // Use error message from API response if available
-        throw new Error(data.error || `HTTP error! status: ${response.status}`)
+        throw new Error(data.error || `HTTP error! status: ${response.status}`);
       }
 
       // Success
       setMessage({
-        type: 'success',
-        text: data.message || 'Successfully subscribed!',
-      })
-      setEmail('') // Clear input on success
+        type: "success",
+        text: data.message || "Successfully subscribed!",
+      });
+      setEmail(""); // Clear input on success
       // Optionally close modal after a short delay on success
       // setTimeout(onClose, 2000);
     } catch (error) {
-      console.error('Subscription error:', error)
       setMessage({
-        type: 'error',
-        text: error instanceof Error ? error.message : 'An unknown error occurred.',
-      })
+        type: "error",
+        text:
+          error instanceof Error ? error.message : "An unknown error occurred.",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // Conditional rendering for ref availability
-  if (!isOpen && !dialogRef.current) {
-    return null
+  if (!(isOpen || dialogRef.current)) {
+    return null;
   }
 
   return (
     <dialog
-      ref={dialogRef}
       aria-labelledby="subscribe-modal-title"
-      className="p-0 max-w-md w-[calc(100%-2rem)] bg-white dark:bg-neutral-900 rounded-lg shadow-xl backdrop:bg-black/30 dark:backdrop:bg-black/50 backdrop:backdrop-blur-sm transition-opacity duration-300 ease-in-out open:opacity-100 open:pointer-events-auto opacity-0 pointer-events-none"
+      className="pointer-events-none w-[calc(100%-2rem)] max-w-md rounded-lg bg-white p-0 opacity-0 shadow-xl transition-opacity duration-300 ease-in-out backdrop:bg-black/30 backdrop:backdrop-blur-sm open:pointer-events-auto open:opacity-100 dark:bg-neutral-900 dark:backdrop:bg-black/50"
+      ref={dialogRef}
     >
       <div className="relative p-6">
         <button
-          type="button"
-          onClick={onClose}
           aria-label="Close modal"
-          disabled={isLoading} // Disable close button while loading
-          className="absolute top-3 right-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors disabled:opacity-50"
+          className="absolute top-3 right-3 text-neutral-500 transition-colors hover:text-neutral-800 disabled:opacity-50 dark:text-neutral-400 dark:hover:text-neutral-200"
+          disabled={isLoading}
+          onClick={onClose} // Disable close button while loading
+          type="button"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
             aria-hidden="true"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <title>Close</title>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            <path
+              d="M6 18 18 6M6 6l12 12"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
 
         <h2
+          className="mb-3 font-medium text-neutral-900 text-xl dark:text-neutral-100"
           id="subscribe-modal-title"
-          className="text-xl font-medium text-neutral-900 dark:text-neutral-100 mb-3"
         >
           Subscribe for Updates
         </h2>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-5">
+        <p className="mb-5 text-neutral-600 text-sm dark:text-neutral-400">
           Get notified when I publish new posts.
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-          <label htmlFor="email-input" className="sr-only">
+        <form className="flex flex-col space-y-3" onSubmit={handleSubmit}>
+          <label className="sr-only" htmlFor="email-input">
             Email Address
           </label>
           <input
+            className="rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:ring-neutral-400"
+            disabled={isLoading}
             id="email-input"
-            type="email"
-            value={email}
-            onChange={e => {
-              setMessage(null)
-              setEmail(e.target.value)
+            onChange={(e) => {
+              setMessage(null);
+              setEmail(e.target.value);
             }}
             placeholder="your.email@example.com"
             required
-            disabled={isLoading}
-            className="px-3 py-2 border border-neutral-300 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-neutral-500 dark:focus:ring-neutral-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            type="email"
+            value={email}
           />
           <button
-            type="submit"
+            className="flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-neutral-200 dark:text-black dark:focus:ring-neutral-400 dark:focus:ring-offset-neutral-900 dark:hover:bg-neutral-300"
             disabled={isLoading}
-            className="px-4 py-2 bg-neutral-800 dark:bg-neutral-200 text-white dark:text-black rounded-md font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 dark:focus:ring-neutral-400 dark:focus:ring-offset-neutral-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            type="submit"
           >
             {isLoading ? (
               <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
+                className="-ml-1 mr-3 h-5 w-5 animate-spin"
                 fill="none"
                 viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <title>Loading</title>
                 <circle
@@ -208,12 +212,12 @@ export function SubscribeModal({
                 />
                 <path
                   className="opacity-75"
-                  fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  fill="currentColor"
                 />
               </svg>
             ) : (
-              'Subscribe'
+              "Subscribe"
             )}
           </button>
         </form>
@@ -222,16 +226,16 @@ export function SubscribeModal({
         {message && (
           <p
             className={`mt-4 text-sm ${
-              message.type === 'success'
-                ? 'text-green-600 dark:text-green-400'
-                : 'text-red-600 dark:text-red-400'
+              message.type === "success"
+                ? "text-green-600 dark:text-green-400"
+                : "text-red-600 dark:text-red-400"
             }`}
-            role={message.type === 'error' ? 'alert' : 'status'} // Set appropriate ARIA role
+            role={message.type === "error" ? "alert" : "status"} // Set appropriate ARIA role
           >
             {message.text}
           </p>
         )}
       </div>
     </dialog>
-  )
+  );
 }

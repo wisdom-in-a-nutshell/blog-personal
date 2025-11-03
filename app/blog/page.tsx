@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/lib/posts";
+import Link from "next/link";
 
 export const metadata = {
   title: "Blog",
@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function BlogPosts() {
-  let allBlogs = getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   return (
     <section>
@@ -25,15 +25,15 @@ export default function BlogPosts() {
           })
           .map((post) => (
             <Link
-              key={post.slug}
-              className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
+              className="mb-5 flex flex-col space-y-1 transition-opacity duration-200 hover:opacity-80"
               href={`/blog/${post.slug}`}
+              key={post.slug}
             >
-              <div className="w-full flex justify-between items-start gap-4">
-                <h2 className="text-black dark:text-white flex-1 min-w-0">
+              <div className="flex w-full items-start justify-between gap-4">
+                <h2 className="min-w-0 flex-1 text-black dark:text-white">
                   {post.metadata.title}
                 </h2>
-                <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm whitespace-nowrap">
+                <p className="whitespace-nowrap text-neutral-600 text-sm tabular-nums dark:text-neutral-400">
                   {formatDate(post.metadata.publishedAt, false)}
                 </p>
               </div>

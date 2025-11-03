@@ -1,9 +1,9 @@
-import { Feed } from "feed";
-import { getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/config";
+import { getBlogPosts } from "app/lib/posts";
+import { Feed } from "feed";
 import { NextResponse } from "next/server";
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return [
     { format: "rss.xml" },
     { format: "atom.xml" },
@@ -47,7 +47,7 @@ export async function GET(
 
   const allPosts = await getBlogPosts();
 
-  allPosts.forEach((post) => {
+  for (const post of allPosts) {
     const postUrl = `${BaseUrl}blog/${post.slug}`;
     const categories = post.metadata.tags
       ? post.metadata.tags.split(",").map((tag) => tag.trim())
@@ -64,7 +64,7 @@ export async function GET(
       })),
       date: new Date(post.metadata.publishedAt),
     });
-  });
+  }
 
   const responseMap: Record<string, { content: string; contentType: string }> =
     {

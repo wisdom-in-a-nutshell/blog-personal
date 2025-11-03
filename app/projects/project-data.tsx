@@ -1,9 +1,9 @@
-export interface Project {
+export type Project = {
   title: string;
   year: number;
   description: string;
   url: string;
-}
+};
 
 export const projects: Project[] = [
   {

@@ -18,6 +18,11 @@ import {
   ChartContainer,
   ChartTooltip,
 } from "@/components/ui/chart";
+import {
+  EPISODE_BUCKET_ORDER,
+  EPISODE_LENGTH_DATA,
+  type EpisodeBucketId,
+} from "@/data/podcasts/episode-length";
 
 const EPISODE_LENGTH_BUCKETS = [
   { id: "under10", label: "<10 minutes" },
@@ -28,7 +33,7 @@ const EPISODE_LENGTH_BUCKETS = [
   { id: "ninetyPlus", label: "90+ minutes" },
 ] as const;
 
-type EpisodeLengthBucketId = (typeof EPISODE_LENGTH_BUCKETS)[number]["id"];
+type EpisodeLengthBucketId = EpisodeBucketId;
 
 type EpisodeLengthBucketInput = {
   id: EpisodeLengthBucketId;
@@ -56,59 +61,20 @@ const BAR_RADIUS: [number, number, number, number] = [
   ZERO_RADIUS,
 ];
 
-const OVERALL_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 5 },
-  { id: "tenToTwenty", shows: 38 },
-  { id: "twentyToForty", shows: 232 },
-  { id: "fortyToSixty", shows: 330 },
-  { id: "sixtyToNinety", shows: 287 },
-  { id: "ninetyPlus", shows: 108 },
-];
+function countsToBuckets(
+  group: keyof typeof EPISODE_LENGTH_DATA
+): EpisodeLengthBucketInput[] {
+  const counts = EPISODE_LENGTH_DATA[group];
+  return EPISODE_BUCKET_ORDER.map((id) => ({ id, shows: counts[id] }));
+}
 
-const DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 3 },
-  { id: "tenToTwenty", shows: 20 },
-  { id: "twentyToForty", shows: 57 },
-  { id: "fortyToSixty", shows: 57 },
-  { id: "sixtyToNinety", shows: 28 },
-  { id: "ninetyPlus", shows: 15 },
-];
-
-const NEAR_DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 0 },
-  { id: "tenToTwenty", shows: 2 },
-  { id: "twentyToForty", shows: 21 },
-  { id: "fortyToSixty", shows: 44 },
-  { id: "sixtyToNinety", shows: 50 },
-  { id: "ninetyPlus", shows: 15 },
-];
-
-const WEEKLY_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 2 },
-  { id: "tenToTwenty", shows: 10 },
-  { id: "twentyToForty", shows: 119 },
-  { id: "fortyToSixty", shows: 207 },
-  { id: "sixtyToNinety", shows: 183 },
-  { id: "ninetyPlus", shows: 67 },
-];
-
-const MONTHLY_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 0 },
-  { id: "tenToTwenty", shows: 1 },
-  { id: "twentyToForty", shows: 29 },
-  { id: "fortyToSixty", shows: 21 },
-  { id: "sixtyToNinety", shows: 20 },
-  { id: "ninetyPlus", shows: 9 },
-];
-
-const OTHER_BUCKETS: EpisodeLengthBucketInput[] = [
-  { id: "under10", shows: 0 },
-  { id: "tenToTwenty", shows: 5 },
-  { id: "twentyToForty", shows: 5 },
-  { id: "fortyToSixty", shows: 4 },
-  { id: "sixtyToNinety", shows: 5 },
-  { id: "ninetyPlus", shows: 1 },
-];
+const OVERALL_BUCKETS: EpisodeLengthBucketInput[] = countsToBuckets("overall");
+const DAILY_BUCKETS: EpisodeLengthBucketInput[] = countsToBuckets("daily");
+const NEAR_DAILY_BUCKETS: EpisodeLengthBucketInput[] =
+  countsToBuckets("nearDaily");
+const WEEKLY_BUCKETS: EpisodeLengthBucketInput[] = countsToBuckets("weekly");
+const MONTHLY_BUCKETS: EpisodeLengthBucketInput[] = countsToBuckets("monthly");
+const OTHER_BUCKETS: EpisodeLengthBucketInput[] = countsToBuckets("other");
 
 function sanitizeShows(value: number): number {
   if (!Number.isFinite(value)) {

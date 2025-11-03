@@ -8,8 +8,12 @@ import {
   ChartContainer,
   ChartTooltip,
 } from "@/components/ui/chart";
+import {
+  BASE_TOTAL,
+  CADENCE_COUNTS,
+  type CadenceId,
+} from "@/data/podcasts/cadence";
 
-const BASE_TOTAL = 1000;
 const PERCENT_FACTOR = 100;
 const LABEL_MIN_SHARE = 0.05;
 const LABEL_OFFSET = 20;
@@ -25,33 +29,20 @@ const RIGHT_SIDE_END_DEG = 270;
 const DEGREE_DIVISOR = 180;
 const DEGREES_TO_RADIANS = Math.PI / DEGREE_DIVISOR;
 const CHART_SIGNATURE = "Adithyan Ilangovan | adithyan.io";
-const cadenceData = [
-  {
-    id: "daily",
-    bucket: "Daily",
-    shows: 180,
-  },
-  {
-    id: "nearDaily",
-    bucket: "≤3 days",
-    shows: 132,
-  },
-  {
-    id: "weekly",
-    bucket: "Weekly (3–9 days)",
-    shows: 588,
-  },
-  {
-    id: "monthly",
-    bucket: "Monthly (10–29 days)",
-    shows: 80,
-  },
-  {
-    id: "slow",
-    bucket: ">30 days",
-    shows: 20,
-  },
-] as const;
+
+const cadenceBucketLabels: Record<CadenceId, string> = {
+  daily: "Daily",
+  nearDaily: "≤3 days",
+  weekly: "Weekly (3–9 days)",
+  monthly: "Monthly (10–29 days)",
+  slow: ">30 days",
+};
+
+const cadenceData = CADENCE_COUNTS.map((c, _index) => ({
+  id: c.id,
+  bucket: cadenceBucketLabels[c.id],
+  shows: c.shows,
+})) as const;
 
 const chartSegments = cadenceData.map((segment, index) => ({
   ...segment,

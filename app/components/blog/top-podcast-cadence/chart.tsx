@@ -1,14 +1,30 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Cell, Pie, PieChart, type TooltipProps } from "recharts"
+import { Cell, Pie, PieChart, type TooltipProps } from "recharts";
 
-import { DownloadChartButton } from "@/components/charts/download-chart-button"
-import { ChartWatermark } from "@/components/charts/watermark"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
+import { ChartCard } from "@/components/charts/chart-card";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+} from "@/components/ui/chart";
 
-const BASE_TOTAL = 1_000
+const BASE_TOTAL = 1000;
+const PERCENT_FACTOR = 100;
+const LABEL_MIN_SHARE = 0.05;
+const LABEL_OFFSET = 20;
+const LABEL_FONT_SIZE = 11;
+const LEADER_LINE_WIDTH = 1;
+const LEADER_LINE_OPACITY = 0.3;
+const DONUT_INNER_RADIUS = 70;
+const DONUT_OUTER_RADIUS = 120;
+const DONUT_PADDING_ANGLE = 3;
+const DONUT_STROKE_WIDTH = 2;
+const RIGHT_SIDE_START_DEG = 90;
+const RIGHT_SIDE_END_DEG = 270;
+const DEGREE_DIVISOR = 180;
+const DEGREES_TO_RADIANS = Math.PI / DEGREE_DIVISOR;
+const CHART_SIGNATURE = "Adithyan Ilangovan | adithyan.io";
 const cadenceData = [
   {
     id: "daily",
@@ -35,13 +51,13 @@ const cadenceData = [
     bucket: ">30 days",
     shows: 20,
   },
-] as const
+] as const;
 
 const chartSegments = cadenceData.map((segment, index) => ({
   ...segment,
-  share: Number(((segment.shows / BASE_TOTAL) * 100).toFixed(1)),
+  share: Number(((segment.shows / BASE_TOTAL) * PERCENT_FACTOR).toFixed(1)),
   colorVar: `var(--chart-${index + 1})`,
-}))
+}));
 
 const cadenceChartTheme: ChartConfig = {
   daily: {
@@ -79,7 +95,7 @@ const cadenceChartTheme: ChartConfig = {
       dark: "hsl(var(--chart-5))",
     },
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 const tooltipLabels: Record<(typeof cadenceData)[number]["id"], string> = {
   daily: "Daily",
@@ -87,7 +103,7 @@ const tooltipLabels: Record<(typeof cadenceData)[number]["id"], string> = {
   weekly: "Weekly",
   monthly: "Monthly",
   slow: "Seasonal / Other",
-}
+};
 
 // Shorter labels for the chart itself
 const chartLabels: Record<(typeof cadenceData)[number]["id"], string> = {
@@ -96,100 +112,112 @@ const chartLabels: Record<(typeof cadenceData)[number]["id"], string> = {
   weekly: "Weekly",
   monthly: "Monthly",
   slow: "Other",
-}
+};
 
 // Custom label component for the donut chart segments with leader lines
-function renderLabel(entry: any) {
-  const {
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  } = entry
+type LabelEntry = {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+  bucket?: string;
+  share?: number;
+  id?: string;
+  payload?: { bucket?: string; share?: number; id?: string };
+};
 
-  const bucket = entry.bucket || entry.payload?.bucket || ""
-  const share = entry.share || entry.payload?.share || 0
-  const id = entry.id || entry.payload?.id || ""
+function renderLabel(entry: LabelEntry) {
+  const { cx, cy, midAngle, outerRadius, percent } = entry;
+
+  const bucket = entry.bucket || entry.payload?.bucket || "";
+  const id = entry.id || entry.payload?.id || "";
 
   // Always show label for "Other" category, otherwise only if segment is large enough (>5%)
-  if (id !== "slow" && percent < 0.05) return null
+  if (id !== "slow" && percent < LABEL_MIN_SHARE) {
+    return null;
+  }
 
   // Use shorter chart label instead of full bucket name
-  const chartLabel = chartLabels[id as keyof typeof chartLabels] || bucket
-
-  const RADIAN = Math.PI / 180
+  const chartLabel = chartLabels[id as keyof typeof chartLabels] || bucket;
 
   // Calculate positions: end of outer radius and label position outside
-  const outerX = cx + outerRadius * Math.cos(-midAngle * RADIAN)
-  const outerY = cy + outerRadius * Math.sin(-midAngle * RADIAN)
+  const outerX = cx + outerRadius * Math.cos(-midAngle * DEGREES_TO_RADIANS);
+  const outerY = cy + outerRadius * Math.sin(-midAngle * DEGREES_TO_RADIANS);
 
   // Extend label further outside
-  const labelRadius = outerRadius + 20
-  const labelX = cx + labelRadius * Math.cos(-midAngle * RADIAN)
-  const labelY = cy + labelRadius * Math.sin(-midAngle * RADIAN)
+  const labelRadius = outerRadius + LABEL_OFFSET;
+  const labelX = cx + labelRadius * Math.cos(-midAngle * DEGREES_TO_RADIANS);
+  const labelY = cy + labelRadius * Math.sin(-midAngle * DEGREES_TO_RADIANS);
 
   // Determine text anchor based on angle (left side vs right side)
-  const textAnchor = midAngle < 90 || midAngle > 270 ? "start" : "end"
-  const labelColor = "hsl(var(--foreground))"
+  const textAnchor =
+    midAngle < RIGHT_SIDE_START_DEG || midAngle > RIGHT_SIDE_END_DEG
+      ? "start"
+      : "end";
+  const labelColor = "hsl(var(--foreground))";
 
   return (
     <g>
       {/* Leader line from outer edge to label */}
       <line
-        x1={outerX}
-        y1={outerY}
-        x2={labelX}
-        y2={labelY}
+        opacity={LEADER_LINE_OPACITY}
         stroke={labelColor}
-        strokeWidth={1}
-        opacity={0.3}
+        strokeWidth={LEADER_LINE_WIDTH}
+        x1={outerX}
+        x2={labelX}
+        y1={outerY}
+        y2={labelY}
       />
       {/* Label text */}
       <text
+        className="pointer-events-none select-none"
+        dominantBaseline="central"
+        fill={labelColor}
+        fontSize={LABEL_FONT_SIZE}
+        fontWeight={500}
+        textAnchor={textAnchor}
         x={labelX}
         y={labelY}
-        fill={labelColor}
-        textAnchor={textAnchor}
-        dominantBaseline="central"
-        fontSize={11}
-        fontWeight={500}
-        className="pointer-events-none select-none"
       >
         <tspan>{chartLabel}</tspan>
       </text>
     </g>
-  )
+  );
 }
 
 function CadenceTooltip({
   active,
   payload,
 }: TooltipProps<(typeof cadenceData)[number]["shows"], string>) {
-  if (!active || !payload?.length) {
-    return null
+  if (!(active && payload?.length)) {
+    return null;
   }
 
-  const dataPoint = payload[0]?.payload as (typeof cadenceData)[number] | undefined
+  const dataPoint = payload[0]?.payload as
+    | (typeof cadenceData)[number]
+    | undefined;
   if (!dataPoint) {
-    return null
+    return null;
   }
 
-  const label = tooltipLabels[dataPoint.id] ?? dataPoint.bucket
+  const label = tooltipLabels[dataPoint.id] ?? dataPoint.bucket;
 
   // Find the matching segment to get the color and share
-  const segment = chartSegments.find((s) => s.id === dataPoint.id)
-  const color = segment?.colorVar ?? "var(--chart-1)"
+  const segment = chartSegments.find((s) => s.id === dataPoint.id);
+  const color = segment?.colorVar ?? "var(--chart-1)";
 
-  const count = dataPoint.shows.toLocaleString()
-  const percentage = segment?.share.toFixed(1) ?? ((dataPoint.shows / BASE_TOTAL) * 100).toFixed(1)
+  const count = dataPoint.shows.toLocaleString();
+  const percentage =
+    segment?.share.toFixed(1) ??
+    ((dataPoint.shows / BASE_TOTAL) * PERCENT_FACTOR).toFixed(1);
 
   return (
     <div className="rounded-md border border-border/50 bg-background px-3 py-2 text-xs shadow-lg">
       <div className="flex items-center gap-2 font-medium text-foreground">
         <span
-          className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
+          className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm"
           style={{ backgroundColor: `hsl(${color})` }}
         />
         <span>{label}</span>
@@ -199,77 +227,24 @@ function CadenceTooltip({
         <span className="font-mono text-foreground">{percentage}%</span>
       </div>
     </div>
-  )
+  );
 }
 
 export function PublishCadenceChart() {
-  const cardRef = React.useRef<HTMLDivElement | null>(null)
-
   return (
-    <Card ref={cardRef} className="border-border/70 bg-background">
-      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col gap-2">
-          <CardTitle className="text-base font-semibold">
-            Top 1% Podcast Cadence
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Distribution of 1,000 highest-audience shows by publishing frequency.
-          </p>
-        </div>
-        <DownloadChartButton
-          getNode={() => cardRef.current}
-          fileName="top-podcast-cadence"
-          pixelRatio={3}
-          filter={(element) =>
-            element instanceof Element
-              ? !element.hasAttribute("data-chart-download-control")
-              : true
-          }
-          className="sm:mt-0"
-        />
-      </CardHeader>
-      <CardContent className="flex flex-col items-center px-4 pb-6">
-        <div className="relative w-full">
-          <ChartContainer
-            config={cadenceChartTheme}
-            className="mx-auto aspect-square h-[360px] w-full max-w-[420px]"
-          >
-            <PieChart margin={{ top: 40, right: 80, bottom: 40, left: 80 }}>
-              <ChartTooltip cursor={false} content={<CadenceTooltip />} />
-              <Pie
-                data={chartSegments}
-                dataKey="shows"
-                nameKey="bucket"
-                innerRadius={70}
-                outerRadius={120}
-                paddingAngle={3}
-                strokeWidth={2}
-                label={renderLabel}
-                labelLine={false}
-              >
-                {chartSegments.map((item) => (
-                  <Cell key={item.id} fill={`hsl(${item.colorVar})`} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-          <ChartWatermark
-            text="Adithyan Ilangovan | adithyan.io"
-            variant="inline"
-            className="w-full max-w-[420px]"
-          />
-        </div>
-        {/* Horizontal legend */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs">
+    <ChartCard
+      description="Distribution of 1,000 highest-audience shows by publishing frequency."
+      downloadName="top-podcast-cadence"
+      footer={
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
           {chartSegments.map((segment) => {
-            const legendLabel = chartLabels[segment.id as keyof typeof chartLabels] || segment.bucket
+            const legendLabel =
+              chartLabels[segment.id as keyof typeof chartLabels] ||
+              segment.bucket;
             return (
-              <div
-                key={segment.id}
-                className="flex items-center gap-1.5"
-              >
+              <div className="flex items-center gap-1.5" key={segment.id}>
                 <span
-                  className="inline-block h-2.5 w-2.5 rounded-sm shrink-0"
+                  className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm"
                   style={{ backgroundColor: `hsl(${segment.colorVar})` }}
                 />
                 <span className="text-foreground">{legendLabel}</span>
@@ -277,10 +252,38 @@ export function PublishCadenceChart() {
                   {segment.share.toFixed(1)}%
                 </span>
               </div>
-            )
+            );
           })}
         </div>
-      </CardContent>
-    </Card>
-  )
+      }
+      signature={CHART_SIGNATURE}
+      title="Top 1% Podcast Cadence"
+      watermarkClassName="w-full max-w-[420px]"
+      watermarkVariant="inline"
+    >
+      <ChartContainer
+        className="mx-auto aspect-square h-[360px] w-full max-w-[420px]"
+        config={cadenceChartTheme}
+      >
+        <PieChart margin={{ top: 40, right: 80, bottom: 40, left: 80 }}>
+          <ChartTooltip content={<CadenceTooltip />} cursor={false} />
+          <Pie
+            data={chartSegments}
+            dataKey="shows"
+            innerRadius={DONUT_INNER_RADIUS}
+            label={renderLabel}
+            labelLine={false}
+            nameKey="bucket"
+            outerRadius={DONUT_OUTER_RADIUS}
+            paddingAngle={DONUT_PADDING_ANGLE}
+            strokeWidth={DONUT_STROKE_WIDTH}
+          >
+            {chartSegments.map((item) => (
+              <Cell fill={`hsl(${item.colorVar})`} key={item.id} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ChartContainer>
+    </ChartCard>
+  );
 }

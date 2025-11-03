@@ -1,34 +1,33 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { TableOfContents } from "app/components/table-of-contents";
-import { formatDate, getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/config";
+import { formatDate, getBlogPosts } from "app/lib/posts";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Script from "next/script";
 
-export async function generateStaticParams() {
-  let posts = getBlogPosts();
+export function generateStaticParams() {
+  const posts = getBlogPosts();
 
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export async function generateMetadata({
-  params,
-}): Promise<Metadata | undefined> {
-  const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+export function generateMetadata({ params }): Promise<Metadata | undefined> {
+  const { slug } = params;
+  const post = getBlogPosts().find((p) => p.slug === slug);
   if (!post) {
     return;
   }
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
   } = post.metadata;
-  let ogImage = image
+  const ogImage = image
     ? image
     : `${metaData.baseUrl}/og?title=${encodeURIComponent(title)}`;
 
@@ -56,9 +55,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Blog({ params }) {
-  const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+export default function Blog({ params }) {
+  const { slug } = params;
+  const post = getBlogPosts().find((p) => p.slug === slug);
 
   if (!post) {
     notFound();
@@ -66,33 +65,33 @@ export default async function Blog({ params }) {
 
   return (
     <section>
-      <script
+      <Script
+        id="blog-jsonld"
+        strategy="afterInteractive"
         type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${metaData.baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${metaData.baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: metaData.name,
-            },
-          }),
-        }}
-      />
+      >
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.metadata.title,
+          datePublished: post.metadata.publishedAt,
+          dateModified: post.metadata.publishedAt,
+          description: post.metadata.summary,
+          image: post.metadata.image
+            ? `${metaData.baseUrl}${post.metadata.image}`
+            : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+          url: `${metaData.baseUrl}/blog/${post.slug}`,
+          author: {
+            "@type": "Person",
+            name: metaData.name,
+          },
+        })}
+      </Script>
       <h1 className="title mb-3 font-medium text-2xl tracking-tight">
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-medium">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+      <div className="mt-2 mb-8 flex items-center justify-between text-medium">
+        <p className="text-neutral-600 text-sm dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>

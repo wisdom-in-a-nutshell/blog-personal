@@ -43,6 +43,20 @@ pnpm dev
 
 The server will be running at [http://localhost:3000](http://localhost:3000).
 
+## Code Quality (Ultracite + Biome)
+
+This repo uses [Ultracite](https://www.ultracite.ai/) (Biome preset) for linting and formatting.
+
+- Format + fix: `pnpm dlx ultracite fix`
+- Check only: `pnpm dlx ultracite check`
+- Pre-commit: Husky runs `lint-staged`, which invokes Ultracite on staged files.
+
+Editors
+- VS Code / Cursor: `.vscode/settings.json` sets Biome as default formatter and enables format-on-save. Cursor inherits VS Code settings.
+
+Notes
+- If a rule blocks a commit, stage only the files you’re fixing; the hook formats staged files without touching the rest of the repo.
+
 ## Configuration
 
 1. Update the site metadata and social links in `app/config.ts` to set up SEO, feeds, social links, and Open Graph settings.

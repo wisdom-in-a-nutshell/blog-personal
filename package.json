@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@types/node": "22.10.7",
@@ -39,9 +40,18 @@
     "typescript": "5.7.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.2",
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.20",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "postcss": "^8.5.1",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "3.4.17",
+    "ultracite": "6.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
+      "pnpm dlx ultracite fix"
+    ]
   }
 }

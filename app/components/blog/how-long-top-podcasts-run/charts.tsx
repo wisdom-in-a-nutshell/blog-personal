@@ -1,25 +1,23 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import React from "react";
 import {
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
   LabelList,
-  TooltipProps,
+  type TooltipProps,
   XAxis,
   YAxis,
-} from "recharts"
+} from "recharts";
 
-import { DownloadChartButton } from "@/components/charts/download-chart-button"
-import { ChartWatermark } from "@/components/charts/watermark"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChartCard } from "@/components/charts/chart-card";
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
 const EPISODE_LENGTH_BUCKETS = [
   { id: "under10", label: "<10 minutes" },
@@ -28,25 +26,35 @@ const EPISODE_LENGTH_BUCKETS = [
   { id: "fortyToSixty", label: "40–60 minutes" },
   { id: "sixtyToNinety", label: "60–90 minutes" },
   { id: "ninetyPlus", label: "90+ minutes" },
-] as const
+] as const;
 
-type EpisodeLengthBucketId = (typeof EPISODE_LENGTH_BUCKETS)[number]["id"]
+type EpisodeLengthBucketId = (typeof EPISODE_LENGTH_BUCKETS)[number]["id"];
 
 type EpisodeLengthBucketInput = {
-  id: EpisodeLengthBucketId
-  shows: number
-}
+  id: EpisodeLengthBucketId;
+  shows: number;
+};
 
 type EpisodeLengthSegment = {
-  id: EpisodeLengthBucketId
-  label: string
-  shows: number
-  share: number
-  shareLabel: string
-  colorVar: string
-}
+  id: EpisodeLengthBucketId;
+  label: string;
+  shows: number;
+  share: number;
+  shareLabel: string;
+  colorVar: string;
+};
 
-const CHART_SIGNATURE = "Adithyan Ilangovan | adithyan.io"
+const CHART_SIGNATURE = "Adithyan Ilangovan | adithyan.io";
+const PERCENT_FACTOR = 100;
+const MIN_POINT_SIZE = 4;
+const ZERO_RADIUS = 0;
+const CORNER_RADIUS = 6;
+const BAR_RADIUS: [number, number, number, number] = [
+  ZERO_RADIUS,
+  CORNER_RADIUS,
+  CORNER_RADIUS,
+  ZERO_RADIUS,
+];
 
 const OVERALL_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 5 },
@@ -55,7 +63,7 @@ const OVERALL_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 330 },
   { id: "sixtyToNinety", shows: 287 },
   { id: "ninetyPlus", shows: 108 },
-]
+];
 
 const DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 3 },
@@ -64,7 +72,7 @@ const DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 57 },
   { id: "sixtyToNinety", shows: 28 },
   { id: "ninetyPlus", shows: 15 },
-]
+];
 
 const NEAR_DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 0 },
@@ -73,7 +81,7 @@ const NEAR_DAILY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 44 },
   { id: "sixtyToNinety", shows: 50 },
   { id: "ninetyPlus", shows: 15 },
-]
+];
 
 const WEEKLY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 2 },
@@ -82,7 +90,7 @@ const WEEKLY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 207 },
   { id: "sixtyToNinety", shows: 183 },
   { id: "ninetyPlus", shows: 67 },
-]
+];
 
 const MONTHLY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 0 },
@@ -91,7 +99,7 @@ const MONTHLY_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 21 },
   { id: "sixtyToNinety", shows: 20 },
   { id: "ninetyPlus", shows: 9 },
-]
+];
 
 const OTHER_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "under10", shows: 0 },
@@ -100,33 +108,33 @@ const OTHER_BUCKETS: EpisodeLengthBucketInput[] = [
   { id: "fortyToSixty", shows: 4 },
   { id: "sixtyToNinety", shows: 5 },
   { id: "ninetyPlus", shows: 1 },
-]
+];
 
 function sanitizeShows(value: number): number {
   if (!Number.isFinite(value)) {
-    return 0
+    return 0;
   }
 
-  return value >= 0 ? value : 0
+  return value >= 0 ? value : 0;
 }
 
 function buildSegments(buckets: EpisodeLengthBucketInput[]) {
-  const sanitizedMap = new Map<EpisodeLengthBucketId, number>()
+  const sanitizedMap = new Map<EpisodeLengthBucketId, number>();
 
   for (const bucket of buckets) {
-    sanitizedMap.set(bucket.id, sanitizeShows(bucket.shows))
+    sanitizedMap.set(bucket.id, sanitizeShows(bucket.shows));
   }
 
   const total = Array.from(sanitizedMap.values()).reduce(
     (sum, value) => sum + value,
     0
-  )
+  );
 
   const segments: EpisodeLengthSegment[] = EPISODE_LENGTH_BUCKETS.map(
     (bucket, index) => {
-      const shows = sanitizedMap.get(bucket.id) ?? 0
+      const shows = sanitizedMap.get(bucket.id) ?? 0;
       const share =
-        total > 0 ? Number(((shows / total) * 100).toFixed(1)) : 0
+        total > 0 ? Number(((shows / total) * PERCENT_FACTOR).toFixed(1)) : 0;
 
       return {
         id: bucket.id,
@@ -135,11 +143,11 @@ function buildSegments(buckets: EpisodeLengthBucketInput[]) {
         share,
         shareLabel: `${share.toFixed(1)}%`,
         colorVar: `var(--chart-${index + 1})`,
-      }
+      };
     }
-  )
+  );
 
-  return { segments, total }
+  return { segments, total };
 }
 
 function createChartConfig(segments: EpisodeLengthSegment[]): ChartConfig {
@@ -150,25 +158,25 @@ function createChartConfig(segments: EpisodeLengthSegment[]): ChartConfig {
         light: `hsl(var(--chart-${index + 1}))`,
         dark: `hsl(var(--chart-${index + 1}))`,
       },
-    }
-    return config
-  }, {} as ChartConfig)
+    };
+    return config;
+  }, {} as ChartConfig);
 }
 
 function EpisodeLengthTooltip({
   active,
   payload,
 }: TooltipProps<number, string>) {
-  if (!active || !payload?.length) {
-    return null
+  if (!(active && payload?.length)) {
+    return null;
   }
 
-  const dataPoint = payload[0]?.payload as EpisodeLengthSegment | undefined
+  const dataPoint = payload[0]?.payload as EpisodeLengthSegment | undefined;
   if (!dataPoint) {
-    return null
+    return null;
   }
 
-  const color = dataPoint.colorVar ?? "var(--chart-1)"
+  const color = dataPoint.colorVar ?? "var(--chart-1)";
 
   return (
     <div className="rounded-md border border-border/50 bg-background px-3 py-2 text-xs shadow-lg">
@@ -186,17 +194,17 @@ function EpisodeLengthTooltip({
         </span>
       </div>
     </div>
-  )
+  );
 }
 
 type EpisodeLengthBarChartProps = {
-  title: string
-  description?: string
-  buckets: EpisodeLengthBucketInput[]
-  footerSignature?: string
-  watermarkVariant?: "overlay" | "inline"
-  downloadName?: string
-}
+  title: string;
+  description?: string;
+  buckets: EpisodeLengthBucketInput[];
+  footerSignature?: string;
+  watermarkVariant?: "overlay" | "inline";
+  downloadName?: string;
+};
 
 function EpisodeLengthBarChart({
   title,
@@ -206,162 +214,140 @@ function EpisodeLengthBarChart({
   watermarkVariant = "overlay",
   downloadName,
 }: EpisodeLengthBarChartProps) {
-  const cardRef = React.useRef<HTMLDivElement | null>(null)
-  const { segments } = React.useMemo(() => buildSegments(buckets), [buckets])
+  const { segments } = React.useMemo(() => buildSegments(buckets), [buckets]);
   const chartConfig = React.useMemo(
     () => createChartConfig(segments),
     [segments]
-  )
+  );
 
   return (
-    <Card ref={cardRef} className="border-border/70 bg-background">
-      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col gap-2">
-          <CardTitle className="text-base font-semibold">{title}</CardTitle>
-          {description ? (
-            <p className="text-sm text-muted-foreground">{description}</p>
-          ) : null}
-        </div>
-        {downloadName ? (
-          <DownloadChartButton
-            getNode={() => cardRef.current}
-            fileName={downloadName}
-            pixelRatio={3}
-            filter={(element) =>
-              element instanceof Element
-                ? !element.hasAttribute("data-chart-download-control")
-                : true
-            }
-            className="sm:mt-0"
+    <ChartCard
+      description={description}
+      downloadName={downloadName}
+      signature={footerSignature}
+      title={title}
+      watermarkVariant={watermarkVariant}
+    >
+      <ChartContainer className="h-[360px] w-full" config={chartConfig}>
+        <BarChart
+          data={segments}
+          layout="vertical"
+          margin={{ top: 8, right: 32, bottom: 8, left: 120 }}
+        >
+          <CartesianGrid
+            horizontal={false}
+            strokeDasharray="2 8"
+            strokeOpacity={0.2}
           />
-        ) : null}
-      </CardHeader>
-      <CardContent className="px-4 pb-6">
-        <div className="relative w-full">
-          <ChartContainer
-            config={chartConfig}
-            className="h-[360px] w-full"
+          <XAxis
+            axisLine={false}
+            tickFormatter={(value) => `${value}`}
+            tickLine={false}
+            type="number"
+          />
+          <YAxis
+            axisLine={false}
+            dataKey="label"
+            tickLine={false}
+            type="category"
+            width={120}
+          />
+          <ChartTooltip
+            content={<EpisodeLengthTooltip />}
+            cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }}
+          />
+          <Bar
+            dataKey="shows"
+            minPointSize={MIN_POINT_SIZE}
+            radius={BAR_RADIUS}
           >
-            <BarChart
-              data={segments}
-              layout="vertical"
-              margin={{ top: 8, right: 32, bottom: 8, left: 120 }}
-            >
-              <CartesianGrid
-                horizontal={false}
-                strokeDasharray="2 8"
-                strokeOpacity={0.2}
+            {segments.map((segment) => (
+              <Cell
+                fill={`hsl(${segment.colorVar})`}
+                key={segment.id}
+                stroke="transparent"
               />
-              <XAxis
-                type="number"
-                axisLine={false}
-                tickLine={false}
-                tickFormatter={(value) => `${value}`}
-              />
-              <YAxis
-                type="category"
-                dataKey="label"
-                axisLine={false}
-                tickLine={false}
-                width={120}
-              />
-              <ChartTooltip
-                cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }}
-                content={<EpisodeLengthTooltip />}
-              />
-              <Bar dataKey="shows" radius={[0, 6, 6, 0]} minPointSize={4}>
-                {segments.map((segment) => (
-                  <Cell
-                    key={segment.id}
-                    fill={`hsl(${segment.colorVar})`}
-                    stroke="transparent"
-                  />
-                ))}
-                <LabelList
-                  dataKey="shareLabel"
-                  position="right"
-                  className="fill-foreground text-xs font-medium"
-                />
-              </Bar>
-            </BarChart>
-          </ChartContainer>
-          {footerSignature ? (
-            <ChartWatermark text={footerSignature} variant={watermarkVariant} />
-          ) : null}
-        </div>
-      </CardContent>
-    </Card>
-  )
+            ))}
+            <LabelList
+              className="fill-foreground font-medium text-xs"
+              dataKey="shareLabel"
+              position="right"
+            />
+          </Bar>
+        </BarChart>
+      </ChartContainer>
+    </ChartCard>
+  );
 }
 
 export function EpisodeLengthHistogram() {
   return (
     <EpisodeLengthBarChart
-      title="How Long Are Top Podcast Episodes?"
-      description="Episode length distribution for the top 1,000 highest-audience shows."
       buckets={OVERALL_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 1,000 highest-audience shows."
       downloadName="episode-length-distribution"
+      title="How Long Are Top Podcast Episodes?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }
 
 export function DailyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Daily Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 180 daily-publishing shows."
       buckets={DAILY_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 180 daily-publishing shows."
       downloadName="daily-episode-length"
+      title="Daily Shows: How Long Do Episodes Run?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }
 
 export function NearDailyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Near-Daily Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 132 near-daily shows."
       buckets={NEAR_DAILY_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 132 near-daily shows."
       downloadName="near-daily-episode-length"
+      title="Near-Daily Shows: How Long Do Episodes Run?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }
 
 export function WeeklyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Weekly Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 588 weekly-publishing shows."
       buckets={WEEKLY_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 588 weekly-publishing shows."
       downloadName="weekly-episode-length"
+      title="Weekly Shows: How Long Do Episodes Run?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }
 
 export function MonthlyEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Monthly Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 80 monthly-publishing shows."
       buckets={MONTHLY_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 80 monthly-publishing shows."
       downloadName="monthly-episode-length"
+      title="Monthly Shows: How Long Do Episodes Run?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }
 
 export function OtherEpisodeLengthChart() {
   return (
     <EpisodeLengthBarChart
-      title="Other Cadence Shows: How Long Do Episodes Run?"
-      description="Episode length distribution for the top 20 shows publishing slower than monthly."
       buckets={OTHER_BUCKETS}
-      watermarkVariant="inline"
+      description="Episode length distribution for the top 20 shows publishing slower than monthly."
       downloadName="other-episode-length"
+      title="Other Cadence Shows: How Long Do Episodes Run?"
+      watermarkVariant="inline"
     />
-  )
+  );
 }

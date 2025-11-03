@@ -1,0 +1,87 @@
+---
+title: "I Tracked 10,000 Top Podcasts: Here's Who Hosts Their Feeds"
+publishedAt: "2025-11-03"
+summary: "Feed hosting share for the top 1k and 10k podcasts, plus the exact rules we used so you can reproduce the results."
+tags: "podcasting, data, infrastructure"
+hidden: false
+---
+
+After mapping [how often big shows publish](/blog/top-podcast-cadence) and [how long their episodes run](/blog/how-long-top-podcasts-run), the next obvious question was: **who actually hosts their RSS feeds?** We ran that probe across the same dataset.
+
+Two quick takeaways before the charts:
+
+- Megaphone’s lead grows the closer you zoom into the very top shows, while Libsyn still owns a big chunk of the broader top 10k.
+- First-party RSS hasn’t disappeared. Roughly 1 in 10 of the very top shows still serves feeds from their own domains.
+
+<hr className="mt-12 border-t border-border/60" />
+
+## Results
+
+### Feed hosts — Top 1,000 shows
+
+<HostingProviderTop1KAggregateChart />
+
+### Feed hosts — Top 10,000 shows
+
+<HostingProviderTop10KAggregateChart />
+
+Each donut keeps the largest platforms separate and bundles the rest so you can see the split at a glance.
+
+**What stood out to me:**
+
+- Megaphone is the gravity well at the top (28.9% of the 1k cohort) and it still shows up even when publishers run their own feeds—22 of the self-hosted feeds deliver audio from Megaphone behind the scenes.
+- Libsyn and Buzzsprout fade quickly once you look at the highest-audience shows. They’re still crucial for the long tail, but the big commercial pods migrate to the enterprise stack.
+- Spotify/Anchor’s footprint collapses at the top 1k. The shows that do break through seem to move to other hosts once the audience ramps.
+
+<hr className="mt-12 border-t border-border/60" />
+
+## Why it matters for us
+
+This is the plumbing we have to navigate for the “record & relax” promise. Knowing which host (and which CDN) sits behind a feed lets us script handoffs, drop in the right intake links, and skip a bunch of back-and-forth when a creator is migrating. It also means the automations we’re shipping stay aware of which analytics proxies or delivery networks might rewrite URLs on their way out.
+
+<hr className="mt-12 border-t border-border/60" />
+
+## Methodology
+
+Same cohort as the last two posts: top shows by audience from the PodSeeker dataset. For each feed we:
+
+1. Classified the hosting platform from the RSS URL (host and path rules).
+2. When the URL looked first-party or wrapped in a proxy, we fetched up to 200 KB, grabbed the first `<enclosure>` URL, and mapped the audio delivery host separately.
+
+We ignored anything slower than monthly cadence for this pass because the sample is tiny and the feed counts don’t move much there.
+
+<hr className="mt-12 border-t border-border/60" />
+
+## Examples (so you can double-check us)
+
+### Straight-shot mappings
+
+- `https://feeds.simplecast.com/dxZsm5kX` → Simplecast
+- `https://feeds.megaphone.fm/stupid-genius` → Megaphone
+- `https://www.omnycontent.com/d/playlist/.../podcast.rss` → Omny
+- `https://rss.art19.com/armchair-expert` → ART19
+- `https://feeds.libsyn.com/580095/rss` → Libsyn
+
+### Proxy or analytics relay, but still clear
+
+- `https://rss.pdrl.fm/aad407/feeds.megaphone.fm/views-podcast` → Megaphone
+- `https://rss.pdrl.fm/5ee0be/feeds.acast.com/public/shows/67894eae7095d15b31e3f226` → Acast
+- `https://rss.pdrl.fm/e6441b/www.omnycontent.com/.../podcast.rss` → Omny
+- `https://podcastfeeds.nbcnews.com/HL4TzgYC` → First-party RSS (NBC News)
+- `https://feeds.publicradio.org/public_feeds/marketplace` → First-party RSS (APM)
+
+### Needed the enclosure sniff
+
+- *Quick refresher:* the `<enclosure>` tag in an RSS feed points to the actual media file, so the host that serves it tells us who delivers the audio.
+
+- `https://www.thisamericanlife.org/podcast/rss.xml` → First-party RSS; enclosure points to Megaphone
+- `https://feeds.npr.org/510318/podcast.xml` → First-party RSS; enclosure points to Megaphone
+- `https://feeds.npr.org/344098539/podcast.xml` → First-party RSS; enclosure points to Megaphone
+- `https://rss.wbur.org/circleround/podcast` → First-party RSS; enclosure points to Megaphone
+- `https://feeds.publicradio.org/public_feeds/marketplace` → First-party RSS; enclosure points to Megaphone
+
+<hr className="mt-16 border-t border-border/60" />
+
+## What's next
+
+Next up, I want to cross-tab this with cadence and episode length. If you’re curious about a specific show or platform, hit me up—I’m planning to publish the full show-level explorer once I finish cleaning the proxy labels.

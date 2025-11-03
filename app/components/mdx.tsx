@@ -9,6 +9,10 @@ import remarkMath from "remark-math";
 import { highlight } from "sugar-high";
 import { CadenceSummaryTable, EpisodeLengthTable } from "./blog/data-tables";
 import {
+  HostingProviderTop1KAggregateChart,
+  HostingProviderTop10KAggregateChart,
+} from "./blog/hosting-provider/charts";
+import {
   DailyEpisodeLengthChart,
   EpisodeLengthHistogram,
   MonthlyEpisodeLengthChart,
@@ -161,6 +165,8 @@ const components = {
   WeeklyEpisodeLengthChart,
   MonthlyEpisodeLengthChart,
   OtherEpisodeLengthChart,
+  HostingProviderTop1KAggregateChart,
+  HostingProviderTop10KAggregateChart,
   CadenceSummaryTable,
   EpisodeLengthTable,
 };

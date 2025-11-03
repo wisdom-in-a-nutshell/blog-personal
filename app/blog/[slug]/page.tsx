@@ -14,8 +14,14 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }): Promise<Metadata | undefined> {
-  const { slug } = params;
+type ParamsPromise = Promise<{ slug: string }>;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: ParamsPromise;
+}): Promise<Metadata | undefined> {
+  const { slug } = await params;
   const post = getBlogPosts().find((p) => p.slug === slug);
   if (!post) {
     return;
@@ -52,11 +58,11 @@ export function generateMetadata({ params }): Promise<Metadata | undefined> {
       description,
       images: [ogImage],
     },
-  };
+  } satisfies Metadata;
 }
 
-export default function Blog({ params }) {
-  const { slug } = params;
+export default async function Blog({ params }: { params: ParamsPromise }) {
+  const { slug } = await params;
   const post = getBlogPosts().find((p) => p.slug === slug);
 
   if (!post) {

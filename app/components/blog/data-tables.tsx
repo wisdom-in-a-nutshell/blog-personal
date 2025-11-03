@@ -14,7 +14,7 @@ import {
 const DECIMALS = 1;
 
 const tableWrap =
-  "w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm";
+  "mx-auto w-full max-w-3xl min-w-[28rem] table-fixed overflow-hidden rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm";
 const theadCls =
   "bg-muted/20 text-left text-xs uppercase tracking-[0.12em] text-muted-foreground/80";
 

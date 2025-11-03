@@ -73,12 +73,14 @@ function Table({ data }) {
     );
   });
   return (
-    <table>
-      <thead>
-        <tr className="text-left">{headers}</tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className="overflow-x-auto">
+      <table className="mx-auto">
+        <thead>
+          <tr className="text-left">{headers}</tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 }
 

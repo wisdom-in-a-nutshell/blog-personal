@@ -7,5 +7,11 @@ if [ -z "$(git diff --cached --name-only)" ]; then
   exit 0
 fi
 
-# Format and fix the codebase using Ultracite
+# 1) Auto-fix with Ultracite
 pnpm dlx ultracite fix
+
+# 2) Re-stage any files Ultracite modified so fixes land in the commit
+git add -A
+
+# 3) Block commit if issues remain
+pnpm dlx ultracite lint

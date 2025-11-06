@@ -1,5 +1,5 @@
 ---
-title: "Which Day Top Podcasts Release Their Episodes"
+title: "Which Day Do Top Weekly Podcasts Release?"
 publishedAt: "2025-11-06"
 summary: "Among elite weekly shows, releases cluster Mon–Wed (Thu follows), and over half hit the same weekday ≥80% of the time."
 tags: "podcasting, data, schedule"
@@ -13,7 +13,7 @@ Here’s what we’ve covered so far:
 - [How long their episodes run](/blog/how-long-top-podcasts-run)
 - [Who hosts these top podcasts](/blog/who-hosts-top-podcasts)
 
-The next basic question is timing: on which weekday do these shows drop new episodes?
+The next basic question is timing: on which weekday do these shows release new episodes?
 
 To keep the analysis clean, I’m looking only at the shows that publish weekly (for details, see the [previous post](/blog/top-podcast-cadence)).
 
@@ -21,7 +21,7 @@ How this post works:
 - First I show the results.
 - Then the key takeaways.
 - Then a short methodology section if you want to know more about the data and analysis.
-- Then I include a link to the raw JSON data so you can explore the data yourself.
+ - Find a link to the raw JSON at the bottom if you want to explore or reproduce the results.
 
 
 
@@ -36,12 +36,12 @@ How this post works:
 What stands out:
 - Of the top 1,000 shows, 582 weekly shows with ≥5 dated recent episodes were evaluated.
 - Releases cluster on Monday–Wednesday; Thursday follows. Weekends are rare.
-- Out of 582 evaluated weekly shows, the split is: Tue is the highest with 22.5% of the shows releasing on that day, followed by Mon with 22.3%.
+- Split by weekday: Tue 22.5%, Mon 22.3%, Wed 21.3%, Thu 15.5%, Fri 12.0%, Sun 4.3%, Sat 2.1%.
 
 ### How consistent are they on that day?
 
-Weekly shows sometimes miss their usual drop day.
-We capture this with a stability band: the share of recent episodes that land on a show’s modal weekday.
+Weekly shows sometimes miss their usual release day.
+We capture this with a stability band: the share of recent episodes that land on the weekday a show posts most often.
 
 <ReleaseStabilityChart />
 
@@ -54,12 +54,12 @@ What the bands mean, in plain terms:
 - 158 shows (27.1%) are looser (40 to 59%).
 - 30 shows (5.2%) are highly irregular (under 40%).
 
-## Key Takeaways
+## Key takeaways
 
 - If you publish weekly and want reliability, aim for a Monday–Wednesday release (Thursday also common). The key is the discipline to keep hitting it.
-- Your audience and downstream work streams (clips, newsletter, social) benefit from a predictable rhythm.
+- Your audience and downstream workflows (clips, newsletter, social) benefit from a predictable rhythm.
 
-## Methodology
+## Method (short)
 
 In case you want to reproduce the analysis yourself, here's the methodology:
 
@@ -74,5 +74,6 @@ Notes
 - Weekday is computed from UTC timestamps for consistency across shows.
 
 Raw data (for reproducibility)
-- [Raw JSON snapshot (Top‑1k weekly)](https://gist.github.com/AdithyanI/5165d9311d9dc0660969e7794c6b5440)
+- [Raw JSON snapshot (Top‑1k weekly)](https://gist.github.com/AdithyanI/5165d9311d9dc0660969e7794c6b5440) — generated on 2025‑11‑06
 - SHA‑256: 2904e33f1dd88fab81e1da096a2ea0ca6303c5472e972348904ee0a23c27918f
+ - Generated: 2025‑11‑06T09:43:06Z

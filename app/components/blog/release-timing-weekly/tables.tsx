@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   EVALUATED_TOTAL,
   RELEASE_WEEKDAY_COUNTS,

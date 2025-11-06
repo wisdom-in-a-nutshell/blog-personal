@@ -109,10 +109,7 @@ function createConfig<T extends { id: string; label: string; share: number }>(
   }, {} as ChartConfig);
 }
 
-function WeekdayTooltip({
-  active,
-  payload,
-}: TooltipProps<number, string>) {
+function WeekdayTooltip({ active, payload }: TooltipProps<number, string>) {
   if (!(active && payload?.length)) {
     return null;
   }
@@ -132,7 +129,9 @@ function WeekdayTooltip({
       </div>
       <div className="mt-1 flex justify-between text-muted-foreground">
         <span>{dataPoint.shows.toLocaleString()} shows</span>
-        <span className="font-mono text-foreground">{dataPoint.share.toFixed(1)}%</span>
+        <span className="font-mono text-foreground">
+          {dataPoint.share.toFixed(1)}%
+        </span>
       </div>
     </div>
   );
@@ -158,7 +157,9 @@ function BandTooltip({ active, payload }: TooltipProps<number, string>) {
       </div>
       <div className="mt-1 flex justify-between text-muted-foreground">
         <span>{dataPoint.shows.toLocaleString()} shows</span>
-        <span className="font-mono text-foreground">{dataPoint.share.toFixed(1)}%</span>
+        <span className="font-mono text-foreground">
+          {dataPoint.share.toFixed(1)}%
+        </span>
       </div>
     </div>
   );
@@ -170,10 +171,10 @@ export function ReleaseWeekdayChart() {
 
   return (
     <ChartCard
-      title="When Do Top Weekly Shows Release?"
       description={`From the top 1,000 shows, ${EVALUATED_TOTAL.toLocaleString()} publish weekly. This chart shows which weekday they release new episodes.`}
       downloadName="release-weekday-weekly"
       signature={CHART_SIGNATURE}
+      title="When Do Top Weekly Shows Release?"
       watermarkVariant="inline"
     >
       <ChartContainer className="h-[360px] w-full" config={config}>
@@ -182,31 +183,46 @@ export function ReleaseWeekdayChart() {
           layout="vertical"
           margin={{ top: 8, right: 24, bottom: 28, left: 100 }}
         >
-          <CartesianGrid horizontal={false} strokeDasharray="2 8" strokeOpacity={0.2} />
+          <CartesianGrid
+            horizontal={false}
+            strokeDasharray="2 8"
+            strokeOpacity={0.2}
+          />
           <XAxis
-            type="number"
+            axisLine={false}
             domain={[0, WEEKDAY_MAX_PERCENT]}
+            tickFormatter={(v) => `${v}%`}
+            tickLine={false}
             ticks={Array.from(
               { length: WEEKDAY_MAX_PERCENT / WEEKDAY_TICK_STEP + 1 },
               (_, idx) => idx * WEEKDAY_TICK_STEP
             )}
-            tickFormatter={(v) => `${v}%`}
-            axisLine={false}
-            tickLine={false}
+            type="number"
           />
           <YAxis
-            type="category"
-            dataKey="label"
-            width={80}
             axisLine={false}
+            dataKey="label"
             tickLine={false}
+            type="category"
+            width={80}
           />
-          <ChartTooltip content={<WeekdayTooltip />} cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }} />
-          <Bar dataKey="share" radius={BAR_RADIUS} minPointSize={4}>
+          <ChartTooltip
+            content={<WeekdayTooltip />}
+            cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }}
+          />
+          <Bar dataKey="share" minPointSize={4} radius={BAR_RADIUS}>
             {segments.map((s) => (
-              <Cell key={s.id} fill={`hsl(${s.colorVar})`} stroke="transparent" />
+              <Cell
+                fill={`hsl(${s.colorVar})`}
+                key={s.id}
+                stroke="transparent"
+              />
             ))}
-            <LabelList className="fill-foreground font-medium text-xs" dataKey="shareLabel" position="right" />
+            <LabelList
+              className="fill-foreground font-medium text-xs"
+              dataKey="shareLabel"
+              position="right"
+            />
           </Bar>
         </BarChart>
       </ChartContainer>
@@ -220,34 +236,63 @@ export function ReleaseStabilityChart() {
 
   return (
     <ChartCard
-      title="How Consistent Are Top Weekly Shows?"
       description={`From the top 1,000 shows, ${EVALUATED_TOTAL.toLocaleString()} publish weekly. For each show, we checked how often it released on the same weekday. ≥80% means 4 out of the last 5 episodes land on the same day.`}
       downloadName="release-weekly-stability"
       signature={CHART_SIGNATURE}
+      title="How Consistent Are Top Weekly Shows?"
       watermarkVariant="inline"
     >
       <ChartContainer className="h-[360px] w-full" config={config}>
-        <BarChart data={segments} layout="vertical" margin={{ top: 8, right: 48, bottom: 28, left: 120 }}>
-          <CartesianGrid horizontal={false} strokeDasharray="2 8" strokeOpacity={0.2} />
-          <XAxis type="number" axisLine={false} tickLine={false} tickFormatter={(v) => `${v}`}>
+        <BarChart
+          data={segments}
+          layout="vertical"
+          margin={{ top: 8, right: 48, bottom: 28, left: 120 }}
+        >
+          <CartesianGrid
+            horizontal={false}
+            strokeDasharray="2 8"
+            strokeOpacity={0.2}
+          />
+          <XAxis
+            axisLine={false}
+            tickFormatter={(v) => `${v}`}
+            tickLine={false}
+            type="number"
+          >
             <Label
-              value="Shows (count)"
-              position="bottom"
-              offset={10}
               className="fill-muted-foreground"
+              offset={10}
+              position="bottom"
+              value="Shows (count)"
             />
           </XAxis>
-          <YAxis type="category" dataKey="label" axisLine={false} tickLine={false} width={120} />
-          <ChartTooltip content={<BandTooltip />} cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }} />
-          <Bar dataKey="shows" radius={BAR_RADIUS} minPointSize={4}>
+          <YAxis
+            axisLine={false}
+            dataKey="label"
+            tickLine={false}
+            type="category"
+            width={120}
+          />
+          <ChartTooltip
+            content={<BandTooltip />}
+            cursor={{ fill: "hsl(var(--muted))", opacity: 0.2 }}
+          />
+          <Bar dataKey="shows" minPointSize={4} radius={BAR_RADIUS}>
             {segments.map((s) => (
-              <Cell key={s.id} fill={`hsl(${s.colorVar})`} stroke="transparent" />
+              <Cell
+                fill={`hsl(${s.colorVar})`}
+                key={s.id}
+                stroke="transparent"
+              />
             ))}
-            <LabelList className="fill-foreground font-medium text-xs" dataKey="shareLabel" position="right" />
+            <LabelList
+              className="fill-foreground font-medium text-xs"
+              dataKey="shareLabel"
+              position="right"
+            />
           </Bar>
         </BarChart>
       </ChartContainer>
     </ChartCard>
   );
 }
-

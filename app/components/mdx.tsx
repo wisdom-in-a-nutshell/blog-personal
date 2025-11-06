@@ -24,6 +24,14 @@ import {
   OtherEpisodeLengthChart,
   WeeklyEpisodeLengthChart,
 } from "./blog/how-long-top-podcasts-run/charts";
+import {
+  ReleaseStabilityChart,
+  ReleaseWeekdayChart,
+} from "./blog/release-timing-weekly/charts";
+import {
+  ReleaseStabilityTable,
+  ReleaseWeekdayTable,
+} from "./blog/release-timing-weekly/tables";
 import { PublishCadenceChart } from "./blog/top-podcast-cadence/chart";
 import { CaptionComponent } from "./caption";
 import { ImageGrid } from "./image-grid";
@@ -177,6 +185,10 @@ const components = {
   HostingProviderTop10KAggregateTable,
   CadenceSummaryTable,
   EpisodeLengthTable,
+  ReleaseWeekdayChart,
+  ReleaseStabilityChart,
+  ReleaseWeekdayTable,
+  ReleaseStabilityTable,
 };
 
 export function CustomMDX(props) {

@@ -1,0 +1,67 @@
+---
+title: "Which Day Top Podcasts Release Their Episodes"
+publishedAt: "2025-11-06"
+summary: "Among elite weekly shows, releases cluster Tue–Thu (plus Mon), and over half hit the same weekday ≥80% of the time."
+tags: "podcasting, data, schedule"
+hidden: false
+---
+
+I work with podcasters at AIPodcasting. I’m continuing a simple series on the patterns the best shows follow.
+
+Here’s what we’ve covered so far:
+- [How often the top shows publish](/blog/top-podcast-cadence)
+- [How long their episodes run](/blog/how-long-top-podcasts-run)
+- [Who hosts these top podcasts](/blog/who-hosts-top-podcasts)
+
+The next basic question is timing: on which weekday do these shows drop new episodes? To keep the analysis clean, I’m looking only at the shows that publish weekly. That subset comes straight from the cadence work above.
+
+How this post works: I show the results first. Then the key takeaways. Then a short method section. I also included a raw table under each chart so you can copy the numbers anywhere that doesn’t allow images.
+
+## Results
+
+### When do weekly shows release?
+
+<ReleaseWeekdayChart />
+
+<ReleaseWeekdayTable />
+
+What stands out:
+- Most weekly shows release on a weekday. Tuesday to Thursday cluster together, and Monday is close behind. Weekends are rare.
+- Out of 582 evaluated weekly shows, the split is: Tue 131 (22.5%), Mon 130 (22.3%), Wed 124 (21.3%), Thu 90 (15.5%), Fri 70 (12.0%), Sun 25 (4.3%), Sat 12 (2.1%).
+
+### How consistent are they on that day?
+
+<ReleaseStabilityChart />
+
+<ReleaseStabilityTable />
+
+What the bands mean, in plain terms:
+- 308 shows (52.9%) hit the same weekday at least four out of five times (≥80%).
+- 86 shows (14.8%) land there most of the time (60 to 79%).
+- 158 shows (27.1%) are looser (40 to 59%).
+- 30 shows (5.2%) are highly irregular (under 40%).
+
+## Why this matters for producers
+
+If you publish weekly and want reliability, aim for a Tuesday to Thursday drop, with Monday also a strong choice. More important than the exact day is the discipline to keep hitting it. Your audience and downstream work streams (clips, newsletter, social) benefit from a predictable rhythm.
+
+## Method (short)
+
+- Cohort: Top 1,000 shows by audience; keep only weekly‑cadence shows.
+- For each show, consider up to the last 40 episodes (require ≥5 dated).
+- For each show, find the weekday it posts most often (UTC).
+- Measure stability as the share of recent episodes that land on that same weekday.
+- Aggregate shows into weekday counts and stability bands.
+
+Notes:
+- Using UTC may shift some late night local releases to the next day. The effect is small and applied evenly across shows.
+- Evaluated weekly shows: 582 of the 1,000 selected. The rest did not have enough dated episodes.
+- Data snapshot generated on 2025-11-06.
+
+## What’s next
+
+- Add hour‑of‑day (local‑time) cuts to see morning vs late‑day release patterns.
+- Compare top‑1% vs top‑10% cohorts for weekday drift.
+- Tie release discipline to growth/retention proxies to quantify impact.
+
+If you’re deciding your show’s schedule and want a second set of eyes, reply and I’m happy to share how we set up “record and relax” workflows at AIPodcasting.

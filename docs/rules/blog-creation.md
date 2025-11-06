@@ -50,7 +50,7 @@ Post content starts here...
 ### Optional Fields
 
 - **image**: Path to a custom OG image for social media sharing. If not provided, a default OG image will be generated.
-- **hidden**: Set to `true` to hide the post from the blog listing (but it will still be accessible via direct URL)
+- **hidden**: Controls listing visibility. Default is `false` for all posts. Set to `true` only when you intentionally want a private draft.
 
 ## Content Formatting
 
@@ -282,8 +282,8 @@ For reference, examine these existing blog posts:
 ## Publishing Workflow
 
 1. Write your post in the `content/` directory
-2. Set `hidden: true` during drafting and review
-3. When ready to publish, set `hidden: false` and ensure the `publishedAt` date is current
-4. Commit and push your changes to deploy the new post
+2. Default visibility is public (`hidden: false`). Only use `hidden: true` for private drafts.
+3. Ensure `publishedAt` is current on publish day.
+4. Commit and push to deploy.
 
 By following these guidelines, you'll create consistent and well-formatted blog posts that take full advantage of the blog's capabilities.

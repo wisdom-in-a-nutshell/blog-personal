@@ -7,7 +7,27 @@ Use this guide whenever you add or update charts in the blog. It keeps presentat
 - Provide the chart body as `children`. Drop legends or supplemental content into the optional `footer` slot.
 - Pass `downloadName` (slugified title) so readers can export the PNG. Leave it empty only for charts that should not be downloadable.
 - Use the shared signature: `signature="Adithyan Ilangovan | adithyan.io"` unless a post calls for an alternate credit. Remove it by setting `signature={null}`.
-- Choose the watermark placement with `watermarkVariant` (`"overlay"` for top-right overlays, `"inline"` for below-chart signatures).
+- Watermark placement defaults to inline (below the chart). You no longer need to set `watermarkVariant`; omit it unless you explicitly want `"overlay"`.
+
+## Companion Tables (Required)
+- Every chart must be followed by a raw, copy‑pastable table sourced from the exact same data module. This supports reuse on platforms that don’t render images or embeds.
+- Tables live as typed React components under `app/components/blog/<slug>/tables.tsx` or shared ones under `app/components/blog/data-tables.tsx`.
+- The table and chart must import from the single source of truth in `data/<topic>/` (no duplicate literals). Keep totals and percentage precision in sync.
+
+### Example pattern
+```tsx
+// charts.tsx
+export function ExampleChart() { /* ... */ }
+
+// tables.tsx
+export function ExampleTable() { /* render the same dataset as rows */ }
+```
+
+Then in MDX:
+```mdx
+<ExampleChart />
+<ExampleTable />
+```
 
 ### Quick Example
 ```tsx
@@ -40,6 +60,7 @@ Use this guide whenever you add or update charts in the blog. It keeps presentat
 - Confirm download output: run the download button locally and inspect the exported PNG.
 - Ensure the watermark is legible on dark/light modes; adjust `watermarkVariant` if the chart body is too busy.
 - Double-check accessibility: tooltip copy should describe what’s being hovered; axis labels must remain readable at mobile breakpoints.
+- Validate that the companion table renders the same totals/percentages as the chart.
 
 ## Cross-Referencing Company Context
 - If the chart supports an AIPodcasting story, pull positioning notes from `docs/company/aipodcasting-positioning.md`, but keep tone aligned with `.cursor/rules/personal-writing-style.md`.

@@ -177,7 +177,7 @@ function EpisodeLengthBarChart({
   description,
   buckets,
   footerSignature = CHART_SIGNATURE,
-  watermarkVariant = "overlay",
+  watermarkVariant = "inline",
   downloadName,
 }: EpisodeLengthBarChartProps) {
   const { segments } = React.useMemo(() => buildSegments(buckets), [buckets]);

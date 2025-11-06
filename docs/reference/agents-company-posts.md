@@ -32,8 +32,9 @@ This playbook is for agents (and future you) who turn raw data into company-spec
 2) If needed, add or adapt a small chart component under `app/components/blog/<slug>/charts.tsx` using `ChartCard`.
 3) Author the MDX file in `content/<slug>.mdx`:
    - Frontmatter: `title`, `publishedAt`, `summary`, `tags`, `image`, `hidden`.
+   - Visibility: default `hidden: false` for all posts. Only set `hidden: true` if explicitly drafting privately.
    - Structure: intro → key findings (hero table ok) → charts/tables → methodology → what’s next.
-   - Use `<CadenceSummaryTable />` and `<EpisodeLengthTable />` instead of hardcoded tables.
+   - Under each chart, include a companion data table using the shared table components (e.g., `<ReleaseWeekdayTable />`, `<ReleaseStabilityTable />`, `<CadenceSummaryTable />`, `<EpisodeLengthTable />`). No hardcoded numbers.
 4) Cross-link the most relevant prior posts (the last two cadence/duration posts) when context helps.
 5) Run locally: `pnpm dev` and scan visuals.
 6) Commit: pre-commit will run Ultracite. Fix any lints.
@@ -61,4 +62,3 @@ export const METRIC = {
 ## Small FAQ
 - “I have new buckets/labels”: update the data module and the table/chart helpers for labels in one place.
 - “My chart needs a different layout”: create a focused chart file under the post folder and still wrap with `ChartCard`.
-

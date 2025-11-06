@@ -24,7 +24,7 @@ export function ChartCard({
   title,
   description,
   downloadName,
-  watermarkVariant = "overlay",
+  watermarkVariant = "inline",
   signature,
   watermarkClassName,
   children,

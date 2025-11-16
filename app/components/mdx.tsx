@@ -35,6 +35,7 @@ import {
 import { PublishCadenceChart } from "./blog/top-podcast-cadence/chart";
 import { CaptionComponent } from "./caption";
 import { ImageGrid } from "./image-grid";
+import { SubscribeForm } from "./subscribe-form";
 import { TweetComponent } from "./tweet";
 import { VerbatimCode } from "./verbatim-code";
 import { YouTubeComponent } from "./youtube";
@@ -166,6 +167,7 @@ const components = {
   a: CustomLink,
   StaticTweet: TweetComponent,
   Caption: CaptionComponent,
+  SubscribeForm,
   YouTube: YouTubeComponent,
   code: Code,
   Table,

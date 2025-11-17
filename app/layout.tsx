@@ -74,9 +74,9 @@ export default function RootLayout({
           type="application/feed+json"
         />
       </head>
-      <body className="mx-auto mt-2 mb-20 flex flex-col items-center justify-center antialiased lg:mt-8 lg:mb-40">
+      <body className="mx-auto mt-2 flex min-h-screen flex-col items-center justify-center antialiased lg:mt-8">
         <ThemeProvider>
-          <main className="mt-2 flex w-full min-w-0 max-w-[640px] flex-auto flex-col px-6 sm:px-4 md:mt-6 md:px-0">
+          <main className="mt-2 flex w-full min-w-0 max-w-[640px] flex-auto flex-col px-6 pb-20 sm:px-4 md:mt-6 md:px-0 lg:pb-40">
             <Navbar />
             {children}
             <Footer />

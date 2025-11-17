@@ -6,6 +6,7 @@ This repo powers the personal blog built with Next.js App Router, TypeScript, Ta
 - `pnpm install` on first run; `pnpm dev` for local preview.
 - Run `pnpm lint` and `pnpm check` (if configured) before pushing sweeping changes.
 - Keep copy tweaks and code changes in separate commits; posts live in `content/*.mdx`, structural work happens in `app/`.
+- If the Next DevTools MCP server is available (Next.js dev server running), automatically call the `init` tool first to seed docs/runtime context before any Next.js work.
 
 ## Reference Library
 - Writing or editing posts? Follow `docs/rules/blog-creation.md` for MDX frontmatter, embeds, and publish workflow.

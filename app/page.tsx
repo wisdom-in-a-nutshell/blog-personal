@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import GithubCalendar from "./components/github-calendar";
 import { socialLinks } from "./config";
 
 /**
@@ -52,16 +51,14 @@ export default function Page() {
             Read more about me →
           </Link>
         </p>
-
-        <div className="mt-8">
-          <h2 className="mb-4 font-medium text-xl">My GitHub Activity</h2>
-          <GithubCalendar />
-          <p className="mt-4 text-neutral-500 text-sm dark:text-neutral-400">
-            Most of my time recently has been spent building AI Podcasting and
-            experimenting with AI tools. I'll be gradually open-sourcing my
-            projects here.
-          </p>
-        </div>
+        <p>
+          <Link
+            className="font-medium text-neutral-800 hover:underline dark:text-neutral-200"
+            href="/stats"
+          >
+            See my stats →
+          </Link>
+        </p>
       </div>
     </section>
   );

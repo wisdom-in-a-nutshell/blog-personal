@@ -12,8 +12,9 @@ const primaryNavItems = {
   // About moved to secondary
 };
 
-// Secondary: About only (Projects/Photos hidden for now)
+// Secondary: Stats and About (Projects/Photos hidden for now)
 const secondaryNavItems = {
+  "/stats": { name: "Stats" },
   "/about": { name: "About" },
 };
 

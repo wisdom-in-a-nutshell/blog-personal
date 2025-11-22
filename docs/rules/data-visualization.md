@@ -63,6 +63,6 @@ Then in MDX:
 - Validate that the companion table renders the same totals/percentages as the chart.
 
 ## Cross-Referencing Company Context
-- If the chart supports an AIPodcasting story, pull positioning notes from `docs/company/aipodcasting-positioning.md`, but keep tone aligned with `.cursor/rules/personal-writing-style.md`.
+- If the chart supports an AIPodcasting story, pull positioning notes from `/Users/adi/GitHub/adi-brand/company-profile.md`, but keep tone aligned with `docs/rules/writing-style-blog.md` and the canonical voice at `/Users/adi/GitHub/adi-brand/adis_writing_style.md`.
 
 Update this playbook whenever the shared chart wrapper or visual style changes so every future post can slot new data visualizations in quickly.

@@ -54,6 +54,12 @@ Post content starts here...
 
 ## Content Formatting
 
+### Narrative Flow
+- Open with the stakes or a concrete observation; explain why it matters before diving into details.
+- Use short paragraphs and bridge sentences so each section leads into the next.
+- Ground claims with real numbers, incidents, or anecdotes before abstracting to a takeaway.
+- End with a crisp takeaway or the next experiment for the reader.
+
 ### Title Handling - CRITICAL
 
 **The blog automatically generates the H1 title from your frontmatter.** Never add the title as an H1 heading in your content.

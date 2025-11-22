@@ -7,8 +7,8 @@ This playbook is for agents (and future you) who turn raw data into company-spec
 - You deliver: a complete MDX post, linked charts and tables, and cross-links to related posts.
 
 ## Writing Style & Voice
-- Always follow `.cursor/rules/personal-writing-style.mdc` for tone and structure.
-- For AIPodcasting context (positioning, terminology), skim `docs/company/aipodcasting-positioning.md`.
+- Always follow the canonical voice at `/Users/adi/GitHub/adi-brand/adis_writing_style.md`; apply blog-specific tweaks in `docs/rules/writing-style-blog.md`.
+- For AIPodcasting context (positioning, terminology), skim `/Users/adi/GitHub/adi-brand/company-profile.md`.
 - Keep the intro → key findings → visuals → methodology → next steps spine (see the last two posts for examples).
 
 ## Data Source of Truth

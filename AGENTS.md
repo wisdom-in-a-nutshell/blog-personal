@@ -10,8 +10,8 @@ This repo powers the personal blog built with Next.js App Router, TypeScript, Ta
 
 ## Reference Library
 - Writing or editing posts? Follow `docs/rules/blog-creation.md` for MDX frontmatter, embeds, and publish workflow.
-- Drafting long-form content? Re-read `docs/rules/personal-writing-style.md` so tone, pacing, and anecdotes stay on brand.
-- Covering AIPodcasting or other company work? Skim the background brief in `docs/company/aipodcasting-positioning.md`, then apply your personal style per `.cursor/rules/personal-writing-style.md`.
+- Drafting long-form content? Re-read `docs/rules/writing-style-blog.md` for blog-specific tweaks, and the canonical voice at `/Users/adi/GitHub/adi-brand/adis_writing_style.md`.
+- Covering AIPodcasting or other company work? Read the canonical profile at `/Users/adi/GitHub/adi-brand/company-profile.md`, then apply the canonical voice.
 - Building or updating charts? Follow `docs/rules/data-visualization.md` for the `ChartCard` pattern, download controls, and data sync checklist.
 - Writing company-specific data posts? Use the agent playbook `docs/reference/agents-company-posts.md`. Data lives in `data/<topic>/`, and both charts and MDX tables must import from those typed modules.
 - Creating a new page or route under `app/`? Mirror the structure in `docs/rules/page-creation-guide.md`.

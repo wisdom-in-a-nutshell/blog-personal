@@ -33,6 +33,7 @@ import {
   ReleaseWeekdayTable,
 } from "./blog/release-timing-weekly/tables";
 import { PublishCadenceChart } from "./blog/top-podcast-cadence/chart";
+import { CityGallery } from "./blog/world-cities/gallery";
 import { CaptionComponent } from "./caption";
 import { ImageGrid } from "./image-grid";
 import { SubscribeForm } from "./subscribe-form";
@@ -191,6 +192,7 @@ const components = {
   ReleaseStabilityChart,
   ReleaseWeekdayTable,
   ReleaseStabilityTable,
+  CityGallery,
 };
 
 export function CustomMDX(props) {

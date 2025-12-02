@@ -32,8 +32,8 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Parse the request body to get the email
-    const { email } = await request.json();
+    // Parse the request body to get the email and source
+    const { email, source } = await request.json();
 
     // Basic email validation
     if (!email || typeof email !== "string" || !email.includes("@")) {
@@ -43,11 +43,15 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Add the contact to the Resend audience
+    // Add the contact to the Resend audience with custom properties
     const { data, error } = await resend.contacts.create({
       email,
       audienceId,
       unsubscribed: false, // Ensure new subscribers are marked as subscribed
+      properties: {
+        source: source || "unknown",
+        subscribedAt: new Date().toISOString(),
+      },
     });
 
     // Handle potential errors from Resend API

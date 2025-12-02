@@ -91,12 +91,16 @@ export function SubscribeModal({
     setMessage(null);
 
     try {
+      // Capture the current page path for tracking subscription source
+      const source =
+        typeof window !== "undefined" ? window.location.pathname : "";
+
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source }),
       });
 
       const data = await response.json();

@@ -43,33 +43,35 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    // Add the contact to the Resend audience with custom properties
+    // Add the contact to the Resend audience with source tracking
+    // Note: Resend automatically tracks "Added" timestamp, so we only store source
     const { data, error } = await resend.contacts.create({
       email,
       audienceId,
-      unsubscribed: false, // Ensure new subscribers are marked as subscribed
+      unsubscribed: false,
       properties: {
         source: source || "unknown",
-        subscribedAt: new Date().toISOString(),
       },
     });
 
     // Handle potential errors from Resend API
     if (error) {
-      // Provide a more user-friendly error message based on common Resend errors
-      if (error.name === "validation_error") {
+      // Check for "already exists" first - this is a common case
+      if (error.message?.includes("already exists")) {
         return NextResponse.json(
-          { error: "Invalid email format according to Resend." },
-          { status: 400 }
-        );
-      }
-      if (error.message.includes("already exists")) {
-        // If the contact already exists, treat it as a success for the user
-        return NextResponse.json(
-          { message: "Contact already subscribed." },
+          { message: "You're already subscribed!" },
           { status: 200 }
         );
       }
+
+      // Provide a more user-friendly error message based on common Resend errors
+      if (error.name === "validation_error") {
+        return NextResponse.json(
+          { error: "Invalid email format. Please check your email address." },
+          { status: 400 }
+        );
+      }
+
       return NextResponse.json(
         { error: "Failed to subscribe. Please try again later." },
         { status: 500 }

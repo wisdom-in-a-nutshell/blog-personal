@@ -42,10 +42,11 @@ export default function AboutPage() {
       <h1 className="mb-8 font-medium text-2xl tracking-tight">About Me</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I write lessons I wish I'd known earlier. This blog helps me think
-          clearly about hard problems and compress insights into principles I
-          can actually use. I write for my younger self, but publishing sharpens
-          my thinking and hopefully helps others skip some struggles.
+          I write lessons I wish I&apos;d known earlier. This blog helps me
+          think clearly about hard problems and compress insights into
+          principles I can actually use. I write for my younger self, but
+          publishing sharpens my thinking and hopefully helps others skip some
+          struggles.
         </p>
 
         <h2>My AI Journey</h2>
@@ -58,27 +59,28 @@ export default function AboutPage() {
 
         <p>
           I had zero AI training but spent 4 months experimenting with GPT-3.5
-          after work every day. Quickly realized this was the turning point I'd
-          been waiting for. Quit my job to figure out how to be part of it.
+          after work every day. Quickly realized this was the turning point
+          I&apos;d been waiting for. Quit my job to figure out how to be part of
+          it.
         </p>
 
         <p>
-          My first AI startup, "Wisdom in a Nutshell," failed after several
-          months. Classic mistake: built a solution first, then looked for
-          problems. For my current startup, A.I. Podcasting, I flipped it.
+          My first AI startup, &quot;Wisdom in a Nutshell,&quot; failed after
+          several months. Classic mistake: built a solution first, then looked
+          for problems. For my current startup, A.I. Podcasting, I flipped it.
           Talked to podcasters first, understood their real challenges, then
           built what they actually needed.
         </p>
 
         <p>
-          Today I'm an AI tinkerer, not a researcher. I experiment with tools to
-          find practical applications rather than develop the underlying tech. I
-          love blending technology with creativity to make complex processes
-          simple.
+          Today I&apos;m an AI tinkerer, not a researcher. I experiment with
+          tools to find practical applications rather than develop the
+          underlying tech. I love blending technology with creativity to make
+          complex processes simple.
         </p>
 
         <p>
-          I'm building{" "}
+          I&apos;m building{" "}
           <a
             className="text-blue-600 hover:underline dark:text-blue-400"
             href="https://aipodcast.ing"
@@ -100,8 +102,8 @@ export default function AboutPage() {
 
         <p>
           I regularly write about AI, entrepreneurship, technology, and personal
-          growth. If you'd like to connect or share your thoughts, reach out via{" "}
-          <a href={socialLinks.email}>email</a> or find me on{" "}
+          growth. If you&apos;d like to connect or share your thoughts, reach
+          out via <a href={socialLinks.email}>email</a> or find me on{" "}
           <a href={socialLinks.twitter}>Twitter</a>,{" "}
           <a href={socialLinks.linkedin}>LinkedIn</a>, or{" "}
           <a href={socialLinks.github}>GitHub</a>. I welcome conversations that

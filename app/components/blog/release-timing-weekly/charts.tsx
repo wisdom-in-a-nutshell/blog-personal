@@ -166,7 +166,7 @@ function BandTooltip({ active, payload }: TooltipProps<number, string>) {
 }
 
 export function ReleaseWeekdayChart() {
-  const segments = React.useMemo(buildWeekdaySegments, []);
+  const segments = React.useMemo(() => buildWeekdaySegments(), []);
   const config = React.useMemo(() => createConfig(segments), [segments]);
 
   return (
@@ -231,7 +231,7 @@ export function ReleaseWeekdayChart() {
 }
 
 export function ReleaseStabilityChart() {
-  const segments = React.useMemo(buildStabilitySegments, []);
+  const segments = React.useMemo(() => buildStabilitySegments(), []);
   const config = React.useMemo(() => createConfig(segments), [segments]);
 
   return (

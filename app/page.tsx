@@ -24,15 +24,16 @@ export default function Page() {
         />
       </a>
       <h1 className="mb-8 font-medium text-2xl tracking-tight">
-        Hello, I'm Adithyan Ilangovan
+        Hello, I&apos;m Adithyan Ilangovan
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I write lessons I wish I'd known earlier. Writing for my younger self
-          helps me compress hard experiences into principles I can actually use.
+          I write lessons I wish I&apos;d known earlier. Writing for my younger
+          self helps me compress hard experiences into principles I can actually
+          use.
         </p>
         <p>
-          I'm building{" "}
+          I&apos;m building{" "}
           <a
             className="text-blue-600 hover:underline dark:text-blue-400"
             href="https://aipodcast.ing"

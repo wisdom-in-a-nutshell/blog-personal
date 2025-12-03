@@ -110,6 +110,7 @@ export default function GithubCalendar() {
       }
     };
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
 
     // If we have fresh cached data, don't show loading state

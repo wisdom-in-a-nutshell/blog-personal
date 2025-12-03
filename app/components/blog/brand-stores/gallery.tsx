@@ -56,8 +56,8 @@ export function BrandStoreGallery() {
         {BRAND_COUNT} brands · Click to view full resolution
       </p>
 
-      {/* Grid - 2 cols on mobile, 3 on tablet, 4 on desktop for portrait images */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      {/* Grid - 2 cols on mobile, 3 on larger screens */}
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
         {BRAND_STORES.map((brand, index) => (
           <BrandCard
             brand={brand}

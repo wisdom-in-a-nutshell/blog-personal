@@ -7,6 +7,7 @@ import React, { type ReactElement, type ReactNode } from "react";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import { highlight } from "sugar-high";
+import { BrandStoreGallery } from "./blog/brand-stores/gallery";
 import { CadenceSummaryTable, EpisodeLengthTable } from "./blog/data-tables";
 import {
   HostingProviderTop1KAggregateChart,
@@ -193,6 +194,7 @@ const components = {
   ReleaseWeekdayTable,
   ReleaseStabilityTable,
   CityGallery,
+  BrandStoreGallery,
 };
 
 export function CustomMDX(props) {
